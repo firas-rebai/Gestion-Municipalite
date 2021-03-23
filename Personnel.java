@@ -16,7 +16,7 @@ public class Personnel {
 	
 	public Personnel(int id, String nom, String prenom, String dateNaissaince, int numTel, String email, double salaire,
 			String equip, String poste) {
-		super();
+		
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
