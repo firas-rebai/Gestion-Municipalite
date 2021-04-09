@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="564.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionPersonnel.GUIs.ModifyController">
+<AnchorPane prefHeight="564.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionPersonnel.GUIs.ModifierPersonnelController">
    <Label layoutX="44.0" layoutY="63.0" prefHeight="8.0" prefWidth="111.0" text="Nom :">
       <font>
          <Font size="15.0" />

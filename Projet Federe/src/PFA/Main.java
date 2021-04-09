@@ -1,6 +1,6 @@
 package PFA;
 
-import PFA.GestionPersonnel.GUIs.ListeController;
+import PFA.GestionPersonnel.GUIs.ListePersonnelController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,7 @@ public class Main extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("brabi e5dem");
         Scene scene = new Scene(root, 1920, 1011);
-        ListeController controller =  loader.getController();
+        ListePersonnelController controller =  loader.getController();
         controller.initListe();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
