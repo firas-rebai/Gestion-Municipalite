@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="ListePersonnel" prefHeight="1011.0" prefWidth="1920.0" stylesheets="@listepersonnelCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionPersonnel.GUIs.ListeController">
+   <children>
+      <TableView fx:id="ListePersonnelTable" layoutX="25.0" layoutY="182.0" prefHeight="756.0" prefWidth="1837.0">
+        <columns>
+          <TableColumn id="listepersonnel" fx:id="nomColumn" prefWidth="110.0" text="Nom" />
+            <TableColumn fx:id="prenomColumn" prefWidth="110.0" text="Prenom" />
+            <TableColumn fx:id="CINColumn" prefWidth="120.0" text="CIN" />
+            <TableColumn fx:id="posteColumn" prefWidth="120.0" text="Poste" />
+            <TableColumn fx:id="equipColumn" prefWidth="135.0" text="Equip" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TextField fx:id="rechercheTextField" layoutX="27.0" layoutY="116.0" prefHeight="40.0" prefWidth="222.0" promptText="Recherche" />
+      <Button layoutX="1663.0" layoutY="954.0" mnemonicParsing="false" onAction="#switchToAjouter" prefHeight="45.0" prefWidth="203.0" text="Ajouter">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
+      <Button layoutX="249.0" layoutY="115.0" mnemonicParsing="false" onAction="#rechercheButton" prefHeight="42.0" prefWidth="44.0" />
+      <Button fx:id="supprimerButton" disable="true" layoutX="958.0" layoutY="949.0" mnemonicParsing="false" onAction="#SuprrimerButton" prefHeight="45.0" prefWidth="203.0" text="Supprimer">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="modifierButton" disable="true" layoutX="1196.0" layoutY="950.0" mnemonicParsing="false" onAction="#switchToModifier" prefHeight="45.0" prefWidth="203.0" text="Modifier">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="detailsButton" disable="true" layoutX="1430.0" layoutY="952.0" mnemonicParsing="false" onAction="#detailsButton" prefHeight="45.0" prefWidth="203.0" text="Details">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
