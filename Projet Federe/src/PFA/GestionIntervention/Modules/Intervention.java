@@ -1,5 +1,8 @@
 package PFA.GestionIntervention.Modules;
 
+import PFA.GestionPersonnel.Modules.Personnel;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Intervention {
@@ -8,21 +11,18 @@ public class Intervention {
     private Date dateBedut;
     private Date dateFin;
     private float budget;
+    private String adresse;
+    private ArrayList<Personnel> equipe;
     
-    public Intervention(String nom, Date dateBedut, Date dateFin, float budget) {
-        this.nom = nom;
-        this.dateBedut = dateBedut;
-        this.dateFin = dateFin;
-        this.budget = budget;
+    public String getAdresse() {
+        return adresse;
     }
     
-    public Intervention(int id, String nom, Date dateBedut, Date dateFin, float budget) {
-        this.id = id;
-        this.nom = nom;
-        this.dateBedut = dateBedut;
-        this.dateFin = dateFin;
-        this.budget = budget;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
+    
+    
     
     public int getId() {
         return id;
@@ -64,14 +64,5 @@ public class Intervention {
         this.budget = budget;
     }
     
-    @Override
-    public String toString() {
-        return "Intervention{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", dateBedut=" + dateBedut +
-                ", dateFin=" + dateFin +
-                ", budget=" + budget +
-                '}';
-    }
+    
 }

@@ -12,12 +12,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionPersonnel/GUIs/fxml/listepersonnel.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("brabi e5dem");
         Scene scene = new Scene(root, 1920, 1011);
-        ListePersonnelController controller =  loader.getController();
-        controller.initListe();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
