@@ -4,7 +4,7 @@ package PFA.GestionIntervention.GUIs;
 import PFA.GestionIntervention.Modules.Intervention;
 import PFA.GestionIntervention.Services.InterventionServices;
 
-import PFA.fxmlLoader.loader;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -47,11 +47,11 @@ public class ListeInterventionController {
     
     
     public void detailsbutton(ActionEvent event) throws IOException {
-        detailsController controller = (detailsController) loader.loadStage("fxml/detailsIntervention.fxml",event);
-        controller.initData(listeIntervention.getSelectionModel().getSelectedItem());
+    
     }
     
     public void modifierButton(ActionEvent event) {
+    
     
     }
     

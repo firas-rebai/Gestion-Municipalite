@@ -39,8 +39,6 @@ public class ListePersonnelController {
     @FXML
     private TableColumn<Personnel, String> posteColumn;
     @FXML
-    private TableColumn<Personnel, String> equipColumn;
-    @FXML
     private Button detailsButton, modifierButton, supprimerButton;
     @FXML
     private TextField rechercheTextField;
@@ -52,13 +50,12 @@ public class ListePersonnelController {
         prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         CINColumn.setCellValueFactory(new PropertyValueFactory<>("CIN"));
         posteColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
-        equipColumn.setCellValueFactory(new PropertyValueFactory<>("equip"));
     
         ListePersonnelTable.getItems().setAll(e);
     }
 
     public void initListe() {
-        refreshList(parseUserList());
+        refreshList(PersonnelServices.ParsePersonnelListe());
     
         ListePersonnelTable.setOnMouseClicked((MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY) && !ListePersonnelTable.getSelectionModel().isEmpty()){
@@ -99,25 +96,7 @@ public class ListePersonnelController {
     }
 
 
-    private List<Personnel> parseUserList() {
-        // parse and construct Personnel list by looping ResultSet rs
-        // and return the list
-        List<Personnel> liste = new ArrayList<>();
-        String query = "SELECT * FROM Personnel";
-        try {
-            Connection connection = getOracleConnection();
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            while (rs.next()) {
-                liste.add(new Personnel(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getInt("CIN"), rs.getString("email"), rs.getInt("numTel"), rs.getFloat("salaire"), rs.getString("poste"), rs.getString("equip"), rs.getString("dateNaissaince")));
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return liste;
-    }
+  
 
     public void rechercheButton(){
         refreshList(PersonnelServices.Recherche(rechercheTextField.getText()));
@@ -130,7 +109,7 @@ public class ListePersonnelController {
         Scene scene1 = new Scene(rt);
         stage1.setScene(scene1);
         stage1.showAndWait();
-        refreshList(parseUserList());
+        refreshList(PersonnelServices.ParsePersonnelListe());
     }
 
 
@@ -143,7 +122,7 @@ public class ListePersonnelController {
         Scene scene = new Scene(rt);
         stage.setScene(scene);
         stage.showAndWait();
-        refreshList(parseUserList());
+        refreshList(PersonnelServices.ParsePersonnelListe());
     }
 
 
@@ -156,7 +135,7 @@ public class ListePersonnelController {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
-        refreshList(parseUserList());
+        refreshList(PersonnelServices.ParsePersonnelListe());
     }
 
 
