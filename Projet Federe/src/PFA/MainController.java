@@ -33,7 +33,6 @@ public class MainController {
         controller.initListe();
         stage.setScene(scene);
         stage.show();
-        System.out.println("liste Personnel");
     }
 
     public void switchToMateriel(ActionEvent event) throws IOException{

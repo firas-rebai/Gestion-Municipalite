@@ -9,22 +9,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionIntervention.GUIs.ListeInterventionController">
    <children>
-      <Button fx:id="ajouterButton" layoutX="1000.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Ajouter" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="ajouterButton" onAction="#ajouterButton" layoutX="1000.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Ajouter" AnchorPane.rightAnchor="50.0">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="detailsButton" disable="true" layoutX="808.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Details" AnchorPane.rightAnchor="230.0">
+      <Button fx:id="detailsButton" onAction="#detailsbutton" disable="true" layoutX="808.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Details" AnchorPane.rightAnchor="230.0">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="modifierButton" disable="true" layoutX="624.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Modifier" AnchorPane.rightAnchor="410.0">
+      <Button fx:id="modifierButton" onAction="#modifierButton" disable="true" layoutX="624.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Modifier" AnchorPane.rightAnchor="410.0">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="supprimerButton" disable="true" layoutX="437.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Supprimer" AnchorPane.rightAnchor="590.0">
+      <Button fx:id="supprimerButton" onAction="#supprimerButton" disable="true" layoutX="437.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Supprimer" AnchorPane.rightAnchor="590.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -40,7 +40,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TextField fx:id="rechercheTextFIeld" layoutX="50.0" layoutY="97.0" prefHeight="27.0" prefWidth="202.0" promptText="Recherche" />
+      <TextField fx:id="rechercheTextField" layoutX="50.0" layoutY="97.0" prefHeight="27.0" prefWidth="202.0" promptText="Recherche" />
       <Button fx:id="rechercheButton" layoutX="251.0" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Recherche" />
       <Button fx:id="refreshButton" layoutX="1079.0" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="REFRESH" />
    </children>

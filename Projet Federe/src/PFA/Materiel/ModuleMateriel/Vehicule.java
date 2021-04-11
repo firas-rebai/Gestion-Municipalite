@@ -2,7 +2,7 @@ package PFA.Materiel.ModuleMateriel;
 
 import java.util.Date;
 import java.time.LocalDate;
-public class MaterielVehicule {
+public class Vehicule {
     private int id;
     private int matricule;
     private String model;
@@ -11,7 +11,7 @@ public class MaterielVehicule {
     private String nom;
     private String date;
 
-    public MaterielVehicule(int id, int matricule, String model, double prix, int quantité, String nom, String datedachat) {
+    public Vehicule(int id, int matricule, String model, double prix, int quantité, String nom, String datedachat) {
         this.id = id;
         this.matricule = matricule;
         this.model = model;
