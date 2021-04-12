@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchro" prefHeight="703.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Materiel.GUIsMateriel.ListeOutilsController">
+   <children>
+      <Label fx:id="lboutilstitle" layoutX="492.0" layoutY="12.0" prefHeight="56.0" prefWidth="184.0" text="Liste des Outils" underline="true">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" proportional="false" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.06315789371728897" green="0.06035087630152702" blue="0.06035087630152702" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button fx:id="boutajouter" layoutX="677.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToAjouter" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #4285F4;" text="ajouter" textFill="WHITE" />
+      <Button fx:id="boutmodifier" layoutX="513.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToModifier" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #4285F4;" text="modifier" textFill="WHITE" />
+      <Button fx:id="boutsupprimer" layoutX="343.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToSupprimer" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #4285F4;" text="supprimer" textFill="WHITE" />
+      <Button fx:id="boutretour" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToChoix1" prefHeight="19.0" prefWidth="58.0" style="-fx-background-color: #4285F4;" text="retour" textFill="WHITE" />
+      <TextField fx:id="toufrecherche" layoutX="920.0" layoutY="77.0" prefHeight="32.0" prefWidth="149.0" promptText="rechercher...">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></TextField>
+      <Button fx:id="boutrecherche" layoutX="816.0" layoutY="77.0" mnemonicParsing="false" onAction="#rechercheButton" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #4285F4;" text="rechercher" textFill="WHITE" />
+      <Button fx:id="boutactualiser" layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#RefreshButton1" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #4285F4;" text="actualiser" textFill="WHITE" />
+      <TableView fx:id="tvoutils" layoutX="22.0" layoutY="132.0" prefHeight="492.0" prefWidth="1117.0">
+        <columns>
+          <TableColumn fx:id="coulid" prefWidth="175.2000093460083" text="id" />
+          <TableColumn fx:id="coulnom" prefWidth="288.1999969482422" text="nom" />
+            <TableColumn fx:id="coulquantité" prefWidth="301.4000244140625" text="quantité" />
+            <TableColumn fx:id="coulprix" prefWidth="352.59991455078125" text="prix" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
