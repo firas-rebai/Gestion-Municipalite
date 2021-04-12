@@ -4,11 +4,15 @@ package PFA.GestionIntervention.GUIs;
 import PFA.GestionIntervention.Modules.Intervention;
 import PFA.GestionIntervention.Services.InterventionServices;
 
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +32,7 @@ public class ListeInterventionController {
         refresheListe(InterventionServices.parseInterventionListe());
     }
     
-    private void refresheListe(List<Intervention> parseInterventionListe) {
+    public void refresheListe(List<Intervention> parseInterventionListe) {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
@@ -37,5 +41,20 @@ public class ListeInterventionController {
         listeIntervention.getItems().setAll(parseInterventionListe);
     }
     
+    public void ajouterButton(){
     
+    }
+    
+    
+    public void detailsbutton(ActionEvent event) throws IOException {
+    
+    }
+    
+    public void modifierButton(ActionEvent event) {
+    
+    
+    }
+    
+    public void supprimerButton(ActionEvent event) {
+    }
 }

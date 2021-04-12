@@ -11,14 +11,10 @@ import javafx.stage.Stage;
 
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 
 public class ajouterPersonnelController implements Initializable {
     String numPattern = "[2-9][0-9]{7}";
@@ -43,18 +39,8 @@ public class ajouterPersonnelController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //fill Equipe and poste picker with their values
-        try {
-            Connection connection = getOracleConnection();
-            Statement statement = connection.createStatement();
-            ResultSet res = statement.executeQuery("select * from equipe");
-            while (res.next()) {
-                EquipPicker.getItems().add(res.getString("nom"));
-            }
-            res.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        // fill poste picker with their values
+        
         PostePicker.getItems().setAll(Poste);
         
         //Check if every text field is correct when it loses focus
@@ -124,7 +110,7 @@ public class ajouterPersonnelController implements Initializable {
         } else Remplir.setVisible(false);
         
         if (valid && Pattern.matches(numPattern, num.getText()) && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(emailPattern, email.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty() && !EquipPicker.getSelectionModel().isEmpty()) {
-            Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), email.getText(), Integer.parseInt(num.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), EquipPicker.getValue(), date.getValue().toString());
+            Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
             PersonnelServices.Ajouter(p);
         }
     }

@@ -1,12 +1,12 @@
 package PFA.Materiel.ModuleMateriel;
 
-public class MaterielOutils {
+public class Outil {
     private int idOutils;
     private int quantitéOutils;
     private Double prixOutils;
     private  String nomOutils;
 
-    public MaterielOutils(int idOutils, int quantitéOutils, Double prixOutils, String nomOutils) {
+    public Outil(int idOutils, int quantitéOutils, Double prixOutils, String nomOutils) {
         this.idOutils = idOutils;
         this.quantitéOutils = quantitéOutils;
         this.prixOutils = prixOutils;

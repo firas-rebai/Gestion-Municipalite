@@ -1,17 +1,21 @@
 package PFA.Materiel.ServiceMateriel;
 import java.sql.SQLException;
 import Materiel.ModuleMateriel.MaterielVehicule;
+import PFA.Materiel.ModuleMateriel.Vehicule;
+
 import java.sql.Connection;
 import java.sql.Statement;
 import static DataBaseConnection.OracleConnection.getOracleConnection;
+import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.ResultSet;
-public class Vehicule {
+public class Vehicules {
 
 
-    public static void Ajouter(MaterielVehicule p){
-        String SQLquery = "insert into materielvehicule values(" + p.getId() + ",'" + p.getModel() +
+    public static void Ajouter(Vehicule p){
+        String SQLquery = "insert into Vehicule values(" + p.getId() + ",'" + p.getModel() +
                 "'," + p.getMatricule() + "," + p.getQuantité() + "," + p.getPrix() + ",'" + p.getNom() + "','" +
                 p.getDateDachat() + "')";
         Statement statement;

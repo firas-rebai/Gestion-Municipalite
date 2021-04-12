@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="617.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Materiel.GUIsMateriel.ModifierVehiculeController">
+   <children>
+      <Label fx:id="lbtitleajouter" layoutX="174.0" layoutY="14.0" prefHeight="40.0" prefWidth="218.0" text="Modifier des Vehicules" underline="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="117.0" prefHeight="40.0" prefWidth="127.0" text="Id:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="290.0" prefHeight="40.0" prefWidth="127.0" text="Model:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="411.0" prefHeight="40.0" prefWidth="127.0" text="Matricule:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="351.0" prefHeight="40.0" prefWidth="127.0" text="Quantité:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="173.0" prefHeight="40.0" prefWidth="127.0" text="Prix:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="231.0" prefHeight="40.0" prefWidth="127.0" text="Nom:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="477.0" prefHeight="40.0" prefWidth="127.0" text="Date D'achat:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfmatricule" layoutX="224.0" layoutY="418.0" prefHeight="26.0" prefWidth="172.0" />
+      <TextField fx:id="tfquantité" layoutX="224.0" layoutY="358.0" prefHeight="26.0" prefWidth="172.0" />
+      <TextField fx:id="tfnom" layoutX="224.0" layoutY="238.0" prefHeight="26.0" prefWidth="172.0" />
+      <TextField fx:id="tfmodel" layoutX="224.0" layoutY="295.0" prefHeight="26.0" prefWidth="172.0" />
+      <TextField fx:id="tfprix" layoutX="224.0" layoutY="180.0" prefHeight="26.0" prefWidth="172.0" />
+      <Button fx:id="btnmodifier" layoutX="300.0" layoutY="569.0" mnemonicParsing="false" onAction="#ModifierButton" prefHeight="33.0" prefWidth="146.0" text="modifier" />
+      <Button fx:id="retour" layoutX="111.0" layoutY="569.0" mnemonicParsing="false" onAction="#retour2" prefHeight="33.0" prefWidth="146.0" text="retour" />
+      <Label fx:id="lbid" layoutX="225.0" layoutY="157.0" prefHeight="18.0" prefWidth="297.0" text="id invalide svp veillez resseillez" textFill="RED" visible="false" />
+      <Label fx:id="lbprix" layoutX="225.0" layoutY="213.0" prefHeight="18.0" prefWidth="297.0" text="prix invalide svp veillez resseilllez" textFill="RED" visible="false" />
+      <Label fx:id="lbnom" layoutX="225.0" layoutY="271.0" prefHeight="18.0" prefWidth="297.0" text="nom invalide svp veillez resseilllez" textFill="RED" visible="false" />
+      <Label fx:id="lbmodel" layoutX="225.0" layoutY="330.0" prefHeight="18.0" prefWidth="297.0" text="model invalide svp veillez resseillez " textFill="RED" visible="false" />
+      <Label fx:id="lbquantité" layoutX="225.0" layoutY="391.0" prefHeight="18.0" prefWidth="297.0" text="quantité invalide svp veillez resseillez" textFill="RED" visible="false" />
+      <Label fx:id="lbmatricule" layoutX="225.0" layoutY="451.0" prefHeight="18.0" prefWidth="297.0" text="matricule invalide svp veillez resseillez" textFill="RED" visible="false" />
+      <Label fx:id="lbdate" layoutX="225.0" layoutY="517.0" prefHeight="18.0" prefWidth="297.0" text="date invalide svp veillez resseillez" textFill="RED" visible="false" />
+      <Label fx:id="lblbb" layoutX="224.0" layoutY="484.0" prefHeight="26.0" prefWidth="172.0">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label fx:id="lbloo" layoutX="224.0" layoutY="128.0" prefHeight="26.0" prefWidth="172.0">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

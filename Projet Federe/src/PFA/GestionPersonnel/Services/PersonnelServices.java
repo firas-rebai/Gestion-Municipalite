@@ -13,7 +13,14 @@ import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class PersonnelServices {
     public static void Ajouter(Personnel p){
-        String SQLquery = "insert into Personnel values(seq_person.nextval" + ",'" + p.getNom() + "','" + p.getPrenom() + "','" + p.getCIN() + "','" + p.getEmail() + "','" + p.getNumTel() + "','" + p.getSalaire() + "','" + p.getPoste() + "','" + p.getEquip() + "','" + p.getDateNaissaince() + "')";
+        String SQLquery = String.format("insert into Personnel values(" +
+                "'Personnel_seq'," +
+                "'%s'," +
+                "'%s'," +
+                "%d," +
+                "'%b'," +
+                "'%s'," +
+                "%f)",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire());
         Statement statement;
         try {
             Connection connection = getOracleConnection();
@@ -25,7 +32,7 @@ public class PersonnelServices {
     }
 
     public static void Suprrimer(int id) {
-        String query = "delete from personnel where id = " + id ;
+        String query = "delete from personnel where IDPERSONNEL = " + id ;
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -37,12 +44,14 @@ public class PersonnelServices {
 
 
     public static void Modifier(Personnel p) {
-        String query ;
-
-        query = "update personnel set " +
-                "nom = "+ "'" +p.getNom()+ "'" +",prenom ="+ "'" +p.getPrenom()+ "'" +",cin ="+ "'" +p.getCIN()+ "'" +" ,email = "+ "'" +p.getEmail()+ "'" +",poste ="+ "'" +p.getPoste()+ "'" +",equip ="+ "'" +p.getEquip()+ "'" +",salaire ="+ "'" +p.getSalaire()+ "'" +",numTel ="+ "'" +p.getNumTel()+ "'" +",dateNaissaince ="+ "'" +p.getDateNaissaince()+ "'" +
-                "where id = "+ "'" +p.getId()+ "'" +"";
-
+        String query = String.format("update perosnnel set " +
+                "nomPersonnel = '%s', " +
+                "prenomPersonnel = '%s'," +
+                "cinPersonnel = %d," +
+                "datenaissancepersonnel = '%b'," +
+                "postepersonnel = '%s'," +
+                "salaire = %f" +
+                " where idPersonnel = %d",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire(),p.getId());
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -52,19 +61,46 @@ public class PersonnelServices {
         }
     }
     
-    public  static List<Personnel> Recherche(String term){
+    public static List<Personnel> Recherche(String term){
         List<Personnel> liste = new ArrayList<>();
         String query = "select * from Personnel" +
-                " WHERE lower(nom) LIKE lower('%" + term + "%')" +
-                " OR lower(prenom) LIKE lower('%" + term + "%')" +
-                " OR cin ="+ "'" + term + "'";
+                " WHERE lower(NOMPERSONNEL) LIKE lower('%" + term + "%')" +
+                " OR lower(PRENOMPERSONNEL) LIKE lower('%" + term + "%')" +
+                " OR CINPERSONNEL ="+ "'" + term + "'";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
             ResultSet res = statement.executeQuery(query);
             while(res.next()){
-                liste.add(new Personnel(res.getInt("id"),res.getString("nom"),res.getString("prenom"),res.getInt("CIN"),res.getString("email"),res.getInt("numTel"),res.getFloat("salaire"),res.getString("poste"),res.getString("equip"),res.getString("dateNaissaince")));
-            }
+                liste.add(new Personnel(res.getInt("idPersonnel")
+                        ,res.getString("nomPersonnel")
+                        ,res.getString("prenomPersonnel")
+                        ,res.getInt("cinPersonnel")
+                        ,res.getFloat("salairePersonnel")
+                        ,res.getString("postePersonnel")
+                        ,res.getDate("datenaissance").toLocalDate()));}
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+    }
+    
+    public static List<Personnel> ParsePersonnelListe(){
+        List<Personnel> liste = new ArrayList<>();
+        String query = "select * from Personnel" ;
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            while(res.next()){
+                liste.add(new Personnel(res.getInt("idPersonnel")
+                        ,res.getString("nomPersonnel")
+                        ,res.getString("prenomPersonnel")
+                        ,res.getInt("cinPersonnel")
+                        ,res.getFloat("salairePersonnel")
+                        ,res.getString("postePersonnel")
+                        ,res.getDate("datenaissance").toLocalDate()));}
             res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
