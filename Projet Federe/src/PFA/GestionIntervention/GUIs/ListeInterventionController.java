@@ -5,11 +5,17 @@ import PFA.GestionIntervention.Modules.Intervention;
 import PFA.GestionIntervention.Services.InterventionServices;
 
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -29,10 +35,10 @@ public class ListeInterventionController {
     TableColumn<Intervention, String> adresseColumn;
     
     public void initListe(){
-        refresheListe(InterventionServices.parseInterventionListe());
+        refreshListe(InterventionServices.parseInterventionListe());
     }
     
-    public void refresheListe(List<Intervention> parseInterventionListe) {
+    public void refreshListe(List<Intervention> parseInterventionListe) {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
@@ -41,8 +47,14 @@ public class ListeInterventionController {
         listeIntervention.getItems().setAll(parseInterventionListe);
     }
     
-    public void ajouterButton(){
-    
+    public void ajouterButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ajouterGenerale.fxml"));
+        Parent rt = loader.load();
+        Stage stage1 = new Stage();
+        Scene scene1 = new Scene(rt);
+        stage1.setScene(scene1);
+        stage1.showAndWait();
+        refreshListe(InterventionServices.parseInterventionListe());
     }
     
     
@@ -56,5 +68,13 @@ public class ListeInterventionController {
     }
     
     public void supprimerButton(ActionEvent event) {
+    }
+    
+    public void retour(ActionEvent event) throws IOException {
+        Parent root7 = FXMLLoader.load(getClass().getResource("../../mainMenu.fxml"));
+        Stage stage7 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene7 = new Scene(root7);
+        stage7.setScene(scene7);
+        stage7.show();
     }
 }

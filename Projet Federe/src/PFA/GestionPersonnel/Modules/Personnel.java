@@ -1,5 +1,7 @@
 package PFA.GestionPersonnel.Modules;
 
+import javafx.scene.control.CheckBox;
+
 import java.time.LocalDate;
 
 public class Personnel {
@@ -9,18 +11,20 @@ public class Personnel {
     private int CIN;
     private float salaire;
     private String poste;
-    private LocalDate dateNaissance;
+    private String dateNaissance;
+    private CheckBox check;
     
-    public Personnel(String nom, String prenom, int CIN, float salaire, String poste, LocalDate dateNaissaince) {
+    public Personnel(String nom, String prenom, int CIN, float salaire, String poste, String dateNaissaince) {
         this.nom = nom;
         this.prenom = prenom;
         this.CIN = CIN;
         this.salaire = salaire;
         this.poste = poste;
         this.dateNaissance = dateNaissaince;
+        this.check = new CheckBox();
     }
     
-    public Personnel(int id, String nom, String prenom, int CIN, float salaire, String poste, LocalDate dateNaissaince) {
+    public Personnel(int id, String nom, String prenom, int CIN, float salaire, String poste, String dateNaissaince) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -28,6 +32,7 @@ public class Personnel {
         this.salaire = salaire;
         this.poste = poste;
         this.dateNaissance = dateNaissaince;
+        this.check = new CheckBox();
     }
     
     public int getId() {
@@ -78,11 +83,11 @@ public class Personnel {
         this.poste = poste;
     }
     
-    public LocalDate getDateNaissance() {
+    public String getDateNaissance() {
         return dateNaissance;
     }
     
-    public void setDateNaissance(LocalDate dateNaissaince) {
+    public void setDateNaissance(String dateNaissaince) {
         this.dateNaissance = dateNaissaince;
     }
     

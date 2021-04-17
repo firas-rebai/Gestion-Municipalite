@@ -2,9 +2,9 @@ package PFA.GestionIntervention.GUIs;
 
 import PFA.GestionIntervention.Modules.Intervention;
 import PFA.GestionIntervention.Modules.OutilsUtilise;
-import PFA.GestionPersonnel.Modules.Personnel;
-import PFA.Materiel.ModuleMateriel.Outil;
-import PFA.Materiel.ServiceMateriel.Vehicules;
+import PFA.GestionIntervention.Modules.PersonnelMin;
+import PFA.MaterielFiras.ModuleMateriel.Outil;
+import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -24,24 +24,22 @@ public class detailsController {
     TableColumn<Outil, Integer> quantiteOutilColumn;
     
     @FXML
-    TableView<Personnel> PersonnelListe;
+    TableView<PersonnelMin> PersonnelListe;
     @FXML
-    TableColumn<Personnel, String> nomPersonnelColumn;
+    TableColumn<PersonnelMin, String> nomPersonnelColumn;
     @FXML
-    TableColumn<Personnel, String> prenomPersonnelColumn;
+    TableColumn<PersonnelMin, String> prenomPersonnelColumn;
     @FXML
-    TableColumn<Personnel, Integer> cinPersonnelColumn;
-    @FXML
-    TableColumn<Personnel, String> postePersonnelColumn;
+    TableColumn<PersonnelMin, String> postePersonnelColumn;
     
     @FXML
-    TableView<Vehicules> VehiculeListe;
+    TableView<Vehicule> VehiculeListe;
     @FXML
-    TableColumn<Vehicules, String> nomVehiculeColumn;
+    TableColumn<Vehicule, String> nomVehiculeColumn;
     @FXML
-    TableColumn<Vehicules, String> modelVehiculeColumn;
+    TableColumn<Vehicule, String> modelVehiculeColumn;
     @FXML
-    TableColumn<Vehicules, Integer> matriculeVehiculeColumn;
+    TableColumn<Vehicule, Integer> matriculeVehiculeColumn;
     
     @FXML
     Label nomLabel,dateDebutLabel,dateFinLabel,adresseLabel,budgetLabel;
@@ -56,7 +54,6 @@ public class detailsController {
         //intializing personnel liste
         nomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        cinPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("cin"));
         postePersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
         PersonnelListe.getItems().setAll(intervention.getEquipe());
         //initializing vehicule liste

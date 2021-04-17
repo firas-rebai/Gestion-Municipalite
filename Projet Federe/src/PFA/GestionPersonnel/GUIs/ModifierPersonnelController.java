@@ -9,25 +9,20 @@ import javafx.stage.Stage;
 
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 
 public class ModifierPersonnelController implements Initializable {
     
     @FXML
     ChoiceBox<String> PostePicker;
     private final String[] Poste = { "Agent(e) administratif (tive)", "Ouvrier(e)", "Technicien(ne) Principal(e)" };
-    String numPattern = "[2-9][0-9]{7}";
     String namePattern = "[a-zA-Z]{3}[a-zA-Z ]*";
     String salairePattern = "[0-9]{1,9}.[0-9]+";
     String cinPattern = "[0-9]{8}";
-    String emailPattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
     
     @FXML
     Label nomErrorLabel, prenomErrorLabel, posteErrorLabel, dateErrorLabel, cinErrorLabel, salaireErrorLabel, Remplir;
@@ -77,14 +72,15 @@ public class ModifierPersonnelController implements Initializable {
     
     
     public void ModifierButton() {
-        boolean valid = true;
+        boolean valid = date.getValue().isBefore(date.getValue().minus(18, ChronoUnit.YEARS));
+        dateErrorLabel.setVisible(!valid);
         if (PostePicker.getSelectionModel().isEmpty() || salaire.getText().isEmpty() || CIN.getText().isEmpty() || prenom.getText().isEmpty() || nom.getText().isEmpty() || date.getValue().toString().isEmpty()) {
             Remplir.setVisible(true);
             valid = false;
         } else Remplir.setVisible(false);
-        
+    
         if (valid && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
-            Personnel p = new Personnel(id, nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
+            Personnel p = new Personnel(id, nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue().toString());
             PersonnelServices.Modifier(p);
         }
     }

@@ -11,27 +11,27 @@ import javafx.stage.Stage;
 
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 
 
 public class ajouterPersonnelController implements Initializable {
-    String numPattern = "[2-9][0-9]{7}";
     String namePattern = "[a-zA-Z]{3}[a-zA-Z ]*";
     String salairePattern = "[0-9]{1,9}.[0-9]+";
     String cinPattern = "[0-9]{8}";
-    String emailPattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
     private final String[] Poste = {"Agent(e) administratif(tive)", "Ouvrier(e)", "Technicien(ne) Principal(e)"};
     
-    @FXML
-    ChoiceBox<String> EquipPicker;
+   
     @FXML
     ChoiceBox<String> PostePicker;
     @FXML
-    Label nomErrorLabel, prenomErrorLabel, emailErrorLabel, posteErrorLabel, equipeErrorLabel, dateErrorLabel, cinErrorLabel, numErrorLabel, salaireErrorLabel, Remplir;
+    Label nomErrorLabel, prenomErrorLabel, posteErrorLabel, dateErrorLabel, cinErrorLabel, salaireErrorLabel, Remplir;
     @FXML
-    TextField nom, prenom, email, CIN, num, salaire;
+    TextField nom, prenom, CIN, salaire;
     @FXML
     DatePicker date;
     @FXML
@@ -48,13 +48,6 @@ public class ajouterPersonnelController implements Initializable {
         nom.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 nomErrorLabel.setVisible(!Pattern.matches(namePattern, nom.getText()));
-            }
-        });
-        
-        
-        EquipPicker.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
-            if (!newPropertyValue) {
-                equipeErrorLabel.setVisible(EquipPicker.getSelectionModel().isEmpty());
             }
         });
         
@@ -80,37 +73,24 @@ public class ajouterPersonnelController implements Initializable {
         });
         
         
-        email.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
-            if (!newPropertyValue) {
-                emailErrorLabel.setVisible(!Pattern.matches(emailPattern, email.getText()));
-            }
-        });
-        
-        
         CIN.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 cinErrorLabel.setVisible(!Pattern.matches(cinPattern, CIN.getText()));
-            }
-        });
-        
-        
-        num.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
-            if (!newPropertyValue) {
-                numErrorLabel.setVisible(!Pattern.matches(numPattern, num.getText()));
             }
         });
     }
     
     
     public void AjouterButton() {
-        boolean valid = true;
-        if (EquipPicker.getSelectionModel().isEmpty() || PostePicker.getSelectionModel().isEmpty() || salaire.getText().isEmpty() || CIN.getText().isEmpty() || email.getText().isEmpty() || num.getText().isEmpty() || prenom.getText().isEmpty() || nom.getText().isEmpty() || date.getValue().toString().isEmpty()) {
+        boolean valid = date.getValue().isBefore(LocalDate.now().minus(18,ChronoUnit.YEARS));
+        dateErrorLabel.setVisible(!valid);
+        if (PostePicker.getSelectionModel().isEmpty() || salaire.getText().isEmpty() || CIN.getText().isEmpty() || prenom.getText().isEmpty() || nom.getText().isEmpty() || date.getValue().toString().isEmpty()) {
             Remplir.setVisible(true);
             valid = false;
         } else Remplir.setVisible(false);
         
-        if (valid && Pattern.matches(numPattern, num.getText()) && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(emailPattern, email.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty() && !EquipPicker.getSelectionModel().isEmpty()) {
-            Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
+        if (valid && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
+            Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue().toString());
             PersonnelServices.Ajouter(p);
         }
     }

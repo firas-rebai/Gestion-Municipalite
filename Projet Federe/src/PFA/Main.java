@@ -1,6 +1,6 @@
 package PFA;
 
-import PFA.GestionPersonnel.GUIs.ListePersonnelController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,8 +14,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("brabi e5dem");
-        Scene scene = new Scene(root, 1920, 1011);
+        primaryStage.setTitle("brabi e5dem the project");
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

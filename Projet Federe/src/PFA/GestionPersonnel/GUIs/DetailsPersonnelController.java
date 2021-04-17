@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class DetailsPersonnelController {
 
     @FXML
-    Label IDD,nomD,prenomD,dateD,posteD,equipD,emailD,salaireD,CIND,numD;
+    Label IDD,nomD,prenomD,dateD,posteD,salaireD,CIND;
     @FXML
     Button retour;
     public void retour() {
