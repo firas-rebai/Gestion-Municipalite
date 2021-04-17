@@ -18,7 +18,7 @@ public class ChoixVehiculeOutilsController {
     public void SwitchToPrincipalListeVehicule(ActionEvent event) throws IOException {
         Parent root7 = FXMLLoader.load(getClass().getResource("Fxmls/ListeVehicule.fxml"));
         Stage stage7 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-       Scene scene7 = new Scene(root7);
+        Scene scene7 = new Scene(root7);
         stage7.setScene(scene7);
         stage7.show();
         System.out.println("c'est l'interface des listes des Vehicules");

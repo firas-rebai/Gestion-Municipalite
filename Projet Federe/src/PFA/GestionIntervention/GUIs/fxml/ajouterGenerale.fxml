@@ -47,7 +47,7 @@
       <TextField fx:id="coutTextField" layoutX="222.0" layoutY="280.0" prefHeight="25.0" prefWidth="278.0" />
       <TextField fx:id="numAdresseTextField" layoutX="222.0" layoutY="330.0" prefHeight="25.0" prefWidth="59.0" />
       <TextField fx:id="adresseTextField" layoutX="289.0" layoutY="330.0" prefHeight="25.0" prefWidth="211.0" />
-      <Button layoutX="200.0" layoutY="741.0" mnemonicParsing="false" onAction="#retour" prefHeight="35.0" prefWidth="163.0" text="Retour">
+      <Button layoutX="200.0" layoutY="741.0" fx:id="retour" mnemonicParsing="false" onAction="#retour" prefHeight="35.0" prefWidth="163.0" text="Retour">
          <font>
             <Font size="15.0" />
          </font>

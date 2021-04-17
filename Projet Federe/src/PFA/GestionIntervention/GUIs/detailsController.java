@@ -7,10 +7,12 @@ import PFA.MaterielFiras.ModuleMateriel.Outil;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -22,7 +24,8 @@ public class detailsController {
     TableColumn<Outil, String> nomOutilColumn;
     @FXML
     TableColumn<Outil, Integer> quantiteOutilColumn;
-    
+    @FXML
+    Button retour;
     @FXML
     TableView<PersonnelMin> PersonnelListe;
     @FXML
@@ -88,7 +91,8 @@ public class detailsController {
     }
     
     public void retour(ActionEvent event) throws IOException {
-    
+        Stage stage = (Stage) retour.getScene().getWindow();
+        stage.close();
     }
     
 }

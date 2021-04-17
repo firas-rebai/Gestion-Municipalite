@@ -1,0 +1,15 @@
+.root {
+    -fx-background-color: linear-gradient(rgba(0,0,0,0), rgba(106, 9, 200,0.5));
+}
+
+.button {
+    -fx-border-color: #5a095a;
+    -fx-background-radius: 50px;
+    -fx-border-width: 4px;
+    -fx-border-radius: 50px;
+}
+
+.button:hover {
+    -fx-border-width: 6px;
+    -fx-effect: dropshadow(three-pass-box, #858080, 30, 0.5, 0, 0);
+}

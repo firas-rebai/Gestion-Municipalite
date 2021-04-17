@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -45,7 +46,8 @@ public class ajouterGenerale implements Initializable {
     @FXML
     private Label NomErrorLabel, remplir;
     
-
+    @FXML
+    Button retour;
     
     public void switchToPersonnel(ActionEvent event) throws IOException {
         boolean valid = true;
@@ -71,8 +73,9 @@ public class ajouterGenerale implements Initializable {
         
     }
     
-    public void retour(ActionEvent event) {
-    
+    public void retour(ActionEvent event) throws IOException {
+        Stage stage = (Stage) retour.getScene().getWindow();
+        stage.close();
     }
     
     @Override
