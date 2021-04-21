@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="580.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Doleance.AjouterDoleanceController">
+   <children>
+      <Label layoutX="202.0" layoutY="14.0" prefHeight="50.0" prefWidth="196.0" text="Ajouter une doleance" underline="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="90.0" layoutY="119.0" prefHeight="34.0" prefWidth="106.0" text="id:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="90.0" layoutY="179.0" prefHeight="34.0" prefWidth="106.0" text="sujet:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="90.0" layoutY="241.0" prefHeight="34.0" prefWidth="106.0" text="date:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="90.0" layoutY="298.0" prefHeight="34.0" prefWidth="106.0" text="descreption:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnajouter" layoutX="329.0" layoutY="522.0" mnemonicParsing="false" onAction="#AjouterButton" prefHeight="26.0" prefWidth="137.0" text="Ajouter" />
+      <Button fx:id="btnannuler" layoutX="127.0" layoutY="522.0" mnemonicParsing="false" onAction="#retour" prefHeight="26.0" prefWidth="137.0" text="Annuler" />
+      <TextField fx:id="tfsujet" layoutX="217.0" layoutY="183.0" prefHeight="26.0" prefWidth="165.0" />
+      <TextField fx:id="tfid" layoutX="217.0" layoutY="123.0" prefHeight="26.0" prefWidth="165.0" />
+      <TextArea fx:id="tades" layoutX="84.0" layoutY="344.0" prefHeight="146.0" prefWidth="493.0" />
+      <DatePicker fx:id="date" layoutX="217.0" layoutY="245.0" prefHeight="26.0" prefWidth="166.0" />
+      <Label fx:id="lblid" layoutX="217.0" layoutY="153.0" prefHeight="18.0" prefWidth="371.0" text="Label" textFill="RED" visible="false" />
+      <Label fx:id="lblsujet" layoutX="217.0" layoutY="213.0" prefHeight="18.0" prefWidth="371.0" text="Label" textFill="RED" visible="false" />
+      <Label fx:id="lbldate" layoutX="217.0" layoutY="275.0" prefHeight="18.0" prefWidth="371.0" text="Label" textFill="RED" visible="false" />
+   </children>
+</AnchorPane>
