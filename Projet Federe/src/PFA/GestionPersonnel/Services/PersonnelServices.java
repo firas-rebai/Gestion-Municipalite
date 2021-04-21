@@ -18,7 +18,7 @@ public class PersonnelServices {
                 "'%s'," +
                 "'%s'," +
                 "%d," +
-                "'%b'," +
+                "'%s'," +
                 "'%s'," +
                 "%f)",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire());
         Statement statement;
@@ -48,7 +48,7 @@ public class PersonnelServices {
                 "nomPersonnel = '%s', " +
                 "prenomPersonnel = '%s'," +
                 "cinPersonnel = %d," +
-                "datenaissancepersonnel = '%b'," +
+                "datenaissancepersonnel = '%s'," +
                 "postepersonnel = '%s'," +
                 "salaire = %f" +
                 " where idPersonnel = %d",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire(),p.getId());
@@ -78,7 +78,7 @@ public class PersonnelServices {
                         ,res.getInt("cinPersonnel")
                         ,res.getFloat("salairePersonnel")
                         ,res.getString("postePersonnel")
-                        ,res.getDate("datenaissance").toLocalDate()));}
+                        ,res.getString("datenaissance")));}
             res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -98,9 +98,9 @@ public class PersonnelServices {
                         ,res.getString("nomPersonnel")
                         ,res.getString("prenomPersonnel")
                         ,res.getInt("cinPersonnel")
-                        ,res.getFloat("salairePersonnel")
+                        ,res.getFloat("salaire")
                         ,res.getString("postePersonnel")
-                        ,res.getDate("datenaissance").toLocalDate()));}
+                        ,res.getString("datenaissancepersonnel")));}
             res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -41,12 +42,15 @@
             </ScrollPane>
          </children>
       </VBox>
-      <HBox layoutX="30.0" layoutY="109.0" prefHeight="35.0" prefWidth="533.0" style="-fx-background-color: blue;">
+      <HBox layoutX="30.0" layoutY="109.0" prefHeight="35.0" prefWidth="533.0" style="-fx-background-color: grey;">
          <children>
             <Label prefHeight="39.0" prefWidth="125.0" text="Nom">
                <font>
                   <Font size="18.0" />
                </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
             <Label prefHeight="39.0" prefWidth="125.0" text="Quantite total">
                <font>

@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="ListePersonnel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionPersonnel.GUIs.ListePersonnelController">
    <children>
-      <Button fx:id="ajouterButton" layoutX="1000.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" onAction="#switchToAjouter" text="Ajouter" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="ajouterButton" layoutX="1000.0" layoutY="729.0" mnemonicParsing="false" onAction="#switchToAjouter" prefHeight="28.0" prefWidth="163.0" text="Ajouter" AnchorPane.rightAnchor="50.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -19,12 +19,12 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="modifierButton" onAction="#switchToModifier" disable="true" layoutX="624.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Modifier" AnchorPane.rightAnchor="410.0">
+      <Button fx:id="modifierButton" disable="true" layoutX="624.0" layoutY="729.0" mnemonicParsing="false" onAction="#switchToModifier" prefHeight="28.0" prefWidth="163.0" text="Modifier" AnchorPane.rightAnchor="410.0">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="supprimerButton" onAction="#SuprrimerButton" disable="true" layoutX="437.0" layoutY="729.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" text="Supprimer" AnchorPane.rightAnchor="590.0">
+      <Button fx:id="supprimerButton" disable="true" layoutX="437.0" layoutY="729.0" mnemonicParsing="false" onAction="#SuprrimerButton" prefHeight="28.0" prefWidth="163.0" text="Supprimer" AnchorPane.rightAnchor="590.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -42,6 +42,7 @@
       </TableView>
       <TextField fx:id="rechercheTextField" layoutX="50.0" layoutY="97.0" prefHeight="27.0" prefWidth="202.0" promptText="Recherche" />
       <Button fx:id="rechercheButton" layoutX="251.0" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Recherche" />
-      <Button fx:id="refreshButton" layoutX="1079.0" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="REFRESH" />
+      <Button fx:id="refreshButton" layoutX="1079.0" layoutY="97.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="71.0" text="REFRESH" />
+      <Button fx:id="retour" layoutX="50.0" layoutY="36.0" mnemonicParsing="false" onAction="#retour" prefHeight="27.0" prefWidth="71.0" text="RETOUR" />
    </children>
 </AnchorPane>

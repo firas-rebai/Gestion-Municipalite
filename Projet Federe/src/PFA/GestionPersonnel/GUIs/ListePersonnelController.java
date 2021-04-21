@@ -2,8 +2,10 @@ package PFA.GestionPersonnel.GUIs;
 
 import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.GestionPersonnel.Services.PersonnelServices;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -56,7 +58,7 @@ public class ListePersonnelController {
 
     public void initListe() {
         refreshList(PersonnelServices.ParsePersonnelListe());
-    
+
         ListePersonnelTable.setOnMouseClicked((MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY) && !ListePersonnelTable.getSelectionModel().isEmpty()){
                 detailsButton.setDisable(false);
@@ -143,8 +145,15 @@ public class ListePersonnelController {
     
     
 
-    public void retour(){
-    
+    public void retour(ActionEvent event) throws IOException {
+        Parent root7 = FXMLLoader.load(getClass().getResource("../../mainMenu.fxml"));
+        Stage stage7 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene7 = new Scene(root7);
+        stage7.setScene(scene7);
+        stage7.show();
     }
-
+    
+    public void refresh(ActionEvent event) {
+        refreshList(PersonnelServices.ParsePersonnelListe());
+    }
 }

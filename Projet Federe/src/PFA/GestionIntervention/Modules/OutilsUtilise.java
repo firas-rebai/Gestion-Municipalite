@@ -1,6 +1,6 @@
 package PFA.GestionIntervention.Modules;
 
-import PFA.Materiel.ModuleMateriel.Outil;
+import PFA.MaterielFiras.ModuleMateriel.Outil;
 
 public class OutilsUtilise {
     public OutilsUtilise(Outil outils, int quantite) {

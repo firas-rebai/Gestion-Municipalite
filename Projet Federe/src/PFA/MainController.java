@@ -24,8 +24,8 @@ public class MainController {
         stage.show();
     }
 
-    public void switchToListe(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+    public void switchToPersonnel(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionPersonnel/GUIs/fxml/listepersonnel.fxml"));
         Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -36,12 +36,11 @@ public class MainController {
     }
 
     public void switchToMateriel(ActionEvent event) throws IOException{
-        root = FXMLLoader.load(getClass().getResource("Pesonnel/GUIs/fxml/listepersonnel.fxml"));
+        root = FXMLLoader.load(getClass().getResource("MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        System.out.println("liste Materiel");
 
     }
 
