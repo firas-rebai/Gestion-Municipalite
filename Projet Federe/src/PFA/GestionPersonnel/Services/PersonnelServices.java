@@ -14,13 +14,14 @@ import static PFA.dbConnection.dbConnection.getOracleConnection;
 public class PersonnelServices {
     public static void Ajouter(Personnel p){
         String SQLquery = String.format("insert into Personnel values(" +
-                "'Personnel_seq'," +
+                "Personnel_seq.nextval," +
                 "'%s'," +
                 "'%s'," +
                 "%d," +
-                "'%s'," +
+                "to_date('%s','yyyy-mm-dd')," +
                 "'%s'," +
                 "%f)",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire());
+        System.out.println(SQLquery);
         Statement statement;
         try {
             Connection connection = getOracleConnection();
@@ -48,7 +49,7 @@ public class PersonnelServices {
                 "nomPersonnel = '%s', " +
                 "prenomPersonnel = '%s'," +
                 "cinPersonnel = %d," +
-                "datenaissancepersonnel = '%s'," +
+                "datenaissancepersonnel = to_date('%s','yyyy-mm-dd')," +
                 "postepersonnel = '%s'," +
                 "salaire = %f" +
                 " where idPersonnel = %d",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire(),p.getId());
@@ -78,7 +79,7 @@ public class PersonnelServices {
                         ,res.getInt("cinPersonnel")
                         ,res.getFloat("salairePersonnel")
                         ,res.getString("postePersonnel")
-                        ,res.getString("datenaissance")));}
+                        ,res.getDate("datenaissance").toLocalDate()));}
             res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -100,7 +101,7 @@ public class PersonnelServices {
                         ,res.getInt("cinPersonnel")
                         ,res.getFloat("salaire")
                         ,res.getString("postePersonnel")
-                        ,res.getString("datenaissancepersonnel")));}
+                        ,res.getDate("datenaissancepersonnel").toLocalDate()));}
             res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,10 +1,11 @@
 package PFA.Doleance.Doleance;
 
+import PFA.Doleance.Module.ModuleDoleance;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import Module.ModuleDoleance;
+
 
 import java.io.IOException;
 

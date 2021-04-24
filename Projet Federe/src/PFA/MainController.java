@@ -43,5 +43,12 @@ public class MainController {
         stage.show();
 
     }
-
+    
+    public void switchToDoleance(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Doleance/Doleance/Fxmls/ListeDoleance.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

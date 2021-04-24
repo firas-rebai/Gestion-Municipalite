@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -72,7 +73,7 @@ public class ModifierPersonnelController implements Initializable {
     
     
     public void ModifierButton() {
-        boolean valid = date.getValue().isBefore(date.getValue().minus(18, ChronoUnit.YEARS));
+        boolean valid = date.getValue().isBefore(LocalDate.now().minus(18,ChronoUnit.YEARS));
         dateErrorLabel.setVisible(!valid);
         if (PostePicker.getSelectionModel().isEmpty() || salaire.getText().isEmpty() || CIN.getText().isEmpty() || prenom.getText().isEmpty() || nom.getText().isEmpty() || date.getValue().toString().isEmpty()) {
             Remplir.setVisible(true);
@@ -80,7 +81,7 @@ public class ModifierPersonnelController implements Initializable {
         } else Remplir.setVisible(false);
     
         if (valid && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
-            Personnel p = new Personnel(id, nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue().toString());
+            Personnel p = new Personnel(id, nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
             PersonnelServices.Modifier(p);
         }
     }

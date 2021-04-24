@@ -1,6 +1,7 @@
 package PFA.GestionIntervention.GUIs;
 
 
+import PFA.GestionIntervention.GUIs.ajouterIntervention.ajouterVehiculeIntervention;
 import PFA.GestionIntervention.Modules.Intervention;
 import PFA.GestionIntervention.Services.InterventionServices;
 
@@ -53,13 +54,21 @@ public class ListeInterventionController {
         Stage stage1 = new Stage();
         Scene scene1 = new Scene(rt);
         stage1.setScene(scene1);
-        stage1.showAndWait();
-        refreshListe(InterventionServices.parseInterventionListe());
+        stage1.show();
+        
     }
     
     
     public void detailsbutton(ActionEvent event) throws IOException {
-    
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/detailsIntervention.fxml"));
+        Parent root = loader.load();
+        detailsController controller = loader.getController();
+        controller.initData(listeIntervention.getSelectionModel().getSelectedItem());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
     }
     
     public void modifierButton(ActionEvent event) {

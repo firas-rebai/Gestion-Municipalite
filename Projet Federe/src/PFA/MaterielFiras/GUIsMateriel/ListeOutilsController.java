@@ -50,7 +50,7 @@ public class ListeOutilsController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resource){
         refresh();
-        
+        tvoutils.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         anchro.setOnMouseClicked((MouseEvent event)->{
             if (event.getButton().equals(MouseButton.PRIMARY)){
                 boutmodifier.setDisable(true);
@@ -75,30 +75,7 @@ public class ListeOutilsController implements Initializable {
         });
     }
 
-    private List<Outil> OutilsListe() {
-        List<Outil> data = new ArrayList<>();
-        String SQLquery = "SELECT * from OUTIL ";
-        try {
-            Connection connection = getOracleConnection();
-
-            Statement statement = connection.createStatement();
-
-            ResultSet rs = statement.executeQuery(SQLquery);
-            while (rs.next()) {
-                data.add(new Outil(
-                        rs.getInt("idOutil"),
-                        rs.getInt("quantiteOutil"),
-                        rs.getString("nomOutil"),
-                        rs.getInt("consumableOutil")));
-
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return data;
-
-    }
+    
     public void switchToAjouter() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/ajouterOutils.fxml"));
         Parent rt = loader.load();
@@ -136,9 +113,6 @@ public class ListeOutilsController implements Initializable {
         Scene scene7 = new Scene(root7);
         stage7.setScene(scene7);
         stage7.show();
-        System.out.println("c'est l'interface des listes des Vehicules && des Outils");
-
-
     }
 
 
@@ -152,7 +126,7 @@ public class ListeOutilsController implements Initializable {
         coulid.setCellValueFactory(new PropertyValueFactory<>("id"));
         coulnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         coulquantité.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-        tvoutils.getItems().setAll(OutilsListe());
+        tvoutils.getItems().setAll(Outils.OutilsListe());
     }
     
     public void switchToModifier() throws IOException {

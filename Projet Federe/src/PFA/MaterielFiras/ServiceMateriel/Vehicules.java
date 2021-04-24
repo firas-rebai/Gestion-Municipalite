@@ -19,13 +19,13 @@ public class Vehicules {
     
     public static void Ajouter(Vehicule p) {
         String SQLquery = String.format("insert into vehicule values( " +
-                "vehicule_seq.nextval,'%s','%s',%d)", p.getNom(), p.getModel(), p.getMatricule());
+                "vehicule_seq.nextval,'%s','%s',%d,%f,to_date('%s','yyyy-mm-dd'))", p.getNom(), p.getModel(), p.getMatricule(),p.getPrix(),p.getDateDachat().toString());
+        System.out.println(SQLquery);
         Statement statement;
         try {
             Connection connection = getOracleConnection();
             statement = connection.createStatement();
             statement.executeUpdate(SQLquery);
-            System.out.println("ajouté");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,8 +36,10 @@ public class Vehicules {
         String SQLquery = String.format("update vehicule set " +
                 "nomVehicule = '%s'," +
                 "modelVehicule = '%s'," +
-                "matriculeVehicule = %d " +
-                "where idVehicule = %d", p.getNom(), p.getModel(), p.getMatricule(), p.getId());
+                "matriculeVehicule = %d," +
+                "prix = %f," +
+                "dateachat = to_date('%s','yyyy-mm-dd')" +
+                "where idVehicule = %d", p.getNom(), p.getModel(), p.getMatricule(),p.getPrix(),p.getDateDachat().toString(), p.getId());
         System.out.println(SQLquery);
         Statement statement;
         try {
@@ -60,7 +62,9 @@ public class Vehicules {
                 liste.add(new Vehicule(rs.getInt("idvehicule"),
                         rs.getInt("matriculevehicule"),
                         rs.getString("modelvehicule"),
-                        rs.getString("nomvehicule")));
+                        rs.getString("nomvehicule"),
+                        rs.getDate("dateachat").toLocalDate(),
+                        rs.getFloat("prix")));
             }
             rs.close();
         } catch (SQLException throwables) {
@@ -78,6 +82,33 @@ public class Vehicules {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+    
+    
+    public static List<Vehicule> VehiculesListe() {
+        List<Vehicule> data = new ArrayList<>();
+        String SQLquery = "SELECT * from VEHICULE";
+        try {
+            Connection connection = getOracleConnection();
+            
+            Statement statement = connection.createStatement();
+            
+            ResultSet rs = statement.executeQuery(SQLquery);
+            while (rs.next()) {
+                data.add(new Vehicule(
+                        rs.getInt("idVehicule"),
+                        rs.getInt("matriculeVehicule"),
+                        rs.getString("modelVehicule"),
+                        rs.getString("nomVehicule"),
+                        rs.getDate("dateachat").toLocalDate(),
+                        rs.getFloat("prix")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+        
     }
     
     

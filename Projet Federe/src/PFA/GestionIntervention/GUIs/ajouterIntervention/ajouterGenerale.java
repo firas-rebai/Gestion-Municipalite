@@ -55,16 +55,17 @@ public class ajouterGenerale implements Initializable {
             remplir.setVisible(true);
             valid = false;
         }
-//        if (!dateDebutPicker.getValue().toString().isEmpty() && !dateDebutPicker.getValue().toString().isEmpty() && dateDebutPicker.getValue().isBefore(dateFinPicker.getValue())) {
-//            DateDebutErrorLabel.setVisible(true);
-//            DateFinErrorLabel.setVisible(true);
-//            valid = false;
-//        }
+        
+        if (!dateDebutPicker.getValue().toString().isEmpty() && !dateDebutPicker.getValue().toString().isEmpty() && !dateDebutPicker.getValue().isBefore(dateFinPicker.getValue())) {
+            DateDebutErrorLabel.setVisible(true);
+            DateFinErrorLabel.setVisible(true);
+            valid = false;
+        }
         if (valid && Pattern.matches(budgetPattern, coutTextField.getText()) && Pattern.matches(budgetPattern, coutTextField.getText()) && Pattern.matches(numPattern, numAdresseTextField.getText()) && Pattern.matches(nomPattern, adresseTextField.getText()) && Pattern.matches(nomPattern, nomTextField.getText())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterPersonnelIntervention.fxml"));
             Parent root = loader.load();
             ajouterPersonnelIntervention controller = loader.getController();
-            controller.intervention = new Intervention(nomTextField.getText(), dateDebutPicker.getValue(), dateFinPicker.getValue(), Float.parseFloat(budgetTextField.getText()), numAdresseTextField.getText() + " " + adresseTextField.getText());
+            controller.setIntervention(new Intervention(nomTextField.getText(), dateDebutPicker.getValue(), dateFinPicker.getValue(), Float.parseFloat(budgetTextField.getText()), numAdresseTextField.getText() + " " + adresseTextField.getText()));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

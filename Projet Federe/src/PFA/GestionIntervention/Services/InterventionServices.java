@@ -17,12 +17,30 @@ import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class InterventionServices {
     public static void Ajouter(Intervention i) {
-        String SQLquery = "insert into INTERVENTION values(INTERVENTION_SEQ.nextval,'" + i.getNom() + "'," + "TO_DATE('2003/05/03 21:02:44','yyyy/mm/dd hh24:mi:ss')" + "," + "TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')" + "," + i.getBudget() + ",'" + i.getAdresse() + "'";
+        String query1;
+        String query3;
+        String query2;
+        String query = "insert into INTERVENTION values(INTERVENTION_SEQ.nextval,'" + i.getNom() + "'," + "TO_DATE('" + i.getDateBedut().toString() + "','yyyy-mm-dd')" + "," + "TO_DATE('" + i.getDateFin().toString() + "','yyyy-mm-dd')" + "," + i.getBudget() + ",'" + i.getAdresse() + "')";
         Statement statement;
+        Statement statement1;
         try {
             Connection connection = getOracleConnection();
+            statement1 = connection.createStatement();
             statement = connection.createStatement();
-            statement.executeUpdate(SQLquery);
+            statement.executeUpdate(query);
+            
+            for (OutilsUtilise o : i.getOutilsUtilises()) {
+                query1 = "insert into INTERVENTION_OUTIL values(" + i.getId() + "," + o.outils.getId() + "," + o.outils.getConsumable() + "," + o.quantite + ",'" + o.outils.getNom() + "')";
+                statement1.executeUpdate(query1);
+            }
+            for (PersonnelMin p : i.getEquipe()) {
+                query2 = "insert into INTERVENTION_PERSONNEL values(" + i.getId() + "," + p.getId() + ",'" + p.getNom() + "','" + p.getPrenom() + "')";
+                statement.executeUpdate(query2);
+            }
+            for (Vehicule v : i.getVehicules()) {
+                query3 = "insert into INTERVENTION_VEHICULE values(" + i.getId() + "," + v.getId() + ",'" + v.getModel() + "','" + v.getNom() + "','" + v.getMatricule() + "'," + v.getPrix() + ",to_date('" + v.getDateDachat().toString() + "','yyyy-mm-dd'))";
+                statement.executeUpdate(query3);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -30,10 +48,16 @@ public class InterventionServices {
     
     public static void Suprrimer(int id) {
         String query = "delete from INTERVENTION where IDINTERVENTION = " + id;
+        String query1 = "delete from INTERVENTION_VEHICULE where IDINTERVENTION = " + id;
+        String query2 = "delete from INTERVENTION_PERSONNEL where IDINTERVENTION = " + id;
+        String query3 = "delete from INTERVENTION_OUTIL where IDINTERVENTION = " + id;
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
             statement.execute(query);
+            statement.execute(query1);
+            statement.execute(query2);
+            statement.execute(query3);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -44,11 +68,11 @@ public class InterventionServices {
         String query = String.format("update intervention set " +
                 "idintervention = %d," +
                 "nomintervention= '%s'," +
-                "dateDebutintervention = %b," +
-                "dateFinintervention = %b," +
+                "dateDebutintervention = TO_DATE('%s','DD-MM-YYYY')," +
+                "dateFinintervention = TO_DATE('%s','DD-MM-YYYY')," +
                 "budgetintervention = %f" +
                 "adresseintervention = '%s'" +
-                " WHERE idintervention = %d", i.getId(), i.getNom(), i.getDateBedut(), i.getDateFin(), i.getBudget(), i.getAdresse(), i.getId());
+                " WHERE idintervention = %d", i.getId(), i.getNom(), i.getDateBedut().toString(), i.getDateFin().toString(), i.getBudget(), i.getAdresse(), i.getId());
         
         
         try {
@@ -72,7 +96,6 @@ public class InterventionServices {
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
-            Statement stat = connection.createStatement();
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
                 ResultSet rsPersonnel = statement.executeQuery(fetchPersonnel + res.getString("idIntervention"));
@@ -119,17 +142,42 @@ public class InterventionServices {
     }
     
     public static List<Vehicule> parseVehiculeList() {
-        List<Vehicule> liste = new ArrayList<>();
-        String query = "select * from vehicule where idVehicule not in (select idvehicule from INTERVENTION_VEHICULE)";
+        List<Vehicule> data = new ArrayList<>();
+        String SQLquery = "SELECT * from VEHICULE where IDVEHICULE not in (select IDVEHICULE from INTERVENTION_VEHICULE)";
+        try {
+            Connection connection = getOracleConnection();
+        
+            Statement statement = connection.createStatement();
+        
+            ResultSet rs = statement.executeQuery(SQLquery);
+            while (rs.next()) {
+                data.add(new Vehicule(
+                        rs.getInt("idVehicule"),
+                        rs.getInt("matriculeVehicule"),
+                        rs.getString("modelVehicule"),
+                        rs.getString("nomVehicule"),
+                        rs.getDate("dateachat").toLocalDate(),
+                        rs.getFloat("prix")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public static List<Outil> parseOutilList() {
+        List<Outil> liste = new ArrayList<>();
+        String query = "select * from OUTIL where IDOUTIL not in (select IDOUTIL from INTERVENTION_OUTIL)";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                liste.add(new Vehicule(rs.getInt("idvehicule"),
-                        rs.getInt("matriculevehicule"),
-                        rs.getString("modelvehicule"),
-                        rs.getString("nomvehicule")));
+                liste.add(new Outil(rs.getInt("idoutil"),
+                        rs.getInt("quantiteoutil"),
+                        rs.getString("nomoutil"),
+                        rs.getInt("consumableoutil")));
             }
             rs.close();
         } catch (SQLException throwables) {

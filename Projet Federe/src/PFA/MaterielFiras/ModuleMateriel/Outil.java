@@ -1,6 +1,7 @@
 package PFA.MaterielFiras.ModuleMateriel;
 
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Spinner;
 
 public class Outil {
     private int id;
@@ -8,6 +9,15 @@ public class Outil {
     private String nom;
     private CheckBox check;
     private int consumable;
+    private Spinner<Integer> spinner;
+    
+    public Spinner<Integer> getSpinner() {
+        return spinner;
+    }
+    
+    public void setSpinner(Spinner<Integer> spinner) {
+        this.spinner = spinner;
+    }
     
     public Outil(int id, int quantité, String nom, int consumable) {
         this.id = id;

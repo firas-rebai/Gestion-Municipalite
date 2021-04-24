@@ -18,15 +18,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 
 public class ListeVehiculeController implements Initializable {
     @FXML
@@ -54,7 +49,7 @@ public class ListeVehiculeController implements Initializable {
         colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colmodel.setCellValueFactory(new PropertyValueFactory<>("model"));
         colmatricule.setCellValueFactory(new PropertyValueFactory<>("matricule"));
-        tvliste.getItems().setAll(VehiculesListe());
+        tvliste.getItems().setAll(Vehicules.VehiculesListe());
         
         anpane.setOnMouseClicked((MouseEvent event) -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -90,29 +85,7 @@ public class ListeVehiculeController implements Initializable {
         
     }
     
-    private List<Vehicule> VehiculesListe() {
-        List<Vehicule> data = new ArrayList<>();
-        String SQLquery = "SELECT * from VEHICULE";
-        try {
-            Connection connection = getOracleConnection();
-            
-            Statement statement = connection.createStatement();
-            
-            ResultSet rs = statement.executeQuery(SQLquery);
-            while (rs.next()) {
-                data.add(new Vehicule(
-                        rs.getInt("idVehicule"),
-                        rs.getInt("matriculeVehicule"),
-                        rs.getString("modelVehicule"),
-                        rs.getString("nomVehicule")));
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return data;
-        
-    }
+    
     
     public void switchToAjouter() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/ajouterVehicule.fxml"));
@@ -120,7 +93,8 @@ public class ListeVehiculeController implements Initializable {
         Stage stage1 = new Stage();
         Scene scene1 = new Scene(rt);
         stage1.setScene(scene1);
-        stage1.show();
+        stage1.showAndWait();
+        refresh();
     }
     
     
@@ -132,7 +106,8 @@ public class ListeVehiculeController implements Initializable {
         Stage stage = new Stage();
         Scene scene = new Scene(rt);
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
+        refresh();
     }
     
     public void rechercheButton() {
@@ -154,14 +129,18 @@ public class ListeVehiculeController implements Initializable {
     
     }
     
-    public void RefreshButton(ActionEvent event) throws IOException {
+    public void RefreshButton(ActionEvent event){
         if (event.getSource() == btnactualiser) {
-            colid.setCellValueFactory(new PropertyValueFactory<>("id"));
-            colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            colmodel.setCellValueFactory(new PropertyValueFactory<>("model"));
-            colmatricule.setCellValueFactory(new PropertyValueFactory<>("matricule"));
-            tvliste.getItems().setAll(VehiculesListe());
+            refresh();
         }
+    }
+    
+    private void refresh(){
+        colid.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colmodel.setCellValueFactory(new PropertyValueFactory<>("model"));
+        colmatricule.setCellValueFactory(new PropertyValueFactory<>("matricule"));
+        tvliste.getItems().setAll(Vehicules.VehiculesListe());
     }
     
     public void switchToDetails() throws IOException {
@@ -183,18 +162,18 @@ public class ListeVehiculeController implements Initializable {
         Stage stage1 = new Stage();
         Scene scene1 = new Scene(rt);
         stage1.setScene(scene1);
-        stage1.show();
+        stage1.showAndWait();
+        refresh();
         
         
     }
     
     public void switchToChoix(ActionEvent event) throws IOException {
-        Parent root7 = FXMLLoader.load(getClass().getResource("Fxmls/ChoixVehiculeOutils.fxml"));
+        Parent root7 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Fxmls/ChoixVehiculeOutils.fxml")));
         Stage stage7 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene7 = new Scene(root7);
         stage7.setScene(scene7);
         stage7.show();
-        System.out.println("c'est l'interface des listes des Vehicules && des Outils");
     }
     
     
