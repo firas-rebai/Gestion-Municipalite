@@ -119,6 +119,18 @@ public class Intervention {
     public void setOutilsUtilises(ArrayList<OutilsUtilise> outilsUtilises) {
         this.outilsUtilises = outilsUtilises;
     }
+    
+    @Override
+    public String toString() {
+        return "Intervention{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", dateBedut=" + dateBedut +
+                ", dateFin=" + dateFin +
+                ", budget=" + budget +
+                ", adresse='" + adresse + '\'' +
+                '}';
+    }
 }
 
 

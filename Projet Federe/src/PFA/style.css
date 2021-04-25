@@ -1,5 +1,5 @@
 .root {
-    -fx-background-color: linear-gradient(rgba(0,0,0,0), rgba(106, 9, 200,0.5));
+    -fx-background-color: #acabab;
 }
 
 .button {
@@ -19,3 +19,4 @@
 .hbox {
     -fx-background-color: #7e7171;
 }
+

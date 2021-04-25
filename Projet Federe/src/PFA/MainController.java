@@ -1,5 +1,6 @@
 package PFA;
 
+import PFA.GestionIntervention.GUIs.ListeInterventionController;
 import PFA.GestionPersonnel.GUIs.ListePersonnelController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +18,11 @@ public class MainController {
     
     
     public void switchToIntervention(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("GestionIntervention/GUIs/fxml/listeIntervention.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionIntervention/GUIs/fxml/listeIntervention.fxml"));
+        Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ListeInterventionController controller = loader.getController();
+        controller.initListe();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

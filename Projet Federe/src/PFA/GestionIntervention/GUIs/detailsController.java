@@ -49,7 +49,7 @@ public class detailsController {
     
     public void initData(Intervention intervention) {
         //initializing outil liste
-        nomOutilColumn.setCellValueFactory(new PropertyValueFactory<>("nomOutils"));
+        nomOutilColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         quantiteOutilColumn.setCellValueFactory(new PropertyValueFactory<>("quantiteOutils"));
         for (OutilsUtilise o : intervention.getOutilsUtilises()) {
             OutilListe.getItems().add(o.outils);
@@ -90,7 +90,7 @@ public class detailsController {
         OutilListe.setVisible(false);
     }
     
-    public void retour(ActionEvent event) throws IOException {
+    public void retour() throws IOException {
         Stage stage = (Stage) retour.getScene().getWindow();
         stage.close();
     }

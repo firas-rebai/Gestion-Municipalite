@@ -40,7 +40,6 @@ public class Vehicules {
                 "prix = %f," +
                 "dateachat = to_date('%s','yyyy-mm-dd')" +
                 "where idVehicule = %d", p.getNom(), p.getModel(), p.getMatricule(),p.getPrix(),p.getDateDachat().toString(), p.getId());
-        System.out.println(SQLquery);
         Statement statement;
         try {
             Connection connection = getOracleConnection();

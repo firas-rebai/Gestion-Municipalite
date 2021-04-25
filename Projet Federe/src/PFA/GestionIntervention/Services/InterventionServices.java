@@ -30,15 +30,15 @@ public class InterventionServices {
             statement.executeUpdate(query);
             
             for (OutilsUtilise o : i.getOutilsUtilises()) {
-                query1 = "insert into INTERVENTION_OUTIL values(" + i.getId() + "," + o.outils.getId() + "," + o.outils.getConsumable() + "," + o.quantite + ",'" + o.outils.getNom() + "')";
+                query1 = "insert into INTERVENTION_OUTIL values(" + o.outils.getId() + "," + o.outils.getConsumable() + ",INTERVENTION_SEQ.currval ," + o.quantite + ",'" + o.outils.getNom() + "')";
                 statement1.executeUpdate(query1);
             }
             for (PersonnelMin p : i.getEquipe()) {
-                query2 = "insert into INTERVENTION_PERSONNEL values(" + i.getId() + "," + p.getId() + ",'" + p.getNom() + "','" + p.getPrenom() + "')";
+                query2 = "insert into INTERVENTION_PERSONNEL values(" + p.getId() + ",INTERVENTION_SEQ.currval,'" + p.getNom() + "','" + p.getPrenom() + "','" + p.getPoste() + "')";
                 statement.executeUpdate(query2);
             }
             for (Vehicule v : i.getVehicules()) {
-                query3 = "insert into INTERVENTION_VEHICULE values(" + i.getId() + "," + v.getId() + ",'" + v.getModel() + "','" + v.getNom() + "','" + v.getMatricule() + "'," + v.getPrix() + ",to_date('" + v.getDateDachat().toString() + "','yyyy-mm-dd'))";
+                query3 = "insert into INTERVENTION_VEHICULE values(" + v.getId() + ",INTERVENTION_SEQ.currval,'" + v.getModel() + "','" + v.getNom() + "','" + v.getMatricule() + "'," + v.getPrix() + ",to_date('" + v.getDateDachat().toString() + "','yyyy-mm-dd'))";
                 statement.executeUpdate(query3);
             }
         } catch (SQLException e) {
@@ -93,27 +93,36 @@ public class InterventionServices {
         ArrayList<PersonnelMin> listePersonnel = new ArrayList<>();
         ArrayList<Vehicule> listeVehicule = new ArrayList<>();
         ArrayList<OutilsUtilise> listeOutil = new ArrayList<>();
+        String id;
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
+            
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
-                ResultSet rsPersonnel = statement.executeQuery(fetchPersonnel + res.getString("idIntervention"));
-                ResultSet rsVehicule = statement.executeQuery(fetchVehicule + res.getString("idIntervention"));
-                ResultSet rsOutil = statement.executeQuery(fetchOutil + res.getString("idIntervention"));
+                id = res.getString("idintervention");
+                Statement statement1 = connection.createStatement();
+                Statement statement2 = connection.createStatement();
+                Statement statement3 = connection.createStatement();
+                ResultSet rsPersonnel = statement1.executeQuery(fetchPersonnel + id);
+                ResultSet rsVehicule = statement2.executeQuery(fetchVehicule + id);
+                ResultSet rsOutil = statement3.executeQuery(fetchOutil + id);
                 listePersonnel.clear();
                 listeVehicule.clear();
                 listeOutil.clear();
                 while (rsPersonnel.next()) {
                     listePersonnel.add(new PersonnelMin(rsPersonnel.getInt("idPersonnel"), rsPersonnel.getString("nom"), rsPersonnel.getString("prenom"), rsPersonnel.getString("poste")));
                 }
+                rsPersonnel.close();
                 while (rsVehicule.next()) {
                     listeVehicule.add(new Vehicule(rsVehicule.getInt("idVehicule"), rsVehicule.getInt("matricule"), rsVehicule.getString("model"), rsVehicule.getString("nom")));
                 }
+                rsVehicule.close();
                 while (rsOutil.next()) {
                     listeOutil.add(new OutilsUtilise(new Outil(rsOutil.getInt("idOutil"), rsOutil.getInt("quantite"), rsOutil.getString("nom"), rsOutil.getInt("consumable")), rsOutil.getInt("quantite")));
                 }
-                liste.add(new Intervention(res.getInt("idIntervention"), res.getString("nomIntervention"), res.getDate("dateDebutIntervention").toLocalDate(), res.getDate("dateFinIntervention").toLocalDate(), res.getFloat("budgetIntervention"), res.getString("adresseIntervention"), listePersonnel, listeVehicule, listeOutil));
+                rsOutil.close();
+                liste.add(new Intervention(Integer.parseInt(id), res.getString("NOMINTERVENTION"), res.getDate("DATEDEBUTINTERVENTION").toLocalDate(), res.getDate("DATEFININTERVENTION").toLocalDate(), res.getFloat("budget"), res.getString("adresse"), listePersonnel, listeVehicule, listeOutil));
             }
             res.close();
         } catch (SQLException e) {
@@ -146,9 +155,9 @@ public class InterventionServices {
         String SQLquery = "SELECT * from VEHICULE where IDVEHICULE not in (select IDVEHICULE from INTERVENTION_VEHICULE)";
         try {
             Connection connection = getOracleConnection();
-        
+            
             Statement statement = connection.createStatement();
-        
+            
             ResultSet rs = statement.executeQuery(SQLquery);
             while (rs.next()) {
                 data.add(new Vehicule(
@@ -168,7 +177,7 @@ public class InterventionServices {
     
     public static List<Outil> parseOutilList() {
         List<Outil> liste = new ArrayList<>();
-        String query = "select * from OUTIL where IDOUTIL not in (select IDOUTIL from INTERVENTION_OUTIL)";
+        String query = "select * from OUTIL";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -185,20 +194,52 @@ public class InterventionServices {
         }
         return liste;
     }
-//    public  static List<Intervention> Recherche(String term){
-//        List<Intervention> liste = new ArrayList<>();
-//        String query = String.format("select * from intervention where lower(nom) LIKE lower('%%s%') or lower(adresse) LIKE lower('%%s%')",term,term);
-//        try {
-//            Connection connection = getOracleConnection();
-//            Statement statement = connection.createStatement();
-//            ResultSet res = statement.executeQuery(query);
-//            while(res.next()){
-//                liste.add(new Intervention(res.getInt("id"),res.getString("nom"),res.getDate("dateDebut"),res.getDate("dateFin"),res.getFloat("budget"),res.getString("adresse")));
-//            }
-//            res.close();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return liste;
-//    }
+    
+    public static List<Intervention> Recherche(String term) {
+        List<Intervention> liste = new ArrayList<>();
+        String query = "SELECT * FROM INTERVENTION WHERE lower(NOMINTERVENTION) like lower('" + term + "')";
+        String fetchPersonnel = "SELECT * from intervention_personnel where idIntervention = ";
+        String fetchVehicule = "SELECT * from intervention_vehicule where idIntervention = ";
+        String fetchOutil = "SELECT * from intervention_outil where idIntervention = ";
+        ArrayList<PersonnelMin> listePersonnel = new ArrayList<>();
+        ArrayList<Vehicule> listeVehicule = new ArrayList<>();
+        ArrayList<OutilsUtilise> listeOutil = new ArrayList<>();
+        String id;
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            
+            ResultSet res = statement.executeQuery(query);
+            while (res.next()) {
+                id = res.getString("idintervention");
+                Statement statement1 = connection.createStatement();
+                Statement statement2 = connection.createStatement();
+                Statement statement3 = connection.createStatement();
+                ResultSet rsPersonnel = statement1.executeQuery(fetchPersonnel + id);
+                ResultSet rsVehicule = statement2.executeQuery(fetchVehicule + id);
+                ResultSet rsOutil = statement3.executeQuery(fetchOutil + id);
+                listePersonnel.clear();
+                listeVehicule.clear();
+                listeOutil.clear();
+                while (rsPersonnel.next()) {
+                    listePersonnel.add(new PersonnelMin(rsPersonnel.getInt("idPersonnel"), rsPersonnel.getString("nom"), rsPersonnel.getString("prenom"), rsPersonnel.getString("poste")));
+                }
+                rsPersonnel.close();
+                while (rsVehicule.next()) {
+                    listeVehicule.add(new Vehicule(rsVehicule.getInt("idVehicule"), rsVehicule.getInt("matricule"), rsVehicule.getString("model"), rsVehicule.getString("nom")));
+                }
+                rsVehicule.close();
+                while (rsOutil.next()) {
+                    listeOutil.add(new OutilsUtilise(new Outil(rsOutil.getInt("idOutil"), rsOutil.getInt("quantite"), rsOutil.getString("nom"), rsOutil.getInt("consumable")), rsOutil.getInt("quantite")));
+                }
+                rsOutil.close();
+                liste.add(new Intervention(Integer.parseInt(id), res.getString("NOMINTERVENTION"), res.getDate("DATEDEBUTINTERVENTION").toLocalDate(), res.getDate("DATEFININTERVENTION").toLocalDate(), res.getFloat("budget"), res.getString("adresse"), listePersonnel, listeVehicule, listeOutil));
+            }
+            res.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return liste;
+    }
 }
