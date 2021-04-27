@@ -21,7 +21,7 @@
 <!--      <Icon fx:id="tacheIcon" content="HELP_OUTLINE" layoutX="883.0" layoutY="352.0" prefHeight="24.0" prefWidth="24.0" />-->
 <!--      <Icon fx:id="materielIcon" content="HELP_OUTLINE" layoutX="883.0" layoutY="199.0" prefHeight="24.0" prefWidth="24.0" />-->
       <Button layoutX="150.0" layoutY="485.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Doleances" />
-      <Button layoutX="831.0" layoutY="485.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Comptes" />
+      <Button layoutX="831.0" layoutY="485.0" mnemonicParsing="false" onAction="#switchToCompte" prefHeight="60.0" prefWidth="220.0" text="Comptes" />
       <Button layoutX="482.0" layoutY="485.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Permissions" />
 <!--      <Icon fx:id="doleancesIcon1" content="HELP_OUTLINE" layoutX="195.0" layoutY="503.0" prefHeight="24.0" prefWidth="24.0" />-->
 <!--      <Icon fx:id="permissionIcon1" content="HELP_OUTLINE" layoutX="528.0" layoutY="503.0" prefHeight="24.0" prefWidth="24.0" />-->

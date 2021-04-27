@@ -1,5 +1,6 @@
 package PFA;
 
+
 import PFA.GestionIntervention.GUIs.ListeInterventionController;
 import PFA.GestionPersonnel.GUIs.ListePersonnelController;
 import javafx.event.ActionEvent;
@@ -54,5 +55,14 @@ public class MainController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void switchToCompte(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionCompte/GUIs/fxml/listecompte.fxml"));
+        Parent root = loader.load();
+        Stage primaryStage = new Stage();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.showAndWait();
     }
 }

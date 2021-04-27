@@ -14,14 +14,14 @@ PERSONNEL :
 
     personnel sequence :
 
-            create sequence "PERSONNEL_SEQ"
-            start with 1
-            increment by 1
-            maxvalue 9999999
-            minvalue 1
-            cache 10
-            nocycle
-            noorder
+                create sequence "PERSONNEL_SEQ"
+                start with 1
+                increment by 1
+                maxvalue 9999999
+                minvalue 1
+                cache 10
+                nocycle
+                noorder
 
 VEHICULE :
 
@@ -82,3 +82,11 @@ INTERVENTION :
             nocycle
             noorder
 
+COMPTE :
+
+            create table compte (
+            idcompte integer not null,
+            idpersonnel integer not null,
+            nomutilisateur varchar2(50) not null,
+            password varchar2(20) not null,
+            constraint compte_pk primary key(idcompte,idpersonnel));

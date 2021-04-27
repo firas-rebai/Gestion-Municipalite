@@ -19,11 +19,11 @@ import java.io.IOException;
 public class detailsController {
     
     @FXML
-    TableView<Outil> OutilListe;
+    TableView<OutilsUtilise> OutilListe;
     @FXML
-    TableColumn<Outil, String> nomOutilColumn;
+    TableColumn<OutilsUtilise, String> nomOutilColumn;
     @FXML
-    TableColumn<Outil, Integer> quantiteOutilColumn;
+    TableColumn<OutilsUtilise, Integer> quantiteOutilColumn;
     @FXML
     Button retour;
     @FXML
@@ -50,9 +50,10 @@ public class detailsController {
     public void initData(Intervention intervention) {
         //initializing outil liste
         nomOutilColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        quantiteOutilColumn.setCellValueFactory(new PropertyValueFactory<>("quantiteOutils"));
+        quantiteOutilColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         for (OutilsUtilise o : intervention.getOutilsUtilises()) {
-            OutilListe.getItems().add(o.outils);
+            o.nom = o.outils.getNom();
+            OutilListe.getItems().add(o);
         }
         //intializing personnel liste
         nomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,6 +149,58 @@ public class InterventionServices {
             throwables.printStackTrace();
         }
         return liste;
+    }
+    
+    public static List<PersonnelMin> ParsePersonnelListe(LocalDate debut, LocalDate fin) {
+        List<PersonnelMin> liste = new ArrayList<>();
+        String query = "select * from Personnel " +
+                "where IDPERSONNEL NOT IN " +
+                "(select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION NOT IN " +
+                "(select IDINTERVENTION from INTERVENTION " +
+                "where DATEDEBUTINTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')" +
+                "and DATEFININTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')))";
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            while (res.next()) {
+                liste.add(new PersonnelMin(res.getInt("idpersonnel"), res.getString("nomPersonnel"), res.getString("prenomPersonnel"), res.getString("postePersonnel")));
+            }
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+    }
+    
+    public static List<Vehicule> parseVehiculeList(LocalDate debut,LocalDate fin) {
+        List<Vehicule> data = new ArrayList<>();
+        String SQLquery = "select * from VEHICULE " +
+                "where IDVEHICULE NOT IN " +
+                "(select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION NOT IN " +
+                "(select IDINTERVENTION from INTERVENTION " +
+                "where DATEDEBUTINTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')" +
+                "and DATEFININTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')))";
+        try {
+            Connection connection = getOracleConnection();
+            
+            Statement statement = connection.createStatement();
+            
+            ResultSet rs = statement.executeQuery(SQLquery);
+            while (rs.next()) {
+                data.add(new Vehicule(
+                        rs.getInt("idVehicule"),
+                        rs.getInt("matriculeVehicule"),
+                        rs.getString("modelVehicule"),
+                        rs.getString("nomVehicule"),
+                        rs.getDate("dateachat").toLocalDate(),
+                        rs.getFloat("prix")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
     
     public static List<Vehicule> parseVehiculeList() {

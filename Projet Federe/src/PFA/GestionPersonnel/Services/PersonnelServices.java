@@ -108,5 +108,28 @@ public class PersonnelServices {
         }
         return liste;
     }
-
+    
+    public static Personnel ParsePersonnel(int id){
+        Personnel personnel = null;
+        String query = "select * from Personnel where IDPERSONNEL = " + id ;
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            while(res.next()){
+                personnel = new Personnel(res.getInt("idPersonnel")
+                        ,res.getString("nomPersonnel")
+                        ,res.getString("prenomPersonnel")
+                        ,res.getInt("cinPersonnel")
+                        ,res.getFloat("salaire")
+                        ,res.getString("postePersonnel")
+                        ,res.getDate("datenaissancepersonnel").toLocalDate());
+            }
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return personnel;
+    }
+    
 }
