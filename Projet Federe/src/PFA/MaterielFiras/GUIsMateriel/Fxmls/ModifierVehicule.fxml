@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="617.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ModifierVehiculeController">
+<AnchorPane fx:id="anajouter" prefHeight="617.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ModifierVehiculeController">
    <children>
-      <Label fx:id="lbtitleajouter" layoutX="174.0" layoutY="14.0" prefHeight="40.0" prefWidth="218.0" text="Modifier des Vehicules" underline="true">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="120.0" layoutY="97.0" prefHeight="40.0" prefWidth="127.0" text="Id:">
+      <Label fx:id="lbmodelajouter" layoutX="88.0" layoutY="177.0" prefHeight="40.0" prefWidth="127.0" text="Model:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="220.0" prefHeight="40.0" prefWidth="127.0" text="Model:">
+      <Label fx:id="lbmatriculeajouter" layoutX="88.0" layoutY="235.0" prefHeight="40.0" prefWidth="127.0" text="Matricule:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="296.0" prefHeight="40.0" prefWidth="127.0" text="Matricule:">
+      <Label fx:id="lbnomajouter" layoutX="88.0" layoutY="118.0" prefHeight="40.0" prefWidth="127.0" text="Nom:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="155.0" prefHeight="40.0" prefWidth="127.0" text="Nom:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfmatricule" layoutX="248.0" layoutY="303.0" prefHeight="26.0" prefWidth="172.0" promptText="Entrer une matricule">
+      <TextField fx:id="tfmatricule" layoutX="216.0" layoutY="242.0" prefHeight="26.0" prefWidth="172.0" promptText="4 Chiffres">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></TextField>
-      <TextField fx:id="tfnom" layoutX="248.0" layoutY="162.0" prefHeight="26.0" prefWidth="172.0" promptText="Entrer un nom">
+      <TextField fx:id="tfnom" layoutX="215.0" layoutY="125.0" prefHeight="26.0" prefWidth="172.0" promptText="Entrer un nom">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></TextField>
-      <TextField fx:id="tfmodel" layoutX="248.0" layoutY="227.0" prefHeight="26.0" prefWidth="172.0" promptText="Entrer un model">
+      <TextField fx:id="tfmodel" layoutX="215.0" layoutY="182.0" prefHeight="26.0" prefWidth="172.0" promptText="Entrer un model">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></TextField>
-      <Button fx:id="btnmodifier" layoutX="300.0" layoutY="569.0" mnemonicParsing="false" onAction="#ModifierButton" prefHeight="33.0" prefWidth="146.0" style="-fx-background-color: #4285F4;" text="Modifier" textFill="WHITE" />
-      <Button fx:id="retour" layoutX="111.0" layoutY="569.0" mnemonicParsing="false" onAction="#retour2" prefHeight="33.0" prefWidth="146.0" style="-fx-background-color: #EA4335;" text="Annuler" textFill="WHITE" />
-      <Label fx:id="lbnom" layoutX="248.0" layoutY="195.0" prefHeight="18.0" prefWidth="297.0" text="nom invalide svp veillez resseilllez" textFill="RED" visible="false" />
-      <Label fx:id="lbmodel" layoutX="248.0" layoutY="263.0" prefHeight="18.0" prefWidth="297.0" text="model invalide svp veillez resseillez " textFill="RED" visible="false" />
-      <Label fx:id="lbmatricule" layoutX="248.0" layoutY="336.0" prefHeight="18.0" prefWidth="297.0" text="matricule invalide svp veillez resseillez" textFill="RED" visible="false" />
-      <Label fx:id="lbloo" layoutX="247.0" layoutY="104.0" prefHeight="26.0" prefWidth="172.0">
+      <Label fx:id="lbnom" layoutX="216.0" layoutY="158.0" prefHeight="18.0" prefWidth="297.0" text="nom invalide svp veillez resseilllez" textFill="RED" visible="false" />
+      <Label fx:id="lbmodel" layoutX="216.0" layoutY="217.0" prefHeight="18.0" prefWidth="297.0" text="model invalide svp veillez resseillez " textFill="RED" visible="false" />
+      <Label fx:id="lbmatricule" layoutX="215.0" layoutY="275.0" prefHeight="18.0" prefWidth="297.0" text="matricule invalide svp veillez resseillez" textFill="RED" visible="false" />
+      <Label fx:id="lbmatriculeajouter1" layoutX="88.0" layoutY="293.0" prefHeight="40.0" prefWidth="127.0" text="Date d'achat :">
          <font>
-            <Font size="13.0" />
-         </font></Label>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datePicker" layoutX="216.0" layoutY="301.0" prefHeight="25.0" prefWidth="172.0" />
+      <Label fx:id="lbmatriculeajouter11" layoutX="88.0" layoutY="357.0" prefHeight="40.0" prefWidth="127.0" text="Prix :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="prixtextField" layoutX="216.0" layoutY="365.0" prefHeight="25.0" prefWidth="172.0" />
+      <Button fx:id="btnajouter" layoutX="364.0" layoutY="559.0" mnemonicParsing="false" onAction="#ModifierButton" prefHeight="33.0" prefWidth="146.0" text="Modifier" />
+      <Button fx:id="retour" layoutX="197.0" layoutY="559.0" mnemonicParsing="false" onAction="#retour" prefHeight="33.0" prefWidth="146.0" text="Annuler" />
+      <Label fx:id="lbdate" layoutX="217.0" layoutY="333.0" prefHeight="18.0" prefWidth="297.0" text="Date invalide" textFill="RED" visible="false" />
+      <Label fx:id="lbprix" layoutX="217.0" layoutY="397.0" prefHeight="18.0" prefWidth="297.0" text="Prix invalide" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

@@ -7,6 +7,14 @@ public class PersonnelMin {
     private String nom,prenom,poste;
     private CheckBox check;
     
+    public CheckBox getCheck() {
+        return check;
+    }
+    
+    public void setCheck(CheckBox check) {
+        this.check = check;
+    }
+    
     public int getId() {
         return id;
     }

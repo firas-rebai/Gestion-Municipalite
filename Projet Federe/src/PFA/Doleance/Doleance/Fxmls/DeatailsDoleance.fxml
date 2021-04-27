@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="581.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Doleance.DetailsDoleance">
+<AnchorPane prefHeight="581.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.Doleance.Doleance.DetailsDoleance">
    <children>
       <Label layoutX="193.0" layoutY="14.0" prefHeight="31.0" prefWidth="214.0" text="Details d'une doleance" underline="true">
          <font>

@@ -90,7 +90,7 @@ public class ajouterPersonnelController implements Initializable {
         } else Remplir.setVisible(false);
         
         if (valid && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
-            Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue().toString());
+            Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
             PersonnelServices.Ajouter(p);
         }
     }

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Doleance.SupprimerDoleance">
+<AnchorPane prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.Doleance.Doleance.SupprimerDoleance">
    <children>
       <Text layoutX="32.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voulez vous vraiment supprimer cette doleance ?" wrappingWidth="390.13665771484375">
          <font>

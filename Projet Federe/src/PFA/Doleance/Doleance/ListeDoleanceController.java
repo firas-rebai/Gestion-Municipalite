@@ -1,6 +1,6 @@
 package PFA.Doleance.Doleance;
-import Module.ModuleDoleance;
-import Service.DoleanceService;
+import PFA.Doleance.Module.ModuleDoleance;
+import PFA.Doleance.Service.DoleanceService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static DataBaseConnection.OracleConnection.getOracleConnection;
+import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 
 public class ListeDoleanceController implements Initializable {
     @FXML

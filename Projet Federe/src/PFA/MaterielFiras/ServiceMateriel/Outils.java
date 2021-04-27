@@ -77,6 +77,30 @@ public class Outils {
         }
     }
     
+    public static List<Outil> OutilsListe() {
+        ArrayList<Outil> data = new ArrayList<>();
+        String SQLquery = "SELECT * from OUTIL ";
+        try {
+            Connection connection = getOracleConnection();
+            
+            Statement statement = connection.createStatement();
+            
+            ResultSet rs = statement.executeQuery(SQLquery);
+            while (rs.next()) {
+                data.add(new Outil(
+                        rs.getInt("idOutil"),
+                        rs.getInt("quantiteOutil"),
+                        rs.getString("nomOutil"),
+                        rs.getInt("consumableOutil")));
+                
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+        
+    }
     
 }
 

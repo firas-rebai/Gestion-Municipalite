@@ -17,56 +17,29 @@ public class ajouterVehiculeController implements Initializable {
     Label lbtitleajouter, lbidajouter, lbmodelajouter, lbmatriculeajouter, lbquantitéajouter, lbprixajouter, lbnomajouter,
             lbdateajouter;
     @FXML
-    TextField tfid, tfmodel, tfmatricule, tfprix, tfnom;
+    TextField  tfmodel, tfmatricule, prixtextField, tfnom;
     @FXML
     Button btnajouter;
     @FXML
-    DatePicker datedate;
+    DatePicker datePicker;
     @FXML
     AnchorPane anajouter;
     @FXML
-    Label lbid, lbprix,lbmodel,lbnom,lbmatricule,lbquantité,lbdate;
+    Label lbprix,lbmodel,lbnom,lbmatricule,lbdate;
     @FXML
     Button retour;
 
-    String idPattern = "[0-9]*";
-    String prixPattern="[0-9]*.[0-9]*";
+    
+    String prixPattern="[[0-9]+.[0-9]*]|[0-9]+";
     String nomPattern = "[a-zA-Z]{3}[a-zA-Z ]*";
     String modelPattern = "[a-zA-Z0-9-_ ]+";
     String matriculePattern = "[0-9]{4}";
-    String datePattern = "[0-9]*-[0-9]*-[0-9]*";
 
     boolean verif = true;
 
     public void AjouterButton(ActionEvent event) throws IOException{
-
-       /* LocalDate date = datedate.getValue();
-        java.sql.Date sqlDate = Date.valueOf(date);
-        */
-
-
-           
-
-           /* if(datedate.getValue().toString().isEmpty()&tfmatricule.getText().isEmpty()&&
-                    tfquantité.getText().isEmpty()&&tfmodel.getText().isEmpty()&&tfnom.getText().isEmpty()&&
-                    tfprix.getText().isEmpty()&&tfid.getText().isEmpty() && event.getSource()==btnajouter){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("valider tous les champs svp");
-                alert.setHeaderText(null);
-                alert.setContentText("svp entrer les informations necessaires");
-                alert.show();
-            }
-
-            */
-
-
-
-
-        if (verif &&
-                Pattern.matches(nomPattern, tfnom.getText())
-                && Pattern.matches(modelPattern, tfmodel.getText()) &&
-                Pattern.matches(matriculePattern, tfmatricule.getText()) && event.getSource()==btnajouter) {
-            Vehicule p = new Vehicule(Integer.parseInt(tfmatricule.getText()),tfmodel.getText(),tfnom.getText());
+        if (verif && Pattern.matches(nomPattern, tfnom.getText()) && Pattern.matches(modelPattern, tfmodel.getText()) && Pattern.matches(matriculePattern, tfmatricule.getText()) && Pattern.matches(prixPattern, prixtextField.getText()) && !prixtextField.getText().isEmpty() && !tfmodel.getText().isEmpty() && !tfmatricule.getText().isEmpty() && !tfnom.getText().isEmpty()) {
+            Vehicule p = new Vehicule(Integer.parseInt(tfmatricule.getText()),tfmodel.getText(),tfnom.getText(),datePicker.getValue(),Float.parseFloat(prixtextField.getText()));
             Vehicules.Ajouter(p);
             Stage stage = (Stage) btnajouter.getScene().getWindow();
             stage.close();
@@ -104,6 +77,12 @@ public class ajouterVehiculeController implements Initializable {
         tfmatricule.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 lbmatricule.setVisible(!Pattern.matches(matriculePattern, tfmatricule.getText())|| tfmatricule.getText().isEmpty());
+            }
+        });
+    
+        prixtextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            if (!newPropertyValue) {
+                lbprix.setVisible(!Pattern.matches(prixPattern, prixtextField.getText())|| prixtextField.getText().isEmpty());
             }
         });
         

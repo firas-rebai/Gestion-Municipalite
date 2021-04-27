@@ -11,10 +11,10 @@ public class Personnel {
     private int CIN;
     private float salaire;
     private String poste;
-    private String dateNaissance;
+    private LocalDate dateNaissance;
     private CheckBox check;
     
-    public Personnel(String nom, String prenom, int CIN, float salaire, String poste, String dateNaissaince) {
+    public Personnel(String nom, String prenom, int CIN, float salaire, String poste, LocalDate dateNaissaince) {
         this.nom = nom;
         this.prenom = prenom;
         this.CIN = CIN;
@@ -24,7 +24,7 @@ public class Personnel {
         this.check = new CheckBox();
     }
     
-    public Personnel(int id, String nom, String prenom, int CIN, float salaire, String poste, String dateNaissaince) {
+    public Personnel(int id, String nom, String prenom, int CIN, float salaire, String poste, LocalDate dateNaissaince) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -83,11 +83,11 @@ public class Personnel {
         this.poste = poste;
     }
     
-    public String getDateNaissance() {
+    public LocalDate getDateNaissance() {
         return dateNaissance;
     }
     
-    public void setDateNaissance(String dateNaissaince) {
+    public void setDateNaissance(LocalDate dateNaissaince) {
         this.dateNaissance = dateNaissaince;
     }
     

@@ -7,7 +7,7 @@ public class OutilsUtilise {
         this.outils = outils;
         this.quantite = quantite;
     }
-    
+    public String nom;
     public Outil outils;
     public int quantite;
 }

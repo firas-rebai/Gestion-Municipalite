@@ -1,6 +1,7 @@
 package PFA.Doleance.Doleance;
 
-import Service.DoleanceService;
+
+import PFA.Doleance.Service.DoleanceService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -15,7 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import static DataBaseConnection.OracleConnection.getOracleConnection;
+import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 
 public class SupprimerDoleance implements Initializable  {
     @FXML

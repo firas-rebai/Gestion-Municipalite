@@ -1,5 +1,7 @@
 package PFA;
 
+
+import PFA.GestionIntervention.GUIs.ListeInterventionController;
 import PFA.GestionPersonnel.GUIs.ListePersonnelController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +19,11 @@ public class MainController {
     
     
     public void switchToIntervention(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("GestionIntervention/GUIs/fxml/listeIntervention.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionIntervention/GUIs/fxml/listeIntervention.fxml"));
+        Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ListeInterventionController controller = loader.getController();
+        controller.initListe();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -43,5 +48,21 @@ public class MainController {
         stage.show();
 
     }
-
+    
+    public void switchToDoleance(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Doleance/Doleance/Fxmls/ListeDoleance.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void switchToCompte(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionCompte/GUIs/fxml/listecompte.fxml"));
+        Parent root = loader.load();
+        Stage primaryStage = new Stage();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.showAndWait();
+    }
 }

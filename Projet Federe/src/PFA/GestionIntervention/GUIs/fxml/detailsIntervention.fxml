@@ -9,17 +9,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionIntervention.GUIs.detailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionIntervention.GUIs.detailsController">
    <children>
       <VBox prefHeight="800.0" prefWidth="217.0" style="-fx-background-color: gray;">
          <children>
-            <Button mnemonicParsing="false" onAction="#retour" fx:id="retour" text="Retour" />
-            <ImageView fitHeight="150.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true" />
-            <Label prefHeight="27.0" prefWidth="246.0" text="Nom d'Intervention" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
+            <Button fx:id="retour" mnemonicParsing="false" onAction="#retour" text="Retour" />
+            <ImageView fitHeight="185.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="33.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="25.0" fitWidth="222.0" pickOnBounds="true" preserveRatio="true" />
             <Button mnemonicParsing="false" onAction="#listePersonnelButton" prefHeight="42.0" prefWidth="295.0" style="-fx-background-color: #969292;" text="Liste des Personnels">
@@ -41,11 +36,10 @@
             </Button>
          </children>
       </VBox>
-      <TableView fx:id="PersonnelListe" layoutX="321.0" layoutY="166.0" prefHeight="541.0" prefWidth="813.0">
+      <TableView fx:id="PersonnelListe" layoutX="321.0" layoutY="166.0" prefHeight="541.0" prefWidth="813.0" visible="false">
         <columns>
           <TableColumn fx:id="nomPersonnelColumn" prefWidth="162.0" text="Nom" />
           <TableColumn fx:id="prenomPersonnelColumn" prefWidth="142.0" text="Prenom" />
-            <TableColumn fx:id="cinPersonnelColumn" prefWidth="121.0" text="CIN" />
             <TableColumn fx:id="postePersonnelColumn" prefWidth="205.0" text="Poste" />
         </columns>
          <columnResizePolicy>
@@ -62,7 +56,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fx:id="OutilListe" layoutX="321.0" layoutY="166.0" prefHeight="541.0" prefWidth="813.0" visible="false">
+      <TableView fx:id="OutilListe" layoutX="321.0" layoutY="166.0" prefHeight="541.0" prefWidth="813.0">
          <columns>
             <TableColumn fx:id="nomOutilColumn" prefWidth="162.0" text="Nom" />
             <TableColumn fx:id="quantiteOutilColumn" prefWidth="142.0" text="Quantite" />
@@ -71,27 +65,52 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label fx:id="dateDebutLabel" layoutX="322.0" layoutY="45.0" prefHeight="27.0" prefWidth="246.0" text="Date Debut :" textAlignment="CENTER">
+      <Label fx:id="dateDebutLabel" layoutX="428.0" layoutY="45.0" prefHeight="27.0" prefWidth="246.0" text="Date Debut :" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="dateFinLabel" layoutX="322.0" layoutY="72.0" prefHeight="27.0" prefWidth="246.0" text="Date Fin :" textAlignment="CENTER">
+      <Label fx:id="dateFinLabel" layoutX="428.0" layoutY="72.0" prefHeight="27.0" prefWidth="246.0" text="Date Fin :" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="budgetLabel" layoutX="322.0" layoutY="124.0" prefHeight="27.0" prefWidth="246.0" text="Budget :" textAlignment="CENTER">
+      <Label fx:id="budgetLabel" layoutX="738.0" layoutY="45.0" prefHeight="27.0" prefWidth="246.0" text="c1" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="nomLabel" layoutX="650.0" layoutY="45.0" prefHeight="27.0" prefWidth="246.0" text="Nom d'Intervention :" textAlignment="CENTER">
+      <Label fx:id="nomLabel" layoutX="492.0" layoutY="127.0" prefHeight="27.0" prefWidth="246.0" text="Nom d'Intervention :" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="adresseLabel" layoutX="650.0" layoutY="72.0" prefHeight="27.0" prefWidth="246.0" text="Adresse :" textAlignment="CENTER">
+      <Label fx:id="adresseLabel" layoutX="738.0" layoutY="72.0" prefHeight="27.0" prefWidth="246.0" text="Adresse :" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateDebutLabel1" layoutX="322.0" layoutY="45.0" prefHeight="27.0" prefWidth="246.0" text="Date Debut :" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateFinLabel1" layoutX="322.0" layoutY="72.0" prefHeight="27.0" prefWidth="246.0" text="Date Fin :" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="nomLabel1" layoutX="322.0" layoutY="127.0" prefHeight="27.0" prefWidth="246.0" text="Nom d'Intervention :" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="adresseLabel1" layoutX="650.0" layoutY="72.0" prefHeight="27.0" prefWidth="246.0" text="Adresse :" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="budgetLabel1" layoutX="650.0" layoutY="45.0" prefHeight="27.0" prefWidth="246.0" text="Cout :" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>

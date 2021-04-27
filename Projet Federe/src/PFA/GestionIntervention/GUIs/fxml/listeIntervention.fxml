@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionIntervention.GUIs.ListeInterventionController">
+<AnchorPane fx:id="pane" stylesheets="@../../../style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionIntervention.GUIs.ListeInterventionController">
    <children>
       <Button fx:id="ajouterButton" layoutX="1000.0" layoutY="729.0" mnemonicParsing="false" onAction="#ajouterButton" prefHeight="28.0" prefWidth="163.0" text="Ajouter" AnchorPane.rightAnchor="50.0">
          <font>
@@ -41,8 +41,8 @@
          </columnResizePolicy>
       </TableView>
       <TextField fx:id="rechercheTextField" layoutX="50.0" layoutY="97.0" prefHeight="27.0" prefWidth="202.0" promptText="Recherche" />
-      <Button fx:id="rechercheButton" layoutX="251.0" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Recherche" />
-      <Button fx:id="refreshButton" layoutX="1079.0" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Actualiser" />
+      <Button fx:id="rechercheButton" layoutX="251.0" onAction="#recherche" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Recherche" />
+      <Button fx:id="refreshButton" layoutX="1079.0" onAction="#refresh" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Actualiser" />
       <Button layoutX="50.0" layoutY="39.0" mnemonicParsing="false" onAction="#retour" prefHeight="27.0" prefWidth="71.0" text="RETOUR" />
    </children>
 </AnchorPane>

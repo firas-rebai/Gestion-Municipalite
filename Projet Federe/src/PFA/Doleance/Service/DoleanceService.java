@@ -1,5 +1,7 @@
 package PFA.Doleance.Service;
 
+import PFA.Doleance.Module.ModuleDoleance;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,8 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Module.ModuleDoleance;
-import static DataBaseConnection.OracleConnection.getOracleConnection;
+import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class DoleanceService {
     public static void Ajouter(ModuleDoleance p){
