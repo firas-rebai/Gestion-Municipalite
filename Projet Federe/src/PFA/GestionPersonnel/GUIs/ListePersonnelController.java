@@ -17,10 +17,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class ListePersonnelController {
     @FXML
@@ -86,6 +89,8 @@ public class ListePersonnelController {
         cntrl.initData(ListePersonnelTable.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         Scene scene = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.show();
     }
@@ -100,10 +105,12 @@ public class ListePersonnelController {
     public void switchToAjouter() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ajouterpersonnel.fxml"));
         Parent rt = loader.load();
-        Stage stage1 = new Stage();
-        Scene scene1 = new Scene(rt);
-        stage1.setScene(scene1);
-        stage1.showAndWait();
+        Stage stage = new Stage();
+        Scene scene = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.showAndWait();
         refreshList(PersonnelServices.ParsePersonnelListe());
     }
 
@@ -115,6 +122,8 @@ public class ListePersonnelController {
         controller.initData(ListePersonnelTable.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         Scene scene = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.showAndWait();
         refreshList(PersonnelServices.ParsePersonnelListe());
@@ -128,6 +137,8 @@ public class ListePersonnelController {
         controller.setP(ListePersonnelTable.getSelectionModel().getSelectedItem());
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
         refreshList(PersonnelServices.ParsePersonnelListe());
@@ -139,11 +150,13 @@ public class ListePersonnelController {
     
 
     public void retour(ActionEvent event) throws IOException {
-        Parent root7 = FXMLLoader.load(getClass().getResource("../../login_mainMenu/fxml/mainMenu.fxml"));
-        Stage stage7 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene7 = new Scene(root7);
-        stage7.setScene(scene7);
-        stage7.show();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../login_mainMenu/fxml/mainMenu.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
     }
     
     public void refresh(ActionEvent event) {

@@ -86,14 +86,15 @@ public class compteServices {
     }
     
     public static boolean usernameExist(String username){
-        String query = "select * from compte where lower(NOMUTILISATEUR) like lower('" + username + "')";
+        String query = "select count(*) from compte where NOMUTILISATEUR like '" + username + "'";
         boolean exist = false;
          try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
             ResultSet res = statement.executeQuery(query);
             res.next();
-            exist = res.getInt(1) == 1;
+            int count = res.getInt(1);
+            exist = count == 1;
             res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

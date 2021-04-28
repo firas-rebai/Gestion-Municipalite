@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anajouter" prefHeight="617.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ajouterVehiculeController">
+<AnchorPane fx:id="anajouter" stylesheets="@../../../resources/style.css" prefHeight="617.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ajouterVehiculeController">
    <children>
       <Label fx:id="lbmodelajouter" layoutX="88.0" layoutY="177.0" prefHeight="40.0" prefWidth="127.0" text="Model:">
          <font>

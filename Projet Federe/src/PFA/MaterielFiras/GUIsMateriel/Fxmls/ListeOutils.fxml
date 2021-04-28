@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchro" prefHeight="703.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ListeOutilsController">
+<AnchorPane stylesheets="@../../../resources/style.css" fx:id="anchro" prefHeight="703.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ListeOutilsController">
    <children>
       <Label fx:id="lboutilstitle" layoutX="492.0" layoutY="12.0" prefHeight="56.0" prefWidth="184.0" text="Liste des Outils" underline="true">
          <font>

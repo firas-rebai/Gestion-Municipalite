@@ -88,7 +88,6 @@ public class ajouterPersonnelController implements Initializable {
         dateErrorLabel.setVisible(!valid);
         if (PostePicker.getSelectionModel().isEmpty() || salaire.getText().isEmpty() || CIN.getText().isEmpty() || prenom.getText().isEmpty() || nom.getText().isEmpty() || date.getValue().toString().isEmpty()) {
             Remplir.setVisible(true);
-            valid = false;
             return ;
         } else Remplir.setVisible(false);
         boolean cinExist = PersonnelServices.CINexist(Integer.parseInt(CIN.getText()));
@@ -96,6 +95,8 @@ public class ajouterPersonnelController implements Initializable {
         if (valid && !cinExist && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
             Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
             PersonnelServices.Ajouter(p);
+            Stage stage = (Stage) retour.getScene().getWindow();
+            stage.close();
         }
     }
     

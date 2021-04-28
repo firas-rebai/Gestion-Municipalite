@@ -114,6 +114,8 @@ public class ListeInterventionController {
         controller.initData(listeIntervention.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.show();
     }
@@ -125,6 +127,8 @@ public class ListeInterventionController {
         controller.initData(listeIntervention.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.showAndWait();
         refreshListe(InterventionServices.parseInterventionListe());
@@ -137,17 +141,21 @@ public class ListeInterventionController {
         controller.id = listeIntervention.getSelectionModel().getSelectedItem().getId();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.showAndWait();
         refreshListe(InterventionServices.parseInterventionListe());
     }
     
     public void retour(ActionEvent event) throws IOException {
-        Parent root7 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../mainMenu.fxml")));
-        Stage stage7 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene7 = new Scene(root7);
-        stage7.setScene(scene7);
-        stage7.show();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../login_mainMenu/fxml/mainMenu.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
     }
     
     

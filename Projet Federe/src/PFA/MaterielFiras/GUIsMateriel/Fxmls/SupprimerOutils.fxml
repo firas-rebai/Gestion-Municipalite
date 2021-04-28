@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="308.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.SupprimerOutilsController">
+<AnchorPane stylesheets="@../../../resources/style.css" prefHeight="308.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.SupprimerOutilsController">
    <children>
       <ChoiceBox fx:id="choiceid" layoutX="237.0" layoutY="141.0" prefWidth="150.0" />
       <Label layoutX="189.0" layoutY="134.0" prefHeight="39.0" prefWidth="26.0" text="id:">

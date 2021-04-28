@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="492.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ChoixVehiculeOutilsController">
+<AnchorPane prefHeight="492.0" stylesheets="@../../../resources/style.css" prefWidth="761.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ChoixVehiculeOutilsController">
    <children>
       <Button fx:id="btnvehicules" layoutX="238.0" layoutY="178.0" mnemonicParsing="false" onAction="#SwitchToPrincipalListeVehicule" prefHeight="47.0" prefWidth="284.0" text="Vehicules">
          <font>

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="229.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.SuppressionVehiculeController">
+<AnchorPane stylesheets="@../../../resources/style.css" prefHeight="229.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.SuppressionVehiculeController">
    <children>
       <Label layoutX="52.0" layoutY="14.0" prefHeight="66.0" prefWidth="494.0" text="   Vous voulez vraiment supprimer cette vehicule ">
          <font>

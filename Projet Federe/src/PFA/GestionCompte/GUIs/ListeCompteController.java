@@ -14,6 +14,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
@@ -124,6 +126,8 @@ public class ListeCompteController implements Initializable {
         Parent root = loader.load();
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
         
@@ -134,6 +138,8 @@ public class ListeCompteController implements Initializable {
         Parent root = loader.load();
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
         refreshListe(compteServices.ParseCompteListe());
@@ -146,6 +152,8 @@ public class ListeCompteController implements Initializable {
         controller.initData(compteTableView.getSelectionModel().getSelectedItem());
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -157,6 +165,8 @@ public class ListeCompteController implements Initializable {
         controller.id = compteTableView.getSelectionModel().getSelectedItem().getId();
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
         refreshListe(compteServices.ParseCompteListe());
@@ -169,6 +179,8 @@ public class ListeCompteController implements Initializable {
         controller.initData(compteTableView.getSelectionModel().getSelectedItem());
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
         refreshListe(compteServices.ParseCompteListe());

@@ -13,6 +13,7 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainController {
     private Stage stage;
@@ -27,6 +28,8 @@ public class MainController {
         ListeInterventionController controller = loader.getController();
         controller.initListe();
         scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.show();
     }
@@ -38,7 +41,7 @@ public class MainController {
         scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(scene);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("PFA/resources/style.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getClassLoader().getResource("PFA/resources/style.css")).toExternalForm());
         ListePersonnelController controller =  loader.getController();
         controller.initListe();
         stage.setScene(scene);
@@ -46,7 +49,7 @@ public class MainController {
     }
 
     public void switchToMateriel(ActionEvent event) throws IOException{
-        root = FXMLLoader.load(getClass().getResource("MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -57,9 +60,8 @@ public class MainController {
     }
     
     public void switchToDoleance(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("../Doleance/Doleance/Fxmls/ListeDoleance.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Doleance/Doleance/Fxmls/ListeDoleance.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
         scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(scene);
@@ -67,7 +69,7 @@ public class MainController {
         stage.show();
     }
     
-    public void switchToCompte(ActionEvent actionEvent) throws IOException {
+    public void switchToCompte() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionCompte/GUIs/fxml/listecompte.fxml"));
         Parent root = loader.load();
         Stage primaryStage = new Stage();
@@ -78,8 +80,5 @@ public class MainController {
         primaryStage.showAndWait();
     }
     
-    public void login () {
-    
-    }
     
 }

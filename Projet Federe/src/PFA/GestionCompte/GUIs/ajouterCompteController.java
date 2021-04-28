@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class ajouterCompteController implements Initializable {
+    public Label userLabel;
     @FXML
     ComboBox<String> roleCombobox;
     @FXML
@@ -109,8 +110,8 @@ public class ajouterCompteController implements Initializable {
             return ;
         }
         boolean usernameExists = compteServices.usernameExist(nomTextField.getText());
-        usernameLabel.setVisible(usernameExists);
-        if (valid && !usernameExists && roleSelected && personnelSelected) {
+        userLabel.setVisible(usernameExists);
+        if (valid && !usernameExists && !roleSelected && !personnelSelected) {
             Compte compte = new Compte(nomTextField.getText(), MDPTextField.getText(), roleCombobox.getSelectionModel().getSelectedItem(), personnelTV.getSelectionModel().getSelectedItem());
             compteServices.Ajouter(compte);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

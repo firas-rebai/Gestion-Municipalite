@@ -1,29 +1,36 @@
 package PFA.login_mainMenu;
 
+import com.sun.org.apache.xml.internal.security.Init;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static PFA.dbConnection.dbConnection.getOracleConnection;
 
-public class login {
+public class login implements Initializable {
     @FXML
     Button loginButton;
     @FXML
@@ -59,4 +66,11 @@ public class login {
     }
     
     
+    @FXML
+    ImageView logo;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        logo.setImage(new Image("PFA/resources/logo.png"));
+    }
 }
