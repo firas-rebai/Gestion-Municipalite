@@ -4,13 +4,17 @@ PASSWORD : PFA
 
 PERSONNEL :
 
-            create table personnel(
-            idPersonnel integer primary key not null,
-            nomPersonnel varchar2(20) not null,
-            prenomPersonnel varchar2(20) not null,
-            cinPersonnel integer not null,
-            dateNaissancePersonnel date not null,
-            postePersonnel varchar2(20) not null);
+            CREATE TABLE  "PERSONNEL"
+               (	"IDPERSONNEL" NUMBER(*,0) NOT NULL ENABLE,
+            	"NOMPERSONNEL" VARCHAR2(20) NOT NULL ENABLE,
+            	"PRENOMPERSONNEL" VARCHAR2(20) NOT NULL ENABLE,
+            	"CINPERSONNEL" NUMBER(*,0) NOT NULL ENABLE,
+            	"DATENAISSANCEPERSONNEL" DATE NOT NULL ENABLE,
+            	"POSTEPERSONNEL" VARCHAR2(100) NOT NULL ENABLE,
+            	"SALAIRE" NUMBER NOT NULL ENABLE,
+            	 PRIMARY KEY ("IDPERSONNEL") ENABLE
+               ) ;
+
 
     personnel sequence :
 
@@ -25,11 +29,15 @@ PERSONNEL :
 
 VEHICULE :
 
-            create table Vehicule (
-            idVehicule integer primary key not null,
-            nomVehicule varchar2(20) not null,
-            modelVehicule varchar2(20) not null,
-            matriculeVehicule integer not null);
+            CREATE TABLE  "VEHICULE"
+               (	"IDVEHICULE" NUMBER(*,0) NOT NULL ENABLE,
+            	"NOMVEHICULE" VARCHAR2(20) NOT NULL ENABLE,
+            	"MODELVEHICULE" VARCHAR2(20) NOT NULL ENABLE,
+            	"MATRICULEVEHICULE" NUMBER(*,0) NOT NULL ENABLE,
+            	"PRIX" NUMBER,
+            	"DATEACHAT" DATE,
+            	 PRIMARY KEY ("IDVEHICULE") ENABLE
+               ) ;
 
     vehicule sequence :
 
@@ -44,11 +52,13 @@ VEHICULE :
 
 OUTIL :
 
-            create table outil (
-            idOutil integer primary key not null,
-            nomOutil varchar2(20) not null,
-            quantiteOutil integer not null,
-            consumableOutil number(1) not null);
+            CREATE TABLE  "OUTIL"
+               (	"IDOUTIL" NUMBER(*,0) NOT NULL ENABLE,
+            	"NOMOUTIL" VARCHAR2(20) NOT NULL ENABLE,
+            	"QUANTITEOUTIL" NUMBER(*,0) NOT NULL ENABLE,
+            	"CONSUMABLEOUTIL" NUMBER(1,0) NOT NULL ENABLE,
+            	 PRIMARY KEY ("IDOUTIL") ENABLE
+               ) ;
 
     outil sequence :
 
@@ -63,13 +73,15 @@ OUTIL :
 
 INTERVENTION :
 
-            create table intervention (
-            idIntervention integer primary key not null,
-            nomIntervention varchar2(50) not null,
-            dateDebutIntervention date not null,
-            dateFinIntervention date not null,
-            budget number not null,
-            adresse varchar2(80) not null);
+            CREATE TABLE  "INTERVENTION"
+               (	"IDINTERVENTION" NUMBER(*,0) NOT NULL ENABLE,
+            	"NOMINTERVENTION" VARCHAR2(50) NOT NULL ENABLE,
+            	"DATEDEBUTINTERVENTION" DATE NOT NULL ENABLE,
+            	"DATEFININTERVENTION" DATE NOT NULL ENABLE,
+            	"BUDGET" NUMBER NOT NULL ENABLE,
+            	"ADRESSE" VARCHAR2(80) NOT NULL ENABLE,
+            	 PRIMARY KEY ("IDINTERVENTION") ENABLE
+               ) ;
 
     intervention sequence :
 
@@ -84,13 +96,14 @@ INTERVENTION :
 
 COMPTE :
 
-            create table compte (
-            idcompte integer not null,
-            idpersonnel integer not null,
-            nomutilisateur varchar2(50) not null,
-            password varchar2(20) not null,
-            constraint compte_pk primary key(idcompte,idpersonnel));
-            role varchar2(20)
+            CREATE TABLE  "COMPTE"
+               (	"IDCOMPTE" NUMBER(*,0) NOT NULL ENABLE,
+            	"IDPERSONNEL" NUMBER(*,0) NOT NULL ENABLE,
+            	"NOMUTILISATEUR" VARCHAR2(50) NOT NULL ENABLE,
+            	"PASSWORD" VARCHAR2(20) NOT NULL ENABLE,
+            	"ROLE" VARCHAR2(50) NOT NULL ENABLE,
+            	 CONSTRAINT "COMPTE_PK" PRIMARY KEY ("IDCOMPTE", "IDPERSONNEL") ENABLE
+               ) ;
 
 
 Doleance:
