@@ -17,6 +17,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 
 import java.io.IOException;
@@ -94,11 +96,13 @@ public class ListeInterventionController {
     
     public void ajouterButton() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ajouterGenerale.fxml"));
-        Parent rt = loader.load();
-        Stage stage1 = new Stage();
-        Scene scene1 = new Scene(rt);
-        stage1.setScene(scene1);
-        stage1.show();
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
         
     }
     

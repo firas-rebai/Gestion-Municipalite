@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 public class modifierCompteController {
     
     
-    private final String[] roleListe = { "Adminstrateur", "Agent Financier", "Agent RH" };
-    private final String nomPattern = "[0-9a-zA-Z_]{5,20}";
+    private final String[] roleListe = { "Adminstrateur", "Agent Financier", "Agent RH" ,""};
+    private final String nomPattern = "[0-9a-zA-Z_.]{5,20}";
     private final String passPattern = "[0-9a-zA-Z_]{5,20}";
     @FXML
     ComboBox<String> roleCombobox;
@@ -63,9 +63,6 @@ public class modifierCompteController {
     
     @FXML
     private Button ajouter;
-    
-    @FXML
-    private Button annuler;
     
     public void initData(Compte compte){
         nomTextField.setText(compte.getNomUtilisateur());

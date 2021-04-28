@@ -59,7 +59,7 @@ public class ajouterCompteController implements Initializable {
     private Label roleLabel;
     
     @FXML
-    private Button ajouter;
+    private Button ajouter,usernameLabel;
     
     @FXML
     private Button annuler;
@@ -100,14 +100,17 @@ public class ajouterCompteController implements Initializable {
     
     public void ajouter() {
         boolean valid = Pattern.matches(passPattern, MDPTextField.getText()) && confirmerTextField.getText().equals(MDPTextField.getText()) && Pattern.matches(nomPattern, nomTextField.getText());
-        personnelLabel.setVisible(personnelTV.getSelectionModel().isEmpty());
-        roleLabel.setVisible(roleCombobox.getSelectionModel().isEmpty());
+        boolean personnelSelected = personnelTV.getSelectionModel().isEmpty();
+        boolean roleSelected = roleCombobox.getSelectionModel().isEmpty();
+        personnelLabel.setVisible(personnelSelected);
+        roleLabel.setVisible(roleSelected);
         if (nomTextField.getText().isEmpty() || MDPTextField.getText().isEmpty() || confirmerTextField.getText().isEmpty() || roleCombobox.getSelectionModel().isEmpty()) {
-            valid = false;
             remplirLabel.setVisible(true);
+            return ;
         }
-        
-        if (valid) {
+        boolean usernameExists = compteServices.usernameExist(nomTextField.getText());
+        usernameLabel.setVisible(usernameExists);
+        if (valid && !usernameExists && roleSelected && personnelSelected) {
             Compte compte = new Compte(nomTextField.getText(), MDPTextField.getText(), roleCombobox.getSelectionModel().getSelectedItem(), personnelTV.getSelectionModel().getSelectedItem());
             compteServices.Ajouter(compte);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

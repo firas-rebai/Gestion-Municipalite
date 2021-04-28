@@ -85,6 +85,22 @@ public class compteServices {
         return liste;
     }
     
+    public static boolean usernameExist(String username){
+        String query = "select * from compte where lower(NOMUTILISATEUR) like lower('" + username + "')";
+        boolean exist = false;
+         try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            res.next();
+            exist = res.getInt(1) == 1;
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return exist;
+    }
+    
     public static List<Personnel> ParsePersonnelListe() {
         List<Personnel> liste = new ArrayList<>();
         String query = "select * from Personnel where IDPERSONNEL not in (select IDPERSONNEL from COMPTE)";

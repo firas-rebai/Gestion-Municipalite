@@ -120,7 +120,7 @@ public class ListeCompteController implements Initializable {
     }
     
     public void retour() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../mainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../login_mainMenu/fxml/mainMenu.fxml"));
         Parent root = loader.load();
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);

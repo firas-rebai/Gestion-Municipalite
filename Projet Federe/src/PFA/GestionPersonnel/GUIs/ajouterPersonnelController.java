@@ -80,6 +80,8 @@ public class ajouterPersonnelController implements Initializable {
         });
     }
     
+    @FXML
+    Label cinLabel;
     
     public void AjouterButton() {
         boolean valid = date.getValue().isBefore(LocalDate.now().minus(18,ChronoUnit.YEARS));
@@ -87,9 +89,11 @@ public class ajouterPersonnelController implements Initializable {
         if (PostePicker.getSelectionModel().isEmpty() || salaire.getText().isEmpty() || CIN.getText().isEmpty() || prenom.getText().isEmpty() || nom.getText().isEmpty() || date.getValue().toString().isEmpty()) {
             Remplir.setVisible(true);
             valid = false;
+            return ;
         } else Remplir.setVisible(false);
-        
-        if (valid && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
+        boolean cinExist = PersonnelServices.CINexist(Integer.parseInt(CIN.getText()));
+        cinLabel.setVisible(cinExist);
+        if (valid && !cinExist && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
             Personnel p = new Personnel(nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
             PersonnelServices.Ajouter(p);
         }

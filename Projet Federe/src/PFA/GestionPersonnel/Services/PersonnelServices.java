@@ -62,6 +62,22 @@ public class PersonnelServices {
         }
     }
     
+    public static boolean CINexist(int cin){
+        String query = "select count(*) from personnel where CINPERSONNEL = " + cin ;
+        boolean exist = false;
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            res.next();
+            exist = res.getInt(1) == 1;
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return exist;
+    }
+    
     public static List<Personnel> Recherche(String term){
         List<Personnel> liste = new ArrayList<>();
         String query = "select * from Personnel" +

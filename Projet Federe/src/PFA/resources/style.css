@@ -1,0 +1,12 @@
+.root {
+    -fx-background-image: url("bg.jpg");
+}
+
+.button {
+    -fx-background-color: #313d6f;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #7789e8;
+}

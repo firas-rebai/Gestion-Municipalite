@@ -54,5 +54,6 @@
       </Label>
       <ComboBox fx:id="roleCombobox" layoutX="257.0" layoutY="216.0" prefHeight="25.0" prefWidth="201.0" />
       <Label fx:id="roleLabel" layoutX="257.0" layoutY="241.0" prefHeight="17.0" prefWidth="193.0" text="Choissisez un role" textFill="RED" visible="false" />
+      <Label fx:id="usernameLabel" layoutX="300.0" layoutY="615.0" prefHeight="17.0" prefWidth="193.0" text="nom utilisateur deja exist" textFill="RED" visible="false" />
    </children>
 </AnchorPane>
