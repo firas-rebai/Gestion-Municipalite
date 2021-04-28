@@ -174,3 +174,11 @@ intervention_vehicule :
                  ) ;ALTER TABLE  "INTERVENTION_VEHICULE" ADD CONSTRAINT "FK4" FOREIGN KEY ("IDINTERVENTION")
               	  REFERENCES  "INTERVENTION" ("IDINTERVENTION") DISABLE;ALTER TABLE  "INTERVENTION_VEHICULE" ADD CONSTRAINT "FK5" FOREIGN KEY ("IDVEHICULE")
               	  REFERENCES  "VEHICULE" ("IDVEHICULE") DISABLE;
+
+tache :
+              create table tache (
+              idtache integer primary key not null,
+              nomtache varchar2(20) not null,
+              idpersonnel integer not null,
+              idprojet integer not null,
+              description varchar2(1000));

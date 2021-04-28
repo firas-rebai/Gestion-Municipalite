@@ -45,7 +45,7 @@ public class PersonnelServices {
 
 
     public static void Modifier(Personnel p) {
-        String query = String.format("update perosnnel set " +
+        String query = String.format("update personnel set " +
                 "nomPersonnel = '%s', " +
                 "prenomPersonnel = '%s'," +
                 "cinPersonnel = %d," +
