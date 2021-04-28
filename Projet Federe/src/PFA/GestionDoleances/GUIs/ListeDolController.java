@@ -1,6 +1,6 @@
-package PFA.GestionDoleance.GUIs;
-import PFA.GestionDoleance.Module.ModuleDoleance;
-import PFA.GestionDoleance.Service.DoleanceService;
+package PFA.GestionDoleances.GUIs;
+import PFA.GestionDoleances.Module.ModuleDoleance;
+import PFA.GestionDoleances.Service.DoleanceService;
 import PFA.dbConnection.dbConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

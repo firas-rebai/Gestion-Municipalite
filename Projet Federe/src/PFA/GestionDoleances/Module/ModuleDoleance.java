@@ -1,4 +1,4 @@
-package PFA.GestionDoleance.Module;
+package PFA.GestionDoleances.Module;
 
 import java.time.LocalDate;
 

@@ -1,29 +1,30 @@
-package PFA.GestionDoleance.GUIs;
+package PFA.GestionDoleances.GUIs;
 
-
-import PFA.GestionDoleance.Module.ModuleDoleance;
-import PFA.GestionDoleance.Service.DoleanceService;
+import PFA.GestionDoleances.Module.ModuleDoleance;
+import PFA.GestionDoleances.Service.DoleanceService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class ModifierDoleanceController implements Initializable {
+public class AjouterDoleanceController implements Initializable {
     @FXML
-    TextField nom, prenom, cin, adresse,sujet,tel,id,tell;
+    TextField nom, prenom, cin, adresse, sujet,tel,tell;
     @FXML
-    Label lbnom, lbprenom, lbcin, lbadresse, lbsujet,lbtel,remplir;
+    Label lbnom, lbprenom, lbcin, lbadresse, lbsujet, lbdate, lbid ,lbtel,remplir;
     @FXML
-    Button boutmodifier, retour;
-    @FXML
-    TextArea descreption;
+    Button boutajouter, retour;
     @FXML
     DatePicker date;
+    @FXML
+    TextArea descreption;
+
 
     String nompattern = "[a-zA-Z]*";
     String prenompattern = "[a-zA-Z]*";
@@ -32,13 +33,14 @@ public class ModifierDoleanceController implements Initializable {
     //  String idpattern = "[0-9]*";
     String sujetpattern = "[a-zA-Z0-9,; ]*";
     String datepattern = "[0-9]{2}/-[0-9]{2}/-[0-9]*";
-    // String descreptionpattern = "";
+   // String descreptionpattern = "";
     String telpattern = "[0-9]{8}";
     boolean verif = true;
 
-    public void modifierDol(ActionEvent event) throws IOException {
 
-       /* if (!Pattern.matches(nompattern, nom.getText()) || nom.getText().isEmpty()) {
+    public void ajouterDol(ActionEvent event) throws IOException {
+
+    /*    if (!Pattern.matches(nompattern, nom.getText()) || nom.getText().isEmpty()) {
             lbnom.setVisible(true);
 
         }else{
@@ -68,43 +70,44 @@ public class ModifierDoleanceController implements Initializable {
         }
 
 
-      /*  if (!Pattern.matches(idpattern, id.getText()) || id.getText().isEmpty()) {
+       /* if (!Pattern.matches(idpattern, id.getText()) || id.getText().isEmpty()) {
             lbid.setVisible(true);
 
         }else{
             lbid.setVisible(false);
         }
 
-       */
+        */
+/*
 
-
-       /* if (!Pattern.matches(sujetpattern, sujet.getText()) || sujet.getText().isEmpty()) {
+        if (!Pattern.matches(sujetpattern, sujet.getText()) || sujet.getText().isEmpty()) {
             lbsujet.setVisible(true);
 
         }else{
             lbsujet.setVisible(false);
         }
 
-      /*  if (!Pattern.matches(datepattern, date.getValue().toString()) || date.getValue().toString().isEmpty()) {
+     /*  if (!Pattern.matches(datepattern, date.getValue().toString()) || date.getValue().toString().isEmpty()) {
             lbdate.setVisible(true);
 
         }else{
             lbdate.setVisible(false);
         }
 
-       */
+      */
+        /*
 
-      /*  if (!Pattern.matches(telpattern, tel.getText()) || tel.getText().isEmpty()) {
+          if (!Pattern.matches(telpattern, tel.getText()) || tel.getText().isEmpty()) {
             lbtel.setVisible(true);
 
         }else{
             lbtel.setVisible(false);
         }
 
-       */
-
+         */
         if (nom.getText().isEmpty() || prenom.getText().isEmpty() || cin.getText().isEmpty() || adresse.getText().isEmpty() ||
-                sujet.getText().isEmpty() || tel.getText().isEmpty()) {
+                sujet.getText().isEmpty() || tel.getText().isEmpty()
+                || date.getValue().toString().isEmpty() ) {
             remplir.setVisible(true);
             verif = false;
         } else {
@@ -119,18 +122,19 @@ public class ModifierDoleanceController implements Initializable {
                 Pattern.matches(adressepattern, adresse.getText()) &&
                 Pattern.matches(telpattern, tel.getText()) &&
                 Pattern.matches(sujetpattern, sujet.getText()) &&
-                event.getSource() == boutmodifier) {
+                !date.getValue().toString().isEmpty() &&
+                event.getSource() == boutajouter) {
 
             ModuleDoleance p = new ModuleDoleance(nom.getText(),prenom.getText(),Integer.parseInt(cin.getText()),
-                    adresse.getText(),Integer.parseInt(id.getText()),sujet.getText(),descreption.getText(),date.getValue(),
+                    adresse.getText(),sujet.getText(),descreption.getText(),date.getValue(),
                     Integer.parseInt(tel.getText()));
-            DoleanceService.Modifier(p);
-            Stage stage = (Stage) boutmodifier.getScene().getWindow();
+            DoleanceService.Ajouter(p);
+            Stage stage = (Stage) boutajouter.getScene().getWindow();
             stage.close();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("succés de modification");
+            alert.setTitle("succés d'ajout");
             alert.setHeaderText(null);
-            alert.setContentText("modification faite avec succés");
+            alert.setContentText("l'ajout est fait avec succés");
             alert.show();
 
 
@@ -138,7 +142,6 @@ public class ModifierDoleanceController implements Initializable {
 
         }
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -178,51 +181,45 @@ public class ModifierDoleanceController implements Initializable {
                 lbtel.setVisible(!Pattern.matches(telpattern, tel.getText())|| tel.getText().isEmpty());
             }
         });
-
         tell.setEditable(false);
 
-      /*  date.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+     /* date.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
-                lbdate.setVisible(!Pattern.matches(datepattern, date.getValue().toString())|| date.getValue().toString().isEmpty());
+                lbdate.setVisible(!Pattern.matches(datepattern,date.getValue().toString()) || date.getValue().toString().isEmpty());
+            }
+        });
+
+      */
+
+     //   if (!Pattern.matches(datepattern, date.getValue().toString()) || date.getValue().toString().isEmpty()) {
+     //       lbdate.setVisible(true);
+
+      //  }else{
+         //   lbdate.setVisible(false);
+       // }
+
+
+
+
+
+
+
+
+      /* id.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            if (!newPropertyValue) {
+                lbid.setVisible(!Pattern.matches(idpattern, id.getText())|| id.getText().isEmpty());
             }
         });
 
        */
 
 
-       /* id.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
-            if (!newPropertyValue) {
-                lbid.setVisible(!Pattern.matches(idpattern, id.getText())|| id.getText().isEmpty());
-            }
-        });
-
-        */
-
-
 
 
     }
 
-    public void initData(ModuleDoleance p) {
-        nom.setText(p.getNom());
-        prenom.setText(p.getPrenom());
-        cin.setText(String.valueOf(p.getCin()));
-        adresse.setText(p.getAddresse());
-        descreption.setText(p.getDescreption());
-        id.setText(String.valueOf(p.getIDdoleance()));
-        id.setEditable(false);
-        sujet.setText(p.getSujet());
-        date.setValue(p.getDateDoleance());
-        tel.setText(String.valueOf(p.getNumTel()));
-
-
-
-
-    }
-
-    public void retour4() {
+    public void retour() {
         Stage stage = (Stage) retour.getScene().getWindow();
         stage.close();
-
     }
 }

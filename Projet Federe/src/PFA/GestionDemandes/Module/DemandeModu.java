@@ -1,4 +1,4 @@
-package PFA.GestionDemande.Module;
+package PFA.GestionDemandes.Module;
 
 import java.time.LocalDate;
 

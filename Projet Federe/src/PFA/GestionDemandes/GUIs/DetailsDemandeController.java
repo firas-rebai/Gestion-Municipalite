@@ -1,5 +1,5 @@
-package PFA.GestionDemande.GUIs;
-import PFA.GestionDemande.Module.DemandeModu;
+package PFA.GestionDemandes.GUIs;
+import PFA.GestionDemandes.Module.DemandeModu;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;

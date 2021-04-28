@@ -1,6 +1,6 @@
-package PFA.GestionDemande.GUIs;
+package PFA.GestionDemandes.GUIs;
 
-import PFA.GestionDemande.Service.DemandeServ;
+import PFA.GestionDemandes.Service.DemandeServ;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

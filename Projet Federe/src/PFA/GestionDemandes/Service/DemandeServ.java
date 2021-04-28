@@ -1,7 +1,7 @@
-package PFA.GestionDemande.Service;
+package PFA.GestionDemandes.Service;
 
 
-import PFA.GestionDemande.Module.DemandeModu;
+import PFA.GestionDemandes.Module.DemandeModu;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
