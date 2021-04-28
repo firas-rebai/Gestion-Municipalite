@@ -90,3 +90,33 @@ COMPTE :
             nomutilisateur varchar2(50) not null,
             password varchar2(20) not null,
             constraint compte_pk primary key(idcompte,idpersonnel));
+            role varchar2(20)
+
+
+Doleance:
+         CREATE TABLE  "DOLEANCE"
+            (	"NOM" VARCHAR2(50),
+         	"PRENOM" VARCHAR2(50),
+         	"CIN" NUMBER(*,0),
+         	"ADDRESSE" VARCHAR2(1000),
+         	"IDDOLEANCE" NUMBER(*,0),
+         	"SUJET" VARCHAR2(1000),
+         	"DESCREPTION" VARCHAR2(1000),
+         	"DATEDOLEANCE" DATE,
+         	"NUMTEL" NUMBER NOT NULL ENABLE,
+         	 CONSTRAINT "PK" PRIMARY KEY ("IDDOLEANCE", "CIN") ENABLE
+            ) ;
+
+Demande:
+           CREATE TABLE  "DEM"
+              (	"NOM" VARCHAR2(1000),
+           	"PRENOM" VARCHAR2(1000),
+           	"CIN" NUMBER(*,0),
+           	"ADRESSE" VARCHAR2(1000),
+           	"NUMTEL" NUMBER(*,0),
+           	"ID" NUMBER(*,0),
+           	"DATEDEM" DATE,
+           	"TYPEDEM" VARCHAR2(1000),
+           	"DESCREPTION" VARCHAR2(1000),
+           	 CONSTRAINT "PK4" PRIMARY KEY ("CIN", "ID") ENABLE
+              ) ;
