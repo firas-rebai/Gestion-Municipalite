@@ -60,7 +60,8 @@ public class MainController {
     }
     
     public void switchToDoleance(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Doleance/Doleance/Fxmls/ListeDoleance.fxml")));
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionDoleances/GUIs/Fxmls/ListeDoleance.fxml"));
+        Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -78,6 +79,17 @@ public class MainController {
         jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
+    }
+
+    public void switchToDemande(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionDemandes/GUIs/fxml/ListeDemande.fxml"));
+        Parent root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
     }
     
     

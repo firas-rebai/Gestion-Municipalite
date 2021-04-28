@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="ojdbc61">
+  <library name="ojdbc6">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../simpleCode/src/ojdbc6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../aa/ojdbc6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

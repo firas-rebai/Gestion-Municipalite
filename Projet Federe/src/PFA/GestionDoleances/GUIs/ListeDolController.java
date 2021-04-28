@@ -3,12 +3,15 @@ import PFA.GestionDoleances.Module.ModuleDoleance;
 import PFA.GestionDoleances.Service.DoleanceService;
 import PFA.dbConnection.dbConnection;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.Initializable;
+
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.net.URL;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +30,9 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
+
 public class ListeDolController implements Initializable{
     @FXML
     Button retour,actualiser,recherche,ajouter,modifier,supprimer,details;
@@ -193,6 +199,17 @@ public class ListeDolController implements Initializable{
         if(event.getSource()==actualiser) {
             refresh();
         }
+    }
+
+    public void retour(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("../../login_mainMenu/fxml/mainMenu.fxml")));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

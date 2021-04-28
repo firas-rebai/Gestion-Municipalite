@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="145.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIs.SupprimerDemandeController">
+<AnchorPane prefHeight="145.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionDemandes.GUIs.SupprimerDemandeController">
    <children>
       <Label layoutX="14.0" layoutY="29.0" prefHeight="44.0" prefWidth="327.0" text="Voulez-vous supprimer cet Demande?">
          <font>
