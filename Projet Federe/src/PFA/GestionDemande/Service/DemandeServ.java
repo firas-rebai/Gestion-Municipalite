@@ -1,6 +1,7 @@
-package PFA.GestionDemande.Services;
+package PFA.GestionDemande.Service;
 
-import Module.DemandeModu;
+
+import PFA.GestionDemande.Module.DemandeModu;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static DataBaseConnection.OracleConnection.getOracleConnection;
+import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 
 public class DemandeServ {
     public static void Ajouter(DemandeModu p) {

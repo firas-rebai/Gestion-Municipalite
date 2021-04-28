@@ -1,6 +1,6 @@
 package PFA.GestionDemande.GUIs;
-import Module.DemandeModu;
-import Services.DemandeServ;
+import PFA.GestionDemande.Module.DemandeModu;
+import PFA.GestionDemande.Service.DemandeServ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static DataBaseConnection.OracleConnection.getOracleConnection;
+import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class ListeDemandeController implements Initializable{
     @FXML

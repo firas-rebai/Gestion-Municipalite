@@ -2,12 +2,13 @@ package PFA.GestionDemande.GUIs;
 
 
 
+import PFA.GestionDemande.Module.DemandeModu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import PFA.GestionDemande.Services.DemandeServ;
+import PFA.GestionDemande.Service.DemandeServ;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

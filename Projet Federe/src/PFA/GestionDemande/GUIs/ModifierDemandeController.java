@@ -1,6 +1,6 @@
 package PFA.GestionDemande.GUIs;
 
-import PFA.GestionDemande.Services.DemandeServ;
+import PFA.GestionDemande.Service.DemandeServ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
