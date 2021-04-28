@@ -1,18 +1,18 @@
 package GestionDoleance.GUIs;
-import java.io.IOException;
-import java.util.ResourceBundle;
 
 import GestionDoleance.Module.ModuleDoleance;
 import GestionDoleance.Service.DoleanceService;
-import javafx.concurrent.Service;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import javafx.stage.Stage;
-import java.net.URL;
 public class AjouterDoleanceController implements Initializable {
     @FXML
     TextField nom, prenom, cin, adresse, sujet,tel,tell;

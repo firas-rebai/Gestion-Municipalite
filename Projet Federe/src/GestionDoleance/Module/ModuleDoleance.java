@@ -1,7 +1,6 @@
-package PFA.GestionDoleance.Module;
+package GestionDoleance.Module;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ModuleDoleance {
     private String nom;

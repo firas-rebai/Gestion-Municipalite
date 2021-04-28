@@ -1,10 +1,9 @@
 package GestionDoleance.GUIs;
+import GestionDoleance.Service.DoleanceService;
 import javafx.scene.control.Alert;
-import Service.DoleanceService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import Module.ModuleDoleance;
 public class SupprimerDoleanceController {
 @FXML
     Button confirmer,annuler;

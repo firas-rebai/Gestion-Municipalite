@@ -1,12 +1,16 @@
 package GestionDoleance.Service;
-import Module.ModuleDoleance;
+
+import GestionDoleance.Module.ModuleDoleance;
+
 import java.util.List;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.ResultSet;
-import static DataBaseConnection.OracleConnection.getOracleConnection;
+
+import static PFA.dbConnection.dbConnection.getOracleConnection;
+
 public class DoleanceService {
     public static void Ajouter(ModuleDoleance p) {
         /*String SQLquery = String.format("insert into doleance values (" +
@@ -32,7 +36,6 @@ public class DoleanceService {
             Connection connection = getOracleConnection();
             statement = connection.createStatement();
             statement.executeUpdate(SQLquery);
-            System.out.println("ajouté");
         } catch (SQLException e) {
             e.printStackTrace();
         }

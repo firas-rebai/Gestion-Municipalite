@@ -1,6 +1,7 @@
 package GestionDoleance.GUIs;
-import Module.ModuleDoleance;
-import Service.DoleanceService;
+import GestionDoleance.Module.ModuleDoleance;
+import GestionDoleance.Service.DoleanceService;
+import PFA.dbConnection.dbConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.Statement;
-import static DataBaseConnection.OracleConnection.getOracleConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -78,7 +78,7 @@ public class ListeDolController implements Initializable{
         List<ModuleDoleance> data = new ArrayList<>();
         String SQLquery = "SELECT * from doleance ";
         try {
-            Connection connection = getOracleConnection();
+            Connection connection = dbConnection.getOracleConnection();
 
             Statement statement = connection.createStatement();
 
@@ -113,7 +113,7 @@ public class ListeDolController implements Initializable{
     }
 
     public void switchToAjouter() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/AjouterDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/AjouterDoleance.fxml"));
         Parent rt = loader.load();
         Stage stage1 = new Stage();
         stage1.setTitle("Ajouter une Doleance");
@@ -128,7 +128,7 @@ public class ListeDolController implements Initializable{
     }
 
     public void switchToModifier() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/ModiferDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/ModiferDoleance.fxml"));
         Parent rt = loader.load();
         ModifierDoleanceController controller = loader.getController();
         controller.initData(tvdol.getSelectionModel().getSelectedItem());
@@ -145,7 +145,7 @@ public class ListeDolController implements Initializable{
 
     }
     public void switchToDetails() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/DetailsDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/DetailsDoleance.fxml"));
         Parent rt = loader.load();
         DetailsDoleanceController controller = loader.getController();
         controller.initData(tvdol.getSelectionModel().getSelectedItem());
@@ -159,7 +159,7 @@ public class ListeDolController implements Initializable{
     }
 
     public void switchToSupprimer() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/SupprimerDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/SupprimerDoleance.fxml"));
         Parent rt = loader.load();
         SupprimerDoleanceController controller = loader.getController();
         controller.iddoleance = tvdol.getSelectionModel().getSelectedItem().getIDdoleance();

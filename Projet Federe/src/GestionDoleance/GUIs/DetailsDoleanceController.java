@@ -1,7 +1,6 @@
 package GestionDoleance.GUIs;
-import Module.ModuleDoleance;
+import GestionDoleance.Module.ModuleDoleance;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 public class DetailsDoleanceController {
