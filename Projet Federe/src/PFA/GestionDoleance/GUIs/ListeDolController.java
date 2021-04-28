@@ -1,6 +1,6 @@
-package GestionDoleance.GUIs;
-import GestionDoleance.Module.ModuleDoleance;
-import GestionDoleance.Service.DoleanceService;
+package PFA.GestionDoleance.GUIs;
+import PFA.GestionDoleance.Module.ModuleDoleance;
+import PFA.GestionDoleance.Service.DoleanceService;
 import PFA.dbConnection.dbConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -113,7 +113,7 @@ public class ListeDolController implements Initializable{
     }
 
     public void switchToAjouter() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/AjouterDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIs/Fxmls/AjouterDoleance.fxml"));
         Parent rt = loader.load();
         Stage stage1 = new Stage();
         stage1.setTitle("Ajouter une Doleance");
@@ -128,7 +128,7 @@ public class ListeDolController implements Initializable{
     }
 
     public void switchToModifier() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/ModiferDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIs/Fxmls/ModiferDoleance.fxml"));
         Parent rt = loader.load();
         ModifierDoleanceController controller = loader.getController();
         controller.initData(tvdol.getSelectionModel().getSelectedItem());
@@ -145,7 +145,7 @@ public class ListeDolController implements Initializable{
 
     }
     public void switchToDetails() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/DetailsDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIs/Fxmls/DetailsDoleance.fxml"));
         Parent rt = loader.load();
         DetailsDoleanceController controller = loader.getController();
         controller.initData(tvdol.getSelectionModel().getSelectedItem());
@@ -159,7 +159,7 @@ public class ListeDolController implements Initializable{
     }
 
     public void switchToSupprimer() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionDoleance/GUIs/Fxmls/SupprimerDoleance.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIs/Fxmls/SupprimerDoleance.fxml"));
         Parent rt = loader.load();
         SupprimerDoleanceController controller = loader.getController();
         controller.iddoleance = tvdol.getSelectionModel().getSelectedItem().getIDdoleance();

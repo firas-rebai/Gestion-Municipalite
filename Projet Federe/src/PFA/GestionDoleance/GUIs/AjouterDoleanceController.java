@@ -1,7 +1,7 @@
-package GestionDoleance.GUIs;
+package PFA.GestionDoleance.GUIs;
 
-import GestionDoleance.Module.ModuleDoleance;
-import GestionDoleance.Service.DoleanceService;
+import PFA.GestionDoleance.Module.ModuleDoleance;
+import PFA.GestionDoleance.Service.DoleanceService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

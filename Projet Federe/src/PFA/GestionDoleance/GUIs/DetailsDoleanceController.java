@@ -1,5 +1,5 @@
-package GestionDoleance.GUIs;
-import GestionDoleance.Module.ModuleDoleance;
+package PFA.GestionDoleance.GUIs;
+import PFA.GestionDoleance.Module.ModuleDoleance;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;

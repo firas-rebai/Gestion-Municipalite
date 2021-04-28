@@ -1,20 +1,22 @@
-package GestionDoleance.GUIs;
-import GestionDoleance.Service.DoleanceService;
-import javafx.scene.control.Alert;
+package PFA.GestionDemande.GUIs;
+
+import Services.DemandeServ;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-public class SupprimerDoleanceController {
-@FXML
+
+public class SupprimerDemandeController {
+    @FXML
     Button confirmer,annuler;
 
     public void annuler(){
         Stage stage = (Stage) annuler.getScene().getWindow();
         stage.close();
     }
-int iddoleance;
+    int id;
     public void confirmer (){
-        DoleanceService.Supprimer(iddoleance);
+        DemandeServ.Supprimer(id);
         Stage stage = (Stage) confirmer.getScene().getWindow();
         stage.close();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -23,6 +25,4 @@ int iddoleance;
         alert.setContentText("suppression faite avec succés");
         alert.show();
     }
-
 }
-

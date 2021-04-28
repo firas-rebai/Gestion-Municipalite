@@ -1,6 +1,6 @@
-package GestionDoleance.Service;
+package PFA.GestionDoleance.Service;
 
-import GestionDoleance.Module.ModuleDoleance;
+import PFA.GestionDoleance.Module.ModuleDoleance;
 
 import java.util.List;
 import java.sql.Connection;
