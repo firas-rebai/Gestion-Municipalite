@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 
 public class Main extends Application {
@@ -16,6 +18,8 @@ public class Main extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("brabi e5dem the project");
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

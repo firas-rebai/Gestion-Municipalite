@@ -117,11 +117,13 @@ public class ListeDemandeController implements Initializable{
 
 
     public void switchToAjouter() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/AjouterDemande.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/AjouterDemande.fxml"));
         Parent rt = loader.load();
         Stage stage1 = new Stage();
         stage1.setTitle("Ajouter une Demande");
         Scene scene1 = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene1);
         stage1.setScene(scene1);
         stage1.setResizable(false);
         stage1.showAndWait();
@@ -131,13 +133,15 @@ public class ListeDemandeController implements Initializable{
     }
 
     public void switchToModifier() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/ModifierDemande.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ModifierDemande.fxml"));
         Parent rt = loader.load();
         ModifierDemandeController controller = loader.getController();
         controller.initData(tvdem.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         stage.setTitle("Modifier une Demande");
         Scene scene = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.showAndWait();
@@ -149,13 +153,15 @@ public class ListeDemandeController implements Initializable{
     }
 
     public void switchToDetails() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/DetailsDemande.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/DetailsDemande.fxml"));
         Parent rt = loader.load();
         DetailsDemandeController controller = loader.getController();
         controller.initData(tvdem.getSelectionModel().getSelectedItem());
         Stage stage = new Stage();
         stage.setTitle("Details d'une Demande");
         Scene scene = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.showAndWait();
@@ -185,13 +191,15 @@ public class ListeDemandeController implements Initializable{
     }
 
     public void switchToSupprimer() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxmls/SupprimerDemande.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/SupprimerDemande.fxml"));
         Parent rt = loader.load();
         SupprimerDemandeController controller = loader.getController();
         controller.id = tvdem.getSelectionModel().getSelectedItem().getId();
         Stage stage1 = new Stage();
         stage1.setTitle("Supprimer une Demande");
         Scene scene1 = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene1);
         stage1.setScene(scene1);
         stage1.setResizable(false);
         stage1.showAndWait();

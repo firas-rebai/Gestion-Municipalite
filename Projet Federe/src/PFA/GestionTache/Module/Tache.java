@@ -7,11 +7,21 @@ public class Tache {
     private String nom;
     private String description;
     private Personnel personnel;
+    private String nomPersonnel = "Non Disponible";
+    
+    public String getNomPersonnel() {
+        return nomPersonnel;
+    }
+    
+    public void setNomPersonnel(String nomPersonnel) {
+        this.nomPersonnel = nomPersonnel;
+    }
     
     public Tache(String nom, String description, Personnel personnel) {
         this.nom = nom;
         this.description = description;
         this.personnel = personnel;
+        if(!(personnel == null)) nomPersonnel = personnel.getNom();
     }
     
     public Tache(int id, String nom, String description, Personnel personnel) {
@@ -19,6 +29,7 @@ public class Tache {
         this.nom = nom;
         this.description = description;
         this.personnel = personnel;
+        if(!(personnel == null)) nomPersonnel = personnel.getNom();
     }
     
     @Override

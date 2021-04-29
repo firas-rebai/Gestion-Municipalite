@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@../../../resources/style.css" prefHeight="145.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionCompte.GUIs.supprimerCompteController">
+<AnchorPane stylesheets="@../../../resources/style.css" prefHeight="145.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionTache.GUIs.supprimerTacheController">
    <children>
-      <Label layoutX="14.0" layoutY="29.0" prefHeight="44.0" prefWidth="327.0" text="Voulez-vous supprimer cet Compte?">
+      <Label layoutX="14.0" layoutY="29.0" prefHeight="44.0" prefWidth="327.0" text="Voulez-vous supprimer cet Tache?">
          <font>
             <Font size="17.0" />
          </font>

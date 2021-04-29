@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.login_mainMenu.MainController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.login_mainMenu.MainController">
    <children>
       <Button layoutX="831.0" layoutY="181.0" mnemonicParsing="false" onAction="#switchToMateriel" prefHeight="60.0" prefWidth="220.0" text="Materiels" />
       <Button layoutX="482.0" layoutY="181.0" mnemonicParsing="false" onAction="#switchToPersonnel" prefHeight="60.0" prefWidth="220.0" text="Personnels" />
       <Button fx:id="intervention" layoutX="150.0" layoutY="181.0" mnemonicParsing="false" onAction="#switchToIntervention" prefHeight="60.0" prefWidth="220.0" text="Interventions" />
       <Button layoutX="150.0" layoutY="334.0" mnemonicParsing="false" onAction="#switchToDoleance" prefHeight="60.0" prefWidth="220.0" text="Doleances" />
-      <Button layoutX="831.0" layoutY="334.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Taches" />
+      <Button layoutX="831.0" layoutY="334.0" mnemonicParsing="false" onAction="#switchToTache" prefHeight="60.0" prefWidth="220.0" text="Taches" />
       <Button layoutX="482.0" layoutY="334.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Permissions" />
       <Icon fx:id="interventionIcon" content="HELP_OUTLINE" layoutX="195.0" layoutY="199.0" prefHeight="24.0" prefWidth="24.0" />
       <Icon fx:id="doleancesIcon" content="HELP_OUTLINE" layoutX="195.0" layoutY="352.0" prefHeight="24.0" prefWidth="24.0" />
@@ -26,12 +26,12 @@
       <Icon fx:id="doleancesIcon1" content="HELP_OUTLINE" layoutX="195.0" layoutY="503.0" prefHeight="24.0" prefWidth="24.0" />
       <Icon fx:id="permissionIcon1" content="HELP_OUTLINE" layoutX="528.0" layoutY="503.0" prefHeight="24.0" prefWidth="24.0" />
       <Icon fx:id="tacheIcon1" content="HELP_OUTLINE" layoutX="883.0" layoutY="503.0" prefHeight="24.0" prefWidth="24.0" />
-      <Button layoutX="934.0" layoutY="732.0" mnemonicParsing="false" opacity="0.0" prefHeight="36.0" prefWidth="37.0" />
-      <Icon fx:id="deconnexionIcon" content="HELP_OUTLINE" layoutX="934.0" layoutY="732.0" prefHeight="36.0" prefWidth="37.0" />
       <Label layoutX="981.0" layoutY="736.0" prefHeight="16.0" prefWidth="123.0" text="Deconnexion">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Button onAction="#logout" layoutX="1097.0" layoutY="733.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: red;" />
+      <Icon fx:id="logoutIcon" content="HELP_OUTLINE" layoutX="1110.0" layoutY="741.0" />
    </children>
 </AnchorPane>

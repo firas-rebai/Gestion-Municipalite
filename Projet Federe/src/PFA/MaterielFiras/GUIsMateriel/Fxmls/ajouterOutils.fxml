@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@../../../resources/style.css" fx:id="anajouter" prefHeight="617.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ajouterOutilsController">
+<AnchorPane fx:id="anajouter" prefHeight="617.0" prefWidth="539.0" stylesheets="@../../../resources/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ajouterOutilsController">
    <children>
       <Label layoutX="178.0" layoutY="14.0" prefHeight="40.0" prefWidth="182.0" text="Ajouter des Outils" underline="true">
          <font>
@@ -28,14 +28,11 @@
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></TextField>
-      <TextField fx:id="tfnom" layoutX="234.0" layoutY="106.0" prefHeight="26.0" prefWidth="172.0" promptText="Entrer le nom...">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font></TextField>
-      <Button fx:id="btnajouter" layoutX="300.0" layoutY="569.0" mnemonicParsing="false" onAction="#ajouterOutils" prefHeight="33.0" prefWidth="146.0" style="-fx-background-color: #4285F4;" text="Ajouter" textFill="WHITE" />
-      <Button fx:id="retour" layoutX="78.0" layoutY="569.0" mnemonicParsing="false" onAction="#retour3" prefHeight="33.0" prefWidth="146.0" style="-fx-background-color: #EA4335;" text="Annuler" textFill="WHITE" />
+      <TextField fx:id="tfnom" layoutX="234.0" layoutY="106.0" prefHeight="26.0" prefWidth="172.0" promptText="Entrer le nom..." />
+      <Button fx:id="btnajouter" layoutX="360.0" layoutY="553.0" mnemonicParsing="false" onAction="#ajouterOutils" prefHeight="33.0" prefWidth="146.0" text="Ajouter" textFill="WHITE" />
+      <Button fx:id="retour" layoutX="179.0" layoutY="553.0" mnemonicParsing="false" onAction="#retour3" prefHeight="33.0" prefWidth="146.0" text="Annuler" textFill="WHITE" />
       <Label fx:id="lbnom" layoutX="234.0" layoutY="139.0" prefHeight="20.0" prefWidth="259.0" text="invalide nom svp veillez resseillez" textFill="RED" visible="false" />
       <Label fx:id="lbquantité" layoutX="234.0" layoutY="238.0" prefHeight="20.0" prefWidth="259.0" text="invalide quantité svp veillez resseillez" textFill="RED" visible="false" />
-      <CheckBox fx:id="consumableCheck" layoutX="234.0" layoutY="283.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" text="Consumable" />
+      <CheckBox fx:id="consumableCheck" layoutX="234.0" layoutY="258.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" text="Consumable" />
    </children>
 </AnchorPane>

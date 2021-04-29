@@ -99,7 +99,7 @@ public class modifierCompteController {
     }
     
     public void ajouter() {
-        boolean valid = Pattern.matches(passPattern, MDPTextField.getText()) && confirmerTextField.getText().equals(MDPTextField.getText()) && Pattern.matches(nomPattern, nomTextField.getText());
+        boolean valid = !personnelTV.getSelectionModel().isEmpty() && Pattern.matches(passPattern, MDPTextField.getText()) && confirmerTextField.getText().equals(MDPTextField.getText()) && Pattern.matches(nomPattern, nomTextField.getText());
         personnelLabel.setVisible(personnelTV.getSelectionModel().isEmpty());
         roleLabel.setVisible(roleCombobox.getSelectionModel().isEmpty());
         if (nomTextField.getText().isEmpty() || MDPTextField.getText().isEmpty() || confirmerTextField.getText().isEmpty() || roleCombobox.getSelectionModel().isEmpty()) {

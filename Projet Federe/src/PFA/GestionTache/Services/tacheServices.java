@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import static PFA.dbConnection.dbConnection.getOracleConnection;
 
@@ -23,6 +24,29 @@ public class tacheServices {
         }
     }
     
+    public static List<Personnel> ParsePersonnelListe() {
+        List<Personnel> liste = new ArrayList<>();
+        String query = "select * from Personnel";
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            while (res.next()) {
+                liste.add(new Personnel(res.getInt("idPersonnel")
+                        , res.getString("nomPersonnel")
+                        , res.getString("prenomPersonnel")
+                        , res.getInt("cinPersonnel")
+                        , res.getFloat("salaire")
+                        , res.getString("postePersonnel")
+                        , res.getDate("datenaissancepersonnel").toLocalDate()));
+            }
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+    }
+    
     public static ArrayList<Tache> parsetacheListe() {
         ArrayList<Tache> liste = new ArrayList<>();
         String query = "select * from tache";
@@ -32,18 +56,20 @@ public class tacheServices {
             Statement statement1 = connection.createStatement();
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
-                int id = res.getInt("idtache");
+                int id = res.getInt("idpersonnel");
                 ResultSet resPersonnel = statement1.executeQuery("select * from PERSONNEL where IDPERSONNEL = " + id);
-                resPersonnel.next();
-                Personnel personnel = new Personnel(res.getInt("idPersonnel")
-                        , res.getString("nomPersonnel")
-                        , res.getString("prenomPersonnel")
-                        , res.getInt("cinPersonnel")
-                        , res.getFloat("salaire")
-                        , res.getString("postePersonnel")
-                        , res.getDate("datenaissancepersonnel").toLocalDate());
+                Personnel personnel = null;
+                while (resPersonnel.next()) {
+                    personnel = new Personnel(resPersonnel.getInt("idpersonnel")
+                            , resPersonnel.getString("nomPersonnel")
+                            , resPersonnel.getString("prenomPersonnel")
+                            , resPersonnel.getInt("cinPersonnel")
+                            , resPersonnel.getFloat("salaire")
+                            , resPersonnel.getString("postePersonnel")
+                            , resPersonnel.getDate("datenaissancepersonnel").toLocalDate());
+                }
                 resPersonnel.close();
-                liste.add(new Tache(id, res.getString("nomtache"), res.getString("description"), personnel));
+                liste.add(new Tache(res.getInt("idtache"), res.getString("nomtache"), res.getString("description"), personnel));
             }
             res.close();
         } catch (SQLException throwables) {
@@ -54,9 +80,9 @@ public class tacheServices {
     
     public static void ajouter(Tache tache) {
         String query;
-        if (tache.getPersonnel() == null){
+        if (tache.getPersonnel() == null) {
             query = "insert into tache (IDTACHE, NOMTACHE, DESCRIPTION) values (tache_seq.nextval,'" + tache.getNom() + "','" + tache.getDescription() + "')";
-        }else
+        } else
             query = "insert into tache (IDTACHE, NOMTACHE, IDPERSONNEL, DESCRIPTION) values (tache_seq.nextval,'" + tache.getNom() + "'," + tache.getPersonnel().getId() + ",'" + tache.getDescription() + "')";
         try {
             Connection connection = getOracleConnection();
@@ -69,22 +95,54 @@ public class tacheServices {
     
     public static void Modifier(Tache tache) {
         String query;
-        if (tache.getPersonnel() == null){
+        if (tache.getPersonnel() == null) {
             query = "update TACHE set NOMTACHE = '" + tache.getNom() + "'," +
-                    "DESCRIPTION = " + tache.getDescription() +
-                    " where IDTACHE =" + tache.getId();
-        }else
-             query = "update TACHE set NOMTACHE = '" + tache.getNom() + "'," +
+                    "DESCRIPTION = '" + tache.getDescription() +
+                    "' where IDTACHE =" + tache.getId();
+        } else
+            query = "update TACHE set NOMTACHE = '" + tache.getNom() + "'," +
                     "IDPERSONNEL = " + tache.getPersonnel().getId() + "," +
-                    "DESCRIPTION = " + tache.getDescription() +
-                    " where IDTACHE =" + tache.getId();
+                    "DESCRIPTION = '" + tache.getDescription() +
+                    "' where IDTACHE =" + tache.getId();
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
+            System.out.println(query);
             statement.execute(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
     
+    public static ArrayList<Tache> recherche(String text) {
+        ArrayList<Tache> liste = new ArrayList<>();
+        String query = "select * from tache where lower(NOMTACHE) like lower('" + text + "')";
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            Statement statement1 = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            while (res.next()) {
+                int id = res.getInt("idtache");
+                ResultSet resPersonnel = statement1.executeQuery("select * from PERSONNEL where IDPERSONNEL = " + id);
+                Personnel personnel = null;
+                while (resPersonnel.next()) {
+                    personnel = new Personnel(id
+                            , resPersonnel.getString("nomPersonnel")
+                            , resPersonnel.getString("prenomPersonnel")
+                            , resPersonnel.getInt("cinPersonnel")
+                            , resPersonnel.getFloat("salaire")
+                            , resPersonnel.getString("postePersonnel")
+                            , resPersonnel.getDate("datenaissancepersonnel").toLocalDate());
+                }
+                resPersonnel.close();
+                liste.add(new Tache(id, res.getString("nomtache"), res.getString("description"), personnel));
+            }
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+        
+    }
 }
