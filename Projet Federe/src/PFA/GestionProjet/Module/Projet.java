@@ -2,6 +2,7 @@ package PFA.GestionProjet.Module;
 
 import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.GestionTache.Module.Tache;
+import PFA.MaterielFiras.ModuleMateriel.Outil;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 
 import java.time.LocalDate;
@@ -18,8 +19,22 @@ public class Projet {
     private LocalDate dateFin;
     private ArrayList<Personnel> equipe;
     private ArrayList<Vehicule> vehicules;
+    private ArrayList<Outil> outils;
     
-    public Projet(int id, String nom, String description, ArrayList<Tache> taches, String adresse, float cout, LocalDate dateBedut, LocalDate dateFin, ArrayList<Personnel> equipe, ArrayList<Vehicule> vehicules) {
+    public Projet(String nom, String description, ArrayList<Tache> taches, String adresse, float cout, LocalDate dateBedut, LocalDate dateFin, ArrayList<Personnel> equipe, ArrayList<Vehicule> vehicules, ArrayList<Outil> outils) {
+        this.nom = nom;
+        this.description = description;
+        this.taches = taches;
+        this.adresse = adresse;
+        this.cout = cout;
+        this.dateBedut = dateBedut;
+        this.dateFin = dateFin;
+        this.equipe = equipe;
+        this.vehicules = vehicules;
+        this.outils = outils;
+    }
+    
+    public Projet(int id, String nom, String description, ArrayList<Tache> taches, String adresse, float cout, LocalDate dateBedut, LocalDate dateFin, ArrayList<Personnel> equipe, ArrayList<Vehicule> vehicules, ArrayList<Outil> outils) {
         this.id = id;
         this.nom = nom;
         this.description = description;
@@ -30,18 +45,15 @@ public class Projet {
         this.dateFin = dateFin;
         this.equipe = equipe;
         this.vehicules = vehicules;
+        this.outils = outils;
     }
     
-    public Projet(String nom, String description, ArrayList<Tache> taches, String adresse, float cout, LocalDate dateBedut, LocalDate dateFin, ArrayList<Personnel> equipe, ArrayList<Vehicule> vehicules) {
-        this.nom = nom;
-        this.description = description;
-        this.taches = taches;
-        this.adresse = adresse;
-        this.cout = cout;
-        this.dateBedut = dateBedut;
-        this.dateFin = dateFin;
-        this.equipe = equipe;
-        this.vehicules = vehicules;
+    public ArrayList<Outil> getOutils() {
+        return outils;
+    }
+    
+    public void setOutils(ArrayList<Outil> outils) {
+        this.outils = outils;
     }
     
     public int getId() {
