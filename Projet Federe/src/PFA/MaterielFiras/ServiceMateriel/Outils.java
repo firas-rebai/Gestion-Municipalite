@@ -14,8 +14,13 @@ import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class Outils {
     public static void Ajouter(Outil p) {
-        String SQLquery = String.format("insert into outil values (" +
+       /* String SQLquery = String.format("insert into outil values (" +
                 "outil_seq.nextval,'%s',%d,%d)", p.getNom(), p.getQuantite(), p.getConsumable());
+
+        */
+
+        String SQLquery = "insert into outil values(outil_seq.nextval , '" +
+                p.getNom() + "'," + p.getQuantite() + "," +p.getConsumable() + ")";
         Statement statement;
         try {
             Connection connection = getOracleConnection();

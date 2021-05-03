@@ -49,7 +49,8 @@ public class MainController {
     }
 
     public void switchToMateriel(ActionEvent event) throws IOException{
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml")));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("../MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml")));
+        Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -83,6 +84,17 @@ public class MainController {
 
     public void switchToDemande(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionDemandes/GUIs/fxml/ListeDemande.fxml"));
+        Parent root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToEvenement(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionEvenement/GUIs/fxml/ListeEvenement.fxml"));
         Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

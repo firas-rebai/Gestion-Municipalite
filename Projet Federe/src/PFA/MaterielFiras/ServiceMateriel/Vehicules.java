@@ -18,8 +18,14 @@ public class Vehicules {
     
     
     public static void Ajouter(Vehicule p) {
-        String SQLquery = String.format("insert into vehicule values( " +
+       /* String SQLquery = String.format("insert into vehicule values( " +
                 "vehicule_seq.nextval,'%s','%s',%d,%f,to_date('%s','yyyy-mm-dd'))", p.getNom(), p.getModel(), p.getMatricule(),p.getPrix(),p.getDateDachat().toString());
+
+        */
+
+        String SQLquery = "insert into vehicule values( vehicule_seq.nextval,'" + p.getNom() + "','" +
+                p.getModel() + "'," + p.getMatricule() + "," + p.getPrix() +
+                ", TO_DATE('" + p.getDateDachat().toString() + "','yyyy-mm-dd')" + ")";
         System.out.println(SQLquery);
         Statement statement;
         try {
@@ -33,13 +39,20 @@ public class Vehicules {
     
     
     public static void Modifier(Vehicule p) {
-        String SQLquery = String.format("update vehicule set " +
+       /* String SQLquery = String.format("update vehicule set " +
                 "nomVehicule = '%s'," +
                 "modelVehicule = '%s'," +
                 "matriculeVehicule = %d," +
                 "prix = %f," +
                 "dateachat = to_date('%s','yyyy-mm-dd')" +
                 "where idVehicule = %d", p.getNom(), p.getModel(), p.getMatricule(),p.getPrix(),p.getDateDachat().toString(), p.getId());
+
+        */
+
+        String SQLquery = "update vehicule set nomVehicule = '" + p.getNom() + "',modelVehicule = '" + p.getModel() +
+                "',matriculeVehicule =" +
+                p.getMatricule() + " , prix = '" + p.getPrix() + ",dateachat = to_date('" +
+                p.getDateDachat().toString() + "','yyyy-mm-dd')" +  "where id =" + p.getId() + "";
         Statement statement;
         try {
             Connection connection = getOracleConnection();

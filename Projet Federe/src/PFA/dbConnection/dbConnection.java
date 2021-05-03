@@ -25,8 +25,8 @@ public class dbConnection {
         }
 
         String URL = "jdbc:oracle:thin:@localhost:1521/XE";
-        String Username = "PFA";//we should use the same username
-        String Password = "PFA";//password too!
+        String Username = "HED";//we should use the same username
+        String Password = "123MA";//password too!
 
         Connection connection = null ;
 
