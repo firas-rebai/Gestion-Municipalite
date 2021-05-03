@@ -83,6 +83,8 @@ public class ModifierPersonnelController implements Initializable {
         if (valid && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {
             Personnel p = new Personnel(id, nom.getText(), prenom.getText(), Integer.parseInt(CIN.getText()), Float.parseFloat(salaire.getText()), PostePicker.getValue(), date.getValue());
             PersonnelServices.Modifier(p);
+            Stage stage = (Stage) retour.getScene().getWindow();
+            stage.close();
         }
     }
     

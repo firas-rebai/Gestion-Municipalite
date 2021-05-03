@@ -13,7 +13,7 @@ import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class PersonnelServices {
     public static void Ajouter(Personnel p){
-       /* String SQLquery = String.format("insert into Personnel values(" +
+        String SQLquery = String.format("insert into Personnel values(" +
                 "Personnel_seq.nextval," +
                 "'%s'," +
                 "'%s'," +
@@ -21,12 +21,6 @@ public class PersonnelServices {
                 "to_date('%s','yyyy-mm-dd')," +
                 "'%s'," +
                 "%f)",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire());
-        */
-        String SQLquery = "insert into Personnel values( PERSONNEL_SEQ.nextval,'" + p.getNom() + "','" +
-                p.getPrenom() + "'," + p.getCIN() + "," +
-                "TO_DATE('" + p.getDateNaissance().toString() + "','yyyy-mm-dd')" + ",'" +
-                p.getPoste() + "'," +
-                p.getSalaire() + ")";
         System.out.println(SQLquery);
         Statement statement;
         try {
@@ -51,7 +45,7 @@ public class PersonnelServices {
 
 
     public static void Modifier(Personnel p) {
-       /* String query = String.format("update perosnnel set " +
+        String query = String.format("update perosnnel set " +
                 "nomPersonnel = '%s', " +
                 "prenomPersonnel = '%s'," +
                 "cinPersonnel = %d," +
@@ -59,20 +53,10 @@ public class PersonnelServices {
                 "postepersonnel = '%s'," +
                 "salaire = %f" +
                 " where idPersonnel = %d",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire(),p.getId());
-
-        */
-
-        String SQLquery = "update personnel set nomPersonnel = '" + p.getNom() +
-                "',prenomPersonnel = '" + p.getPrenom() + "',cinPersonnel =" +
-                p.getCIN() + ", datenaissancepersonnel = to_date('" +
-                p.getDateNaissance().toString() + "','yyyy-mm-dd')" + ",postepersonnel ='" + p.getPoste() + "',salaire=" +
-                p.getSalaire() + "where idPersonnel =" + p.getId() + "";
-
-
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
-            statement.execute(SQLquery);
+            statement.execute(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

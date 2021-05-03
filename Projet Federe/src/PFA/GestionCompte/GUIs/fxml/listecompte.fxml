@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" fx:controller="PFA.GestionCompte.GUIs.ListeCompteController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane stylesheets="@../../../resources/style.css" fx:id="pane" fx:controller="PFA.GestionCompte.GUIs.ListeCompteController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="ajouterButton" layoutX="564.0" layoutY="729.0" mnemonicParsing="false" onAction="#ajouterButton" prefHeight="28.0" prefWidth="163.0" text="Ajouter" AnchorPane.rightAnchor="24.0">
          <font>

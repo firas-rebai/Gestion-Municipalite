@@ -52,6 +52,10 @@ public class detailsController {
         nomOutilColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         quantiteOutilColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         OutilListe.getItems().setAll(intervention.getOutilsUtilises());
+        for (OutilsUtilise o :intervention.getOutilsUtilises()){
+            System.out.println(o.nom);
+            System.out.println(o.quantite);
+        }
         //intializing personnel liste
         nomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));

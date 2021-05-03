@@ -122,6 +122,8 @@ public class ListeDemandeController implements Initializable{
         Stage stage1 = new Stage();
         stage1.setTitle("Ajouter une Demande");
         Scene scene1 = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene1);
         stage1.setScene(scene1);
         stage1.setResizable(false);
         stage1.showAndWait();
@@ -138,6 +140,8 @@ public class ListeDemandeController implements Initializable{
         Stage stage = new Stage();
         stage.setTitle("Modifier une Demande");
         Scene scene = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.showAndWait();
@@ -156,6 +160,8 @@ public class ListeDemandeController implements Initializable{
         Stage stage = new Stage();
         stage.setTitle("Details d'une Demande");
         Scene scene = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.showAndWait();
@@ -192,6 +198,8 @@ public class ListeDemandeController implements Initializable{
         Stage stage1 = new Stage();
         stage1.setTitle("Supprimer une Demande");
         Scene scene1 = new Scene(rt);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene1);
         stage1.setScene(scene1);
         stage1.setResizable(false);
         stage1.showAndWait();

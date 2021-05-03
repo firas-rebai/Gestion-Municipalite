@@ -145,7 +145,7 @@ public class ListeCompteController implements Initializable {
         refreshListe(compteServices.ParseCompteListe());
     }
     
-    public void detailsButton(ActionEvent actionEvent) throws IOException {
+    public void detailsButton() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/detailscompte.fxml"));
         Parent root = loader.load();
         detailsCompteController controller = loader.getController();

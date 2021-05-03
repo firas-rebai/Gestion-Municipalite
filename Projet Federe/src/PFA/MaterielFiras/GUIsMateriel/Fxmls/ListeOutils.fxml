@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@../../../resources/style.css" fx:id="anchro" prefHeight="703.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ListeOutilsController">
+<AnchorPane fx:id="anchro" prefHeight="703.0" prefWidth="1164.0" stylesheets="@../../../resources/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.MaterielFiras.GUIsMateriel.ListeOutilsController">
    <children>
       <Label fx:id="lboutilstitle" layoutX="492.0" layoutY="12.0" prefHeight="56.0" prefWidth="184.0" text="Liste des Outils" underline="true">
          <font>
@@ -34,16 +34,25 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="boutajouter" layoutX="677.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToAjouter" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #4285F4;" text="ajouter" textFill="WHITE" />
-      <Button fx:id="boutmodifier" layoutX="512.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToModifier" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #4285F4;" text="modifier" textFill="WHITE" />
-      <Button fx:id="boutsupprimer" layoutX="344.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToSupprimer" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #4285F4;" text="supprimer" textFill="WHITE" />
-      <Button fx:id="boutretour" layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToChoix1" prefHeight="19.0" prefWidth="58.0" style="-fx-background-color: #4285F4;" text="Retour" textFill="WHITE" />
-      <TextField fx:id="toufrecherche" layoutX="920.0" layoutY="77.0" prefHeight="32.0" prefWidth="149.0" promptText="rechercher...">
+      <Button fx:id="boutajouter" layoutX="981.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToAjouter" prefHeight="32.0" prefWidth="158.0" text="Ajouter" textFill="WHITE">
          <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font></TextField>
-      <Button fx:id="boutrecherche" layoutX="816.0" layoutY="77.0" mnemonicParsing="false" onAction="#rechercheButton" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #4285F4;" text="rechercher" textFill="WHITE" />
-      <Button fx:id="boutactualiser" layoutX="23.0" layoutY="81.0" mnemonicParsing="false" onAction="#RefreshButton1" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #4285F4;" text="Actualiser" textFill="WHITE" />
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="boutmodifier" layoutX="810.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToModifier" prefHeight="32.0" prefWidth="158.0" text="Modifier" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="boutsupprimer" layoutX="639.0" layoutY="644.0" mnemonicParsing="false" onAction="#switchToSupprimer" prefHeight="32.0" prefWidth="158.0" text="Supprimer" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="boutretour" layoutX="22.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToChoix1" prefHeight="32.0" prefWidth="97.0" text="Retour" textFill="WHITE" />
+      <TextField fx:id="toufrecherche" layoutX="22.0" layoutY="81.0" prefHeight="32.0" prefWidth="149.0" promptText="rechercher..." />
+      <Button fx:id="boutrecherche" layoutX="171.0" layoutY="81.0" mnemonicParsing="false" onAction="#rechercheButton" prefHeight="32.0" prefWidth="104.0" text="Rechercher" textFill="WHITE" />
+      <Button fx:id="boutactualiser" layoutX="1025.0" layoutY="75.0" mnemonicParsing="false" onAction="#RefreshButton1" prefHeight="32.0" prefWidth="104.0" text="Actualiser" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <TableView fx:id="tvoutils" layoutX="22.0" layoutY="132.0" prefHeight="492.0" prefWidth="1117.0">
         <columns>
           <TableColumn fx:id="coulid" prefWidth="175.2000093460083" text="ID" />

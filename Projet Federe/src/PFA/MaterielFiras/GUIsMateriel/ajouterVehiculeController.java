@@ -30,7 +30,7 @@ public class ajouterVehiculeController implements Initializable {
     Button retour;
 
     
-    String prixPattern="[[0-9]+.[0-9]*]|[0-9]+";
+    String prixPattern="[0-9]+.[0-9]+";
     String nomPattern = "[a-zA-Z]{3}[a-zA-Z ]*";
     String modelPattern = "[a-zA-Z0-9-_ ]+";
     String matriculePattern = "[0-9]{4}";
