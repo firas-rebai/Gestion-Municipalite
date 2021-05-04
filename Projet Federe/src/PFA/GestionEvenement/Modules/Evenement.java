@@ -45,6 +45,17 @@ public class Evenement {
         this.BudgetEve=BudgetEve;
     }
 
+    public Evenement(int idEve,String nomEve,
+                     LocalDate dateBedutEve,
+                     LocalDate dateFinEve,Float BudgetEve,
+                     String adresseEve){
+        this.idEve = idEve;
+        this.nomEve = nomEve;
+        this.dateBedutEve = dateBedutEve;
+        this.dateFinEve = dateFinEve;
+        this.adresseEve = adresseEve;
+        this.BudgetEve=BudgetEve;
+    }
     public Evenement(String nomEve,
                      LocalDate dateBedutEve,
                      LocalDate dateFinEve,Float BudgetEve,

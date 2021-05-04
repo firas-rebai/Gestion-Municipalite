@@ -25,7 +25,7 @@ public class ModifierEvenementController {
     private TextField nomTextField;
 
     @FXML
-    private TextField budgetTextField;
+    private TextField budgetTextField,id;
 
     @FXML
     private Button modifier;
@@ -60,6 +60,8 @@ public class ModifierEvenementController {
         budgetTextField.setText(String.valueOf(selectedItem.getBudgetEve()));
         dateDebutPicker.setValue(selectedItem.getDateBedutEve());
         dateFinPicker.setValue(selectedItem.getDateFinEve());
+        id.setText(String.valueOf(selectedItem.getIdEve()));
+        id.setEditable(false);
 
         nomTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
@@ -81,8 +83,11 @@ public class ModifierEvenementController {
                         budgetTextField.getText().isEmpty());
             }
         });
+
+
     }
 
+    Evenement evenement;
     public void modifierEve(ActionEvent event) throws IOException {
         boolean valid = true;
         if (nomTextField.getText().isEmpty() ||
@@ -104,7 +109,7 @@ public class ModifierEvenementController {
                 Pattern.matches(adressePattern, adresseTextField.getText()) &&
                 Pattern.matches(nomPattern, nomTextField.getText()) &&
                  event.getSource() == modifier) {
-            Evenement i = new Evenement(nomTextField.getText(),
+            Evenement i = new Evenement(Integer.parseInt(id.getText()),nomTextField.getText(),
                     dateDebutPicker.getValue(),dateFinPicker.getValue(),
                     Float.parseFloat(budgetTextField.getText()),adresseTextField.getText());
             EvenementServ.Modifier(i);

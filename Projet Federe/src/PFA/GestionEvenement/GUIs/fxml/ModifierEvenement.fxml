@@ -56,5 +56,11 @@
       <Label fx:id="AdresseErrorLabel" layoutX="222.0" layoutY="309.0" prefHeight="17.0" prefWidth="272.0" text="Adresse invalide" textFill="RED" visible="false" />
       <Label fx:id="NomErrorLabel" layoutX="222.0" layoutY="110.0" prefHeight="17.0" prefWidth="272.0" text="Nom invalide" textFill="RED" visible="false" />
       <Label fx:id="remplir" layoutX="395.0" layoutY="710.0" prefHeight="17.0" prefWidth="272.0" text="Remplir tous les champs" textFill="RED" visible="false" />
+      <Label layoutX="67.0" layoutY="318.0" prefHeight="35.0" prefWidth="112.0" text="Id:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="id" layoutX="222.0" layoutY="323.0" prefHeight="25.0" prefWidth="278.0" />
    </children>
 </AnchorPane>
