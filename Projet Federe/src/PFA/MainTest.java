@@ -1,6 +1,7 @@
 package PFA;
 
 
+import PFA.GestionProjet.GUIs.ListeProjetController;
 import com.gluonhq.charm.glisten.control.Icon;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -17,8 +18,10 @@ public class MainTest extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("login_mainMenu/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionProjet/GUIs/fxml/listeprojet.fxml"));
         Parent root = loader.load();
+        ListeProjetController controller = loader.getController();
+        controller.initDate();
         primaryStage.setTitle("brabi e5dem the project");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

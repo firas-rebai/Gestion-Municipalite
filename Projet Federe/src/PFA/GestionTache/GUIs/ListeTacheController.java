@@ -1,6 +1,8 @@
 package PFA.GestionTache.GUIs;
 
 
+import PFA.GestionProjet.GUIs.ajouterProjet.ajouterPersonnel;
+import PFA.GestionProjet.Module.Projet;
 import PFA.GestionTache.Module.Tache;
 import PFA.GestionTache.Services.tacheServices;
 import javafx.event.ActionEvent;
@@ -10,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -59,10 +58,13 @@ public class ListeTacheController implements Initializable {
     @FXML
     private Button refreshButton;
     
+    @FXML
+    private TableColumn<Tache, CheckBox> selectColumn;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refresh(tacheServices.parsetacheListe());
-    
+        
         compteTableView.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY) && !compteTableView.getSelectionModel().isEmpty()){
                 detailsButton.setDisable(false);
@@ -108,6 +110,10 @@ public class ListeTacheController implements Initializable {
     public void refresh(ArrayList<Tache> liste){
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         nomColumn1.setCellValueFactory(new PropertyValueFactory<>("nomPersonnel"));
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
+        for (Tache tache : liste){
+            tache.setCheck(new CheckBox());
+        }
         compteTableView.getItems().setAll(liste);
     }
     
@@ -186,5 +192,33 @@ public class ListeTacheController implements Initializable {
         primaryStage.show();
     }
     
+    private Projet projet;
     
+    public Projet getProjet() {
+        return projet;
+    }
+    
+    public void setProjet(Projet projet) {
+        this.projet = projet;
+    }
+    
+    public void switchToPersonnel(ActionEvent event) throws IOException {
+        ArrayList<Tache> toAdd = new ArrayList<>();
+        for (Tache tache : compteTableView.getItems()){
+            if (tache.getCheck().isSelected()){
+                toAdd.add(tache);
+            }
+        }
+        projet.setTaches(toAdd);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../GestionProjet/GUIs/fxml/ajouterpersonnel.fxml"));
+        Parent root = loader.load();
+        ajouterPersonnel controller = loader.getController();
+        controller.setProjet(projet);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 }

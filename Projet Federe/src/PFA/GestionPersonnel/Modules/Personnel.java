@@ -103,6 +103,14 @@ public class Personnel {
                 ", dateNaissance='" + dateNaissance + '\'' +
                 '}';
     }
+    
+    public CheckBox getCheck() {
+        return check;
+    }
+    
+    public void setCheck(CheckBox check) {
+        this.check = check;
+    }
 }
 
 

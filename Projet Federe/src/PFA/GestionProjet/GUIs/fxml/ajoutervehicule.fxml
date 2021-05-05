@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../../../resources/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionIntervention.GUIs.ajouterIntervention.ajouterVehiculeIntervention">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../../../resources/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionProjet.GUIs.ajouterProjet.ajouterVehicule">
    <children>
       <Label layoutX="-42.0" layoutY="94.0" text="Label" />
       <Button layoutX="200.0" layoutY="741.0" mnemonicParsing="false" onAction="#retour" prefHeight="35.0" prefWidth="163.0" text="Retour">
@@ -15,7 +15,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="395.0" layoutY="741.0" mnemonicParsing="false" onAction="#switchToOutil" prefHeight="35.0" prefWidth="163.0" text="Suivant">
+      <Button layoutX="395.0" layoutY="741.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="35.0" prefWidth="163.0" text="Suivant">
          <font>
             <Font size="15.0" />
          </font>

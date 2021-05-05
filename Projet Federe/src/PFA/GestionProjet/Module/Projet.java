@@ -34,6 +34,16 @@ public class Projet {
         this.outils = outils;
     }
     
+    public Projet(int id, String nom, String description, String adresse, float cout, LocalDate dateBedut, LocalDate dateFin) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.adresse = adresse;
+        this.cout = cout;
+        this.dateBedut = dateBedut;
+        this.dateFin = dateFin;
+    }
+    
     public Projet(int id, String nom, String description, ArrayList<Tache> taches, String adresse, float cout, LocalDate dateBedut, LocalDate dateFin, ArrayList<Personnel> equipe, ArrayList<Vehicule> vehicules, ArrayList<Outil> outils) {
         this.id = id;
         this.nom = nom;

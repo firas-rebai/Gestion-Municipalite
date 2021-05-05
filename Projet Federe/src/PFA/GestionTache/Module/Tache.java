@@ -1,6 +1,7 @@
 package PFA.GestionTache.Module;
 
 import PFA.GestionPersonnel.Modules.Personnel;
+import javafx.scene.control.CheckBox;
 
 public class Tache {
     private int id;
@@ -8,6 +9,15 @@ public class Tache {
     private String description;
     private Personnel personnel;
     private String nomPersonnel = "Non Disponible";
+    private CheckBox check;
+    
+    public CheckBox getCheck() {
+        return check;
+    }
+    
+    public void setCheck(CheckBox check) {
+        this.check = check;
+    }
     
     public String getNomPersonnel() {
         return nomPersonnel;

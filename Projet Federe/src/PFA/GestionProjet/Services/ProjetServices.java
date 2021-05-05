@@ -28,7 +28,9 @@ public class ProjetServices {
             while (res.next()) {
                 id = res.getInt("idprojet");
                 liste.add(new Projet(id, res.getString("nomprojet"), res.getString("description"), fetchTacheWithID(id), res.getString("adresse"), res.getFloat("cout"), res.getDate("datedebut").toLocalDate(), res.getDate("datefin").toLocalDate(), fetchPersonnelWithID(id), fetchVehiculeWithID(id), fetchOutilWithID(id)));
+                System.out.println(id);
             }
+            res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -43,7 +45,7 @@ public class ProjetServices {
             Statement statement = connection.createStatement();
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
-                liste.add(new Vehicule(res.getInt("idvehicule"), res.getInt("matricule"), res.getString("model"), res.getString("nom")));
+                liste.add(new Vehicule(res.getInt("idvehicule"), res.getInt("matriculevehicule"), res.getString("modelvehicule"), res.getString("nomvehicule")));
             }
             res.close();
         } catch (SQLException throwables) {
@@ -62,7 +64,7 @@ public class ProjetServices {
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
                 id = res.getInt("idoutil");
-                liste.add(new Outil(id, fetchQuantite(id), res.getString("nomoutil"), res.getInt("consumable")));
+                liste.add(new Outil(id, fetchQuantite(id), res.getString("nomoutil"), res.getInt("consumableoutil")));
             }
             res.close();
         } catch (SQLException throwables) {
@@ -96,7 +98,7 @@ public class ProjetServices {
             Statement statement = connection.createStatement();
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
-                liste.add(new Personnel(res.getInt("idpersonnel"), res.getString("nompersonnel"), res.getString("prenompersonnel"), res.getInt("cinpersonnel"), res.getFloat("salaire"), res.getString("poste"), res.getDate("datenaissance").toLocalDate()));
+                liste.add(new Personnel(res.getInt("idpersonnel"), res.getString("nompersonnel"), res.getString("prenompersonnel"), res.getInt("cinpersonnel"), res.getFloat("salaire"), res.getString("postepersonnel"), res.getDate("datenaissancepersonnel").toLocalDate()));
             }
             res.close();
         } catch (SQLException throwables) {
@@ -115,7 +117,7 @@ public class ProjetServices {
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
                 id = res.getInt("idtache");
-                liste.add(new Tache(id, res.getString("nom"), res.getString("description"), PersonnelServices.ParsePersonnel(id)));
+                liste.add(new Tache(id, res.getString("nomtache"), res.getString("description"), PersonnelServices.ParsePersonnel(id)));
             }
             res.close();
         } catch (SQLException throwables) {
@@ -126,11 +128,15 @@ public class ProjetServices {
     
     public static void ajouter(Projet projet) {
         String query = "insert into PROJET (IDPROJET, NOMPROJET, DESCRIPTION, ADRESSE, DATEDEBUT, DATEFIN,COUT) VALUES (projet_seq.nextval,'" + projet.getNom() + "','" + projet.getDescription() + "','" + projet.getAdresse() + "',to_date('" + projet.getDateBedut().toString() + "','yyyy-mm-dd'),to_date('" + projet.getDateFin().toString() + "','yyyy-mm-dd')," + projet.getCout() + ")";
-        int id = projet.getId();
+        int id = 0;
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
             statement.execute(query);
+            ResultSet rs = statement.executeQuery("select PROJET_SEQ.currval from DUAL");
+            rs.next();
+            id = rs.getInt(1);
+            rs.close();
             insertPersonnel(projet.getEquipe(), id);
             insertOutil(projet.getOutils(), id);
             insertTache(projet.getTaches(), id);
@@ -140,8 +146,8 @@ public class ProjetServices {
         }
     }
     
-    public static void insertVehicule(ArrayList<Vehicule> vehicule, int idprojet) {
-        String query = "insert into PROJET_VEHICULE (IDPROJET, IDVEHICULE) VALUES (" + idprojet + ",";
+    public static void insertVehicule(ArrayList<Vehicule> vehicule, int id) {
+        String query = "insert into PROJET_VEHICULE (IDPROJET, IDVEHICULE) VALUES (" + id + ",";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -153,8 +159,8 @@ public class ProjetServices {
         }
     }
     
-    public static void insertOutil(ArrayList<Outil> outils, int idprojet) {
-        String query = "insert into PROJET_OUTIL (IDPROJET, IDOUTIL, QUANTITE) VALUES (" + idprojet + ",";
+    public static void insertOutil(ArrayList<Outil> outils, int id) {
+        String query = "insert into PROJET_OUTIL (IDPROJET, IDOUTIL, QUANTITE) VALUES (" + id + ",";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -167,8 +173,8 @@ public class ProjetServices {
     }
     
     
-    public static void insertPersonnel(ArrayList<Personnel> personnels, int idprojet) {
-        String query = "insert into PROJET_PERSONNEL (IDPROJET, IDPERSONNEL) VALUES (" + idprojet + ",";
+    public static void insertPersonnel(ArrayList<Personnel> personnels, int id) {
+        String query = "insert into PROJET_PERSONNEL (IDPROJET, IDPERSONNEL) VALUES (" + id + ",";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -180,8 +186,8 @@ public class ProjetServices {
         }
     }
     
-    public static void insertTache(ArrayList<Tache> taches, int idprojet) {
-        String query = "insert into PROJET_TACHE (IDPROJET, IDTACHE) VALUES (" + idprojet + ",";
+    public static void insertTache(ArrayList<Tache> taches, int id) {
+        String query = "insert into PROJET_TACHE (IDPROJET, IDTACHE) VALUES (" + id + ",";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -204,15 +210,34 @@ public class ProjetServices {
         }
     }
     
-    public static void modifier(Projet projet){
-        String query = "update PROJET set NOMPROJET = '%s',DESCRIPTION = '%s',ADRESSE = '%s', DATEDEBUT = to_date('%s','yyyy-mm-dd'),DATEFIN = to_date('%s','yyyy-mm-dd'),COUT = %f";
+    public static void modifier(Projet projet) {
+        String query = "update PROJET set NOMPROJET = '%s',DESCRIPTION = '%s',ADRESSE = '%s', DATEDEBUT = to_date('%s','yyyy-mm-dd'),DATEFIN = to_date('%s','yyyy-mm-dd'),COUT = %f where idprojet = %d";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
-              statement.execute(String.format(query, projet.getNom(),projet.getDescription(),projet.getAdresse(),projet.getDateBedut().toString(),projet.getDateFin().toString(),projet.getCout()));
+            statement.execute(String.format(query, projet.getNom(), projet.getDescription(), projet.getAdresse(), projet.getDateBedut().toString(), projet.getDateFin().toString(), projet.getCout(),projet.getId()));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
     
+    public static ArrayList<Projet> Recherche(String text) {
+        ArrayList<Projet> liste = new ArrayList<>();
+        String fetchProjet = "select * from projet where lower(ADRESSE) like lower('%" + text + "%') or lower(NOMPROJET) like lower('%" + text + "%')";
+        
+        int id;
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(fetchProjet);
+            while (res.next()) {
+                id = res.getInt("idprojet");
+                liste.add(new Projet(id, res.getString("nomprojet"), res.getString("description"), fetchTacheWithID(id), res.getString("adresse"), res.getFloat("cout"), res.getDate("datedebut").toLocalDate(), res.getDate("datefin").toLocalDate(), fetchPersonnelWithID(id), fetchVehiculeWithID(id), fetchOutilWithID(id)));
+            }
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+    }
 }

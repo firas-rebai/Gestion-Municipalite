@@ -3,6 +3,7 @@ package PFA.login_mainMenu;
 
 import PFA.GestionIntervention.GUIs.ListeInterventionController;
 import PFA.GestionPersonnel.GUIs.ListePersonnelController;
+import PFA.GestionProjet.GUIs.ListeProjetController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -103,5 +104,17 @@ public class MainController {
         stage.show();
     }
     
+    public void switchToProjet(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionProjet/GUIs/fxml/listeprojet.fxml"));
+        Parent root = loader.load();
+        ListeProjetController controller = loader.getController();
+        controller.initDate();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
+    }
     
 }

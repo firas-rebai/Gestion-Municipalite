@@ -39,6 +39,15 @@ public class Intervention {
         this.outilsUtilises = outilsUtilises;
     }
     
+    public Intervention(int id, String nom, LocalDate dateBedut, LocalDate dateFin, float budget, String adresse) {
+        this.id = id;
+        this.nom = nom;
+        this.dateBedut = dateBedut;
+        this.dateFin = dateFin;
+        this.budget = budget;
+        this.adresse = adresse;
+    }
+    
     public Intervention(String nom, LocalDate dateBedut, LocalDate dateFin, float budget, String adresse) {
         this.nom = nom;
         this.dateBedut = dateBedut;

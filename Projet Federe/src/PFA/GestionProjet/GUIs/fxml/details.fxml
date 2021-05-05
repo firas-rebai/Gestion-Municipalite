@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../resources/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionIntervention.GUIs.detailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../resources/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionProjet.GUIs.detailsController">
    <children>
       <VBox prefHeight="800.0" prefWidth="217.0" style="-fx-background-color: grey;">
          <children>
@@ -38,7 +38,7 @@
                </font>
             </Button>
             <ImageView fitHeight="25.0" fitWidth="258.0" pickOnBounds="true" preserveRatio="true" />
-            <Button mnemonicParsing="false" onAction="#listeOutilButton" prefHeight="42.0" prefWidth="394.0" text="Liste des Taches">
+            <Button mnemonicParsing="false" onAction="#listeTacheButton" prefHeight="42.0" prefWidth="394.0" text="Liste des Taches">
                <font>
                   <Font size="15.0" />
                </font>
@@ -79,7 +79,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="dateFinLabel" layoutX="428.0" layoutY="72.0" prefHeight="27.0" prefWidth="246.0" text="Date Fin :" textAlignment="CENTER">
+      <Label fx:id="dateFinLabel" layoutX="428.0" layoutY="73.0" prefHeight="27.0" prefWidth="246.0" text="Date Fin :" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>

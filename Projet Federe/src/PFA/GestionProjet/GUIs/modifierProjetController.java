@@ -1,18 +1,15 @@
-package PFA.GestionIntervention.GUIs;
+package PFA.GestionProjet.GUIs;
 
-import PFA.GestionIntervention.Modules.Intervention;
-import PFA.GestionIntervention.Services.InterventionServices;
+import PFA.GestionProjet.Module.Projet;
+import PFA.GestionProjet.Services.ProjetServices;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-public class ModifierInterventionController {
+public class modifierProjetController {
     private final String nomPattern = "[A-Za-z]{3}[A-Za-z ]*";
     private final String adressePattern = "[A-Za-z 0-9]*";
     private final String budgetPattern = "[0-9]+.[0-9]+";
@@ -52,21 +49,24 @@ public class ModifierInterventionController {
     
     @FXML
     private Label remplir;
+    
+    @FXML private TextArea descriptionTF;
     int id;
-    public void initData(Intervention selectedItem) {
+    public void initData(Projet selectedItem) {
         id = selectedItem.getId();
         nomTextField.setText(selectedItem.getNom());
         adresseTextField.setText(selectedItem.getAdresse());
-        budgetTextField.setText(String.valueOf(selectedItem.getBudget()));
+        budgetTextField.setText(String.valueOf(selectedItem.getCout()));
         dateDebutPicker.setAccessibleText(selectedItem.getDateBedut().toString());
         dateFinPicker.setAccessibleText(selectedItem.getDateFin().toString());
-    
+        descriptionTF.setText(selectedItem.getDescription());
+        
         nomTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 NomErrorLabel.setVisible(!Pattern.matches(nomPattern, nomTextField.getText()));
             }
         });
-    
+        
         adresseTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 AdresseErrorLabel.setVisible(!Pattern.matches(adressePattern, adresseTextField.getText()));
@@ -78,8 +78,9 @@ public class ModifierInterventionController {
                 BudgetErrorLabel.setVisible(!Pattern.matches(budgetPattern, budgetTextField.getText()));
             }
         });
-    
+        
     }
+    
     
     public void modifier() throws IOException {
         boolean valid = true;
@@ -87,15 +88,16 @@ public class ModifierInterventionController {
             remplir.setVisible(true);
             valid = false;
         }
-    
-        if (!dateDebutPicker.getValue().toString().isEmpty() && !dateDebutPicker.getValue().toString().isEmpty() && !dateDebutPicker.getValue().isBefore(dateFinPicker.getValue())) {
+        
+        if (dateDebutPicker.getValue().toString().isEmpty() || dateDebutPicker.getValue().toString().isEmpty() || !dateDebutPicker.getValue().isBefore(dateFinPicker.getValue())) {
             DateDebutErrorLabel.setVisible(true);
             DateFinErrorLabel.setVisible(true);
             valid = false;
         }
-        if (valid && Pattern.matches(budgetPattern, budgetTextField.getText()) && Pattern.matches(nomPattern, adresseTextField.getText()) && Pattern.matches(nomPattern, nomTextField.getText())) {
-            Intervention i = new Intervention(id,nomTextField.getText(),dateDebutPicker.getValue(),dateFinPicker.getValue(),Float.parseFloat(budgetTextField.getText()),adresseTextField.getText());
-            InterventionServices.Modifier(i);
+        if (valid && Pattern.matches(budgetPattern, budgetTextField.getText()) && Pattern.matches(adressePattern, adresseTextField.getText()) && Pattern.matches(nomPattern, nomTextField.getText())) {
+            Projet projet = new Projet(id,nomTextField.getText(),descriptionTF.getText(),adresseTextField.getText(),Float.parseFloat(budgetTextField.getText()),dateDebutPicker.getValue(),dateFinPicker.getValue());
+            ProjetServices.modifier(projet);
+            System.out.println("fiff");
         }
     }
     
