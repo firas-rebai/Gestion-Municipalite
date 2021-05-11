@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class ajouterGenerale implements Initializable {
     
-    private final String nomPattern = "[A-Za-z]{3}[A-Za-z ]*";
+    private final String nomPattern = "[A-Za-z0-9]{3}[0-9A-Za-z ]*";
     private final String budgetPattern = "[0-9]+.[0-9]+";
     private final String numPattern = "[0-9]*";
     @FXML
@@ -35,9 +35,6 @@ public class ajouterGenerale implements Initializable {
     
     @FXML
     private Label DateFinErrorLabel;
-    
-    @FXML
-    private Label BudgetErrorLabel;
     
     @FXML
     private Label CoutErrorLabel;
@@ -53,7 +50,7 @@ public class ajouterGenerale implements Initializable {
     
     public void switchToPersonnel(ActionEvent event) throws IOException {
         boolean valid = true;
-        if (nomTextField.getText().isEmpty() || numAdresseTextField.getText().isEmpty() || coutTextField.getText().isEmpty() || adresseTextField.getText().isEmpty() || budgetTextField.getText().isEmpty() || dateDebutPicker.getValue().toString().isEmpty() || dateFinPicker.getValue().toString().isEmpty()) {
+        if (nomTextField.getText().isEmpty() || numAdresseTextField.getText().isEmpty() || coutTextField.getText().isEmpty() || adresseTextField.getText().isEmpty() || dateDebutPicker.getValue().toString().isEmpty() || dateFinPicker.getValue().toString().isEmpty()) {
             remplir.setVisible(true);
             valid = false;
         }
@@ -67,7 +64,8 @@ public class ajouterGenerale implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterPersonnelIntervention.fxml"));
             Parent root = loader.load();
             ajouterPersonnelIntervention controller = loader.getController();
-            controller.setIntervention(new Intervention(nomTextField.getText(), dateDebutPicker.getValue(), dateFinPicker.getValue(), Float.parseFloat(budgetTextField.getText()), numAdresseTextField.getText() + " " + adresseTextField.getText()));
+            controller.setIntervention(new Intervention(nomTextField.getText(), dateDebutPicker.getValue(), dateFinPicker.getValue(), Float.parseFloat(coutTextField.getText()), numAdresseTextField.getText() + " " + adresseTextField.getText()));
+            controller.initData();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             JMetro jMetro = new JMetro(Style.LIGHT);
@@ -107,12 +105,6 @@ public class ajouterGenerale implements Initializable {
         coutTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 CoutErrorLabel.setVisible(!Pattern.matches(budgetPattern, coutTextField.getText()));
-            }
-        });
-        
-        budgetTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
-            if (!newPropertyValue) {
-                BudgetErrorLabel.setVisible(!Pattern.matches(budgetPattern, budgetTextField.getText()));
             }
         });
         

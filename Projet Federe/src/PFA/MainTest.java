@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -15,13 +16,12 @@ import javafx.stage.Stage;
 public class MainTest extends Application {
     @FXML
     Icon icon;
-    
+    @FXML
+    Pane pane;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionProjet/GUIs/fxml/listeprojet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml"));
         Parent root = loader.load();
-        ListeProjetController controller = loader.getController();
-        controller.initDate();
         primaryStage.setTitle("brabi e5dem the project");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

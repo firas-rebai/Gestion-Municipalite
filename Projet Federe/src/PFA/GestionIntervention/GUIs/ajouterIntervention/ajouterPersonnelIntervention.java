@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ajouterPersonnelIntervention implements Initializable {
+public class ajouterPersonnelIntervention {
     public Intervention getIntervention() {
         return intervention;
     }
@@ -96,13 +96,12 @@ public class ajouterPersonnelIntervention implements Initializable {
         
     }
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData() {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         posteColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
-        ArrayList<PersonnelMin> liste = (ArrayList<PersonnelMin>) InterventionServices.ParsePersonnelListe();
+        ArrayList<PersonnelMin> liste = (ArrayList<PersonnelMin>) InterventionServices.ParsePersonnelListe(intervention.getDateBedut(),intervention.getDateFin());
         for (PersonnelMin p:liste){
             p.setCheck(new CheckBox());
         }

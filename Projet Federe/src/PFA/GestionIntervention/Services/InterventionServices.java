@@ -155,10 +155,10 @@ public class InterventionServices {
         List<PersonnelMin> liste = new ArrayList<>();
         String query = "select * from Personnel " +
                 "where IDPERSONNEL NOT IN " +
-                "(select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION NOT IN " +
+                "(select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION IN " +
                 "(select IDINTERVENTION from INTERVENTION " +
-                "where DATEDEBUTINTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')" +
-                "and DATEFININTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')))";
+                "where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION))";
+        System.out.println(query);
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
