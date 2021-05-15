@@ -50,14 +50,13 @@ public class MainController {
     }
 
     public void switchToMateriel(ActionEvent event) throws IOException{
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(scene);
         stage.setScene(scene);
         stage.show();
-
     }
     
     public void switchToDoleance(ActionEvent event) throws IOException {

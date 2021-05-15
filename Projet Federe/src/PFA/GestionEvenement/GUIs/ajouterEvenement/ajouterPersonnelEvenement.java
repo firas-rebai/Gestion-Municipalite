@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ajouterPersonnelEvenement implements Initializable {
+public class ajouterPersonnelEvenement{
     private Evenement evenement;
 
     public Evenement getEvenement() {
@@ -85,14 +85,14 @@ public class ajouterPersonnelEvenement implements Initializable {
         Parent root = loader.load();
         ajouterVehiculeEvenement controller = loader.getController();
         controller.evenement = getEvenement();
+        controller.initData();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData() {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomper"));
         prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenomper"));
         posteColumn.setCellValueFactory(new PropertyValueFactory<>("posteper"));

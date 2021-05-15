@@ -6,11 +6,9 @@ import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,11 +18,9 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class ajouterVehiculeIntervention implements Initializable {
+public class ajouterVehiculeIntervention {
     public void retour(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterVehiculeIntervention.fxml"));
         Parent root = loader.load();
@@ -45,28 +41,30 @@ public class ajouterVehiculeIntervention implements Initializable {
             if (v.getCheck().isSelected())
                 toAdd.add(v);
         }
-        if(!toAdd.isEmpty()){
-            intervention.setVehicules(toAdd);
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("");
-            alert.setHeaderText(null);
-            alert.setContentText("Aucune Vehicule Selectionee");
-            alert.showAndWait();
-            return ;
-        }
-        
+        intervention.setVehicules(toAdd);
+    
+        System.out.println(toAdd);
+        System.out.println(intervention);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterOutilIntervention.fxml"));
         Parent root = loader.load();
         ajouterOutilIntervention controller = loader.getController();
-        controller.intervention = intervention;
+        controller.setIntervention(intervention);
+        controller.initData();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
     
-    public Intervention intervention;
+    public Intervention getIntervention() {
+        return intervention;
+    }
+    
+    public void setIntervention(Intervention intervention) {
+        this.intervention = intervention;
+    }
+    
+    private Intervention intervention;
     
     @FXML
     private TableView<Vehicule> listeVehicule;
@@ -79,22 +77,21 @@ public class ajouterVehiculeIntervention implements Initializable {
     
     @FXML
     private TableColumn<Vehicule, Integer> MatriculeColumn;
+    
     @FXML
     private TableColumn<Vehicule, CheckBox> selectColumn;
     
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData(){
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         MatriculeColumn.setCellValueFactory(new PropertyValueFactory<>("matricule"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
-        ArrayList<Vehicule> liste = (ArrayList<Vehicule>) InterventionServices.parseVehiculeList();
+        ArrayList<Vehicule> liste = InterventionServices.parseVehiculeList(intervention.getDateBedut());
         for (Vehicule v : liste){
             v.setCheck(new CheckBox());
         }
         listeVehicule.getItems().setAll(liste);
-        
         
     }
 }

@@ -3,22 +3,16 @@ package PFA.GestionEvenement.GUIs.ajouterEvenement;
 import PFA.GestionEvenement.Modules.Evenement;
 import PFA.GestionEvenement.Modules.OutillMater;
 import PFA.GestionEvenement.Services.EvenementServ;
-import PFA.GestionIntervention.Modules.OutilsUtilise;
-import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.MaterielFiras.ModuleMateriel.Outil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class ajouterOutilEvenement implements Initializable {
+public class ajouterOutilEvenement{
     public Evenement evenement;
     @FXML
     private TableView<Outil> outilTV;
@@ -38,10 +32,9 @@ public class ajouterOutilEvenement implements Initializable {
     @FXML
     private TableColumn<Outil, Spinner<Integer>> spinnerColumn;
 
-    private ArrayList<HBox> hBoxes = new ArrayList<>();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    
+    public void initData() {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         conumableColumn.setCellValueFactory(new PropertyValueFactory<>("consumable"));
         quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
@@ -54,7 +47,6 @@ public class ajouterOutilEvenement implements Initializable {
             o.getSpinner().setValueFactory(valueFactory);
         }
         outilTV.getItems().setAll(liste);
-
     }
 
     public void retour1(ActionEvent event) {

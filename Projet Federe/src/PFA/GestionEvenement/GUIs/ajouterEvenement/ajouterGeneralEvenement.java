@@ -81,6 +81,7 @@ public class ajouterGeneralEvenement implements Initializable {
                     dateDebutPicker.getValue(), dateFinPicker.getValue(),
                     Float.parseFloat(budgetTextField.getText()), numAdresseTextField.getText() +
                     " " + adresseTextField.getText()));
+            controller.initData();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

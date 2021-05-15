@@ -73,20 +73,15 @@ public class ajouterPersonnelIntervention {
             }
         }
         
-        if (!toAdd.isEmpty()){
-            intervention.setEquipe(toAdd);
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("");
-            alert.setHeaderText(null);
-            alert.setContentText("Aucun personnel selectione");
-            alert.showAndWait();
-            return ;
-        }
+        intervention.setEquipe(toAdd);
+        System.out.println(intervention);
+        System.out.println(toAdd);
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterVehiculeIntervention.fxml"));
         Parent root = loader.load();
         ajouterVehiculeIntervention controller = loader.getController();
-        controller.intervention = getIntervention();
+        controller.setIntervention(intervention);
+        controller.initData();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);

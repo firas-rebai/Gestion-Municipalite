@@ -20,7 +20,7 @@ public class MainTest extends Application {
     Pane pane;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionIntervention/GUIs/fxml/listeIntervention.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("brabi e5dem the project");
         Scene scene = new Scene(root);

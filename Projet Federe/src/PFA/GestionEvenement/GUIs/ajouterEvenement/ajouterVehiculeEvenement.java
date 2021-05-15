@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ajouterVehiculeEvenement implements  Initializable{
+public class ajouterVehiculeEvenement{
 
 
     public void retour6(ActionEvent event) throws IOException {
@@ -59,6 +59,7 @@ public class ajouterVehiculeEvenement implements  Initializable{
         Parent root = loader.load();
         ajouterOutilEvenement controller = loader.getController();
         controller.evenement = evenement;
+        controller.initData();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -83,8 +84,7 @@ public class ajouterVehiculeEvenement implements  Initializable{
     private TableColumn<Vehicule, CheckBox> selectColumn;
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData() {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         MatriculeColumn.setCellValueFactory(new PropertyValueFactory<>("matricule"));

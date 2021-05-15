@@ -173,14 +173,13 @@ public class InterventionServices {
         return liste;
     }
     
-    public static List<Vehicule> parseVehiculeList(LocalDate debut,LocalDate fin) {
+    public static List<Vehicule> parseVehiculeList(LocalDate debut, LocalDate fin) {
         List<Vehicule> data = new ArrayList<>();
         String SQLquery = "select * from VEHICULE " +
                 "where IDVEHICULE NOT IN " +
-                "(select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION NOT IN " +
+                "(select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION IN " +
                 "(select IDINTERVENTION from INTERVENTION " +
-                "where DATEDEBUTINTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')" +
-                "and DATEFININTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')))";
+                "where DATEDEBUTINTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')))";
         try {
             Connection connection = getOracleConnection();
             
@@ -203,9 +202,9 @@ public class InterventionServices {
         return data;
     }
     
-    public static List<Vehicule> parseVehiculeList() {
-        List<Vehicule> data = new ArrayList<>();
-        String SQLquery = "SELECT * from VEHICULE where IDVEHICULE not in (select IDVEHICULE from INTERVENTION_VEHICULE)";
+    public static ArrayList<Vehicule> parseVehiculeList(LocalDate debut) {
+        ArrayList<Vehicule> data = new ArrayList<>();
+        String SQLquery = "SELECT * from VEHICULE where IDVEHICULE not in (select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('"+debut.toString()+"','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION))";
         try {
             Connection connection = getOracleConnection();
             
@@ -240,6 +239,39 @@ public class InterventionServices {
                         rs.getInt("quantiteoutil"),
                         rs.getString("nomoutil"),
                         rs.getInt("consumableoutil")));
+            }
+            rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+    }
+    
+    public static ArrayList<Outil> parseOutilList(LocalDate debut) {
+        ArrayList<Outil> liste = new ArrayList<>();
+        String query = "select * from OUTIL";
+        String query2 = "select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in" +
+                "(select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)";
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            Statement statement1 = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            int total = 0;
+            while (rs.next()) {
+                total = rs.getInt("quantiteoutil");
+                ResultSet res = statement1.executeQuery(query2);
+                int con = rs.getInt("consumableoutil");
+                while(res.next()){
+                    int i =res.getInt(1);
+                    if (con == 0 && (total - i > 0))
+                        total -= i;
+                }
+                res.close();
+                liste.add(new Outil(rs.getInt("IDOUTIL"),
+                        total,
+                        rs.getString("nomoutil"),
+                        con));
             }
             rs.close();
         } catch (SQLException throwables) {
