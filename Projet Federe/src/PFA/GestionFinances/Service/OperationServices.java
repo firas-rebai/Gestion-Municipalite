@@ -64,4 +64,22 @@ public class OperationServices {
         }
         return liste;
     }
+    
+    static public ArrayList<Operation> recherche(String term) {
+        String query = "select * from OPERATION where lower(OPERATION.NOMOPERATION) like lower('%" + term + "%')";
+        ArrayList<Operation> liste = new ArrayList<>();
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                liste.add(new Operation(rs.getInt("IDOPERATION"), rs.getString("NOMOPERATION"), rs.getString("TYPEOPRATION"), rs.getFloat("VALEUROPERATION"), rs.getDate("DATEOPERATION").toLocalDate()));
+            }
+            rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+    }
+    
 }

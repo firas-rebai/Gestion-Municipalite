@@ -30,9 +30,6 @@ public class ListeController implements Initializable {
     private AnchorPane pane;
     
     @FXML
-    private Button ajouterButton;
-    
-    @FXML
     private Button supprimerButton;
     
     @FXML
@@ -141,10 +138,15 @@ public class ListeController implements Initializable {
     public void refresh() {
         liste = OperationServices.parseOperationList();
         listeEve.getItems().setAll(liste);
+        depenseButton.setSelected(false);
+        revenueButton.setSelected(false);
     }
     
     public void recherche() {
-        liste = OperationServices.parseOperationList();
+        if (!tfrecherche.getText().isEmpty())
+            liste = OperationServices.recherche(tfrecherche.getText());
+        else
+            liste = OperationServices.parseOperationList();
         listeEve.getItems().setAll(liste);
     }
     
