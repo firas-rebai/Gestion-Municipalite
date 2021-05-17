@@ -1,6 +1,7 @@
 package PFA.GestionProjet.GUIs.ajouterProjet;
 
 import PFA.GestionEvenement.Modules.OutillMater;
+import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.GestionProjet.Module.Projet;
 import PFA.GestionTache.GUIs.ListeTacheController;
 import PFA.MaterielFiras.ModuleMateriel.Outil;
@@ -23,7 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ajouterOutil implements Initializable {
+public class ajouterOutil {
     
     @FXML
     private TableView<Outil> outilTV;
@@ -57,6 +58,7 @@ public class ajouterOutil implements Initializable {
         ajouterPersonnel controller = loader.getController();
         projet.getEquipe().clear();
         controller.setProjet(projet);
+        controller.initData();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -78,6 +80,7 @@ public class ajouterOutil implements Initializable {
         Parent root = loader.load();
         ajouterVehicule controller = loader.getController();
         controller.setProjet(projet);
+        controller.initData();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -86,13 +89,12 @@ public class ajouterOutil implements Initializable {
         stage.show();
     }
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData(){
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         conumableColumn.setCellValueFactory(new PropertyValueFactory<>("consumable"));
         quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         spinnerColumn.setCellValueFactory(new PropertyValueFactory<>("spinner"));
-        ArrayList<Outil> liste = (ArrayList<Outil>) Outils.OutilsListe();
+        ArrayList<Outil> liste = (ArrayList<Outil>) InterventionServices.parseOutilList(projet.getDateBedut());
         for (Outil outil:liste){
             outil.setSpinner(new Spinner<>());
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, outil.getQuantite(), 0);

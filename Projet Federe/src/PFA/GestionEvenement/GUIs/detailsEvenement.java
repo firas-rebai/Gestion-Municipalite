@@ -3,6 +3,7 @@ package PFA.GestionEvenement.GUIs;
 import PFA.GestionEvenement.Modules.Evenement;
 import PFA.GestionEvenement.Modules.OutillMater;
 import PFA.GestionEvenement.Modules.Perso;
+import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,13 +26,13 @@ public class detailsEvenement {
     @FXML
     Button retour;
     @FXML
-    TableView<Perso> PersonnelListe;
+    TableView<Personnel> PersonnelListe;
     @FXML
-    TableColumn<Perso, String> nomPersonnelColumn;
+    TableColumn<Personnel, String> nomPersonnelColumn;
     @FXML
-    TableColumn<Perso, String> prenomPersonnelColumn;
+    TableColumn<Personnel, String> prenomPersonnelColumn;
     @FXML
-    TableColumn<Perso, String> postePersonnelColumn;
+    TableColumn<Personnel, String> postePersonnelColumn;
 
     @FXML
     TableView<Vehicule> VehiculeListe;
@@ -47,9 +48,9 @@ public class detailsEvenement {
 
     public void initData1(Evenement evenement) {
         //intializing personnel liste
-        nomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("nomper"));
-        prenomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("prenomper"));
-        postePersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("posteper"));
+        nomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomPersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        postePersonnelColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
         PersonnelListe.getItems().setAll(evenement.getEquipeEve());
         //initializing vehicule liste
         nomVehiculeColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));

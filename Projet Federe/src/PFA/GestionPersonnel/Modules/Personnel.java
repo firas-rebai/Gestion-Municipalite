@@ -104,6 +104,13 @@ public class Personnel {
                 '}';
     }
     
+    public Personnel(int id, String nom, String prenom, String poste) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.poste = poste;
+    }
+    
     public CheckBox getCheck() {
         return check;
     }

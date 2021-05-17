@@ -60,7 +60,7 @@ public class ajouterCompteController implements Initializable {
     private Label roleLabel;
     
     @FXML
-    private Button ajouter,usernameLabel;
+    private Button ajouter;
     
     @FXML
     private Button annuler;

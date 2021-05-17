@@ -1,5 +1,6 @@
 package PFA.GestionProjet.GUIs.ajouterProjet;
 
+import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.GestionProjet.Module.Projet;
 import PFA.GestionProjet.Services.ProjetServices;
 import PFA.GestionTache.GUIs.ListeTacheController;
@@ -26,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ajouterVehicule implements Initializable {
+public class ajouterVehicule {
     private Projet projet;
     @FXML
     private TableView<Vehicule> listeVehicule;
@@ -57,6 +58,7 @@ public class ajouterVehicule implements Initializable {
         ajouterOutil controller = loader.getController();
         projet.getOutils().clear();
         controller.setProjet(projet);
+        controller.initData();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -73,8 +75,6 @@ public class ajouterVehicule implements Initializable {
             }
         }
         projet.setVehicules(toAdd);
-        System.out.println(projet.getEquipe());
-        System.out.println(projet.getVehicules());
         ProjetServices.ajouter(projet);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("");
@@ -85,13 +85,12 @@ public class ajouterVehicule implements Initializable {
         stage.close();
     }
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData() {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         MatriculeColumn.setCellValueFactory(new PropertyValueFactory<>("matricule"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
-        ArrayList<Vehicule> liste = (ArrayList<Vehicule>) Vehicules.VehiculesListe();
+        ArrayList<Vehicule> liste = InterventionServices.parseVehiculeList(projet.getDateBedut());
         for (Vehicule vehicule : liste) {
             vehicule.setCheck(new CheckBox());
         }

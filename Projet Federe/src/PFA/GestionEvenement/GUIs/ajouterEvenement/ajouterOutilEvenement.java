@@ -3,6 +3,7 @@ package PFA.GestionEvenement.GUIs.ajouterEvenement;
 import PFA.GestionEvenement.Modules.Evenement;
 import PFA.GestionEvenement.Modules.OutillMater;
 import PFA.GestionEvenement.Services.EvenementServ;
+import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.MaterielFiras.ModuleMateriel.Outil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +40,7 @@ public class ajouterOutilEvenement{
         conumableColumn.setCellValueFactory(new PropertyValueFactory<>("consumable"));
         quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         spinnerColumn.setCellValueFactory(new PropertyValueFactory<>("spinner"));
-        ArrayList<Outil> liste = new ArrayList<>(EvenementServ.parseOutilList());
+        ArrayList<Outil> liste = InterventionServices.parseOutilList(evenement.getDateBedutEve());
         for (Outil o : liste) {
             o.setSpinner(new Spinner<Integer>());
             SpinnerValueFactory<Integer> valueFactory = //

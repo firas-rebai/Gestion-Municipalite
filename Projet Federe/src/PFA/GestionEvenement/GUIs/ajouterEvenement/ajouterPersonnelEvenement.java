@@ -5,6 +5,7 @@ import PFA.GestionEvenement.Services.EvenementServ;
 import PFA.GestionIntervention.GUIs.ajouterIntervention.ajouterVehiculeIntervention;
 import PFA.GestionIntervention.Modules.PersonnelMin;
 import PFA.GestionIntervention.Services.InterventionServices;
+import PFA.GestionPersonnel.Modules.Personnel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,19 +38,19 @@ public class ajouterPersonnelEvenement{
     }
 
     @FXML
-    private TableView<Perso> PersonnelTV;
+    private TableView<Personnel> PersonnelTV;
 
     @FXML
-    private TableColumn<Perso, String> nomColumn;
+    private TableColumn<Personnel, String> nomColumn;
 
     @FXML
-    private TableColumn<Perso, String> prenomColumn;
+    private TableColumn<Personnel, String> prenomColumn;
 
     @FXML
-    private TableColumn<Perso, String> posteColumn;
+    private TableColumn<Personnel, String> posteColumn;
 
     @FXML
-    private TableColumn<Perso, CheckBox> selectColumn;
+    private TableColumn<Personnel, CheckBox> selectColumn;
 
     public void retour1(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterGeneralEvenement.fxml"));
@@ -61,10 +62,10 @@ public class ajouterPersonnelEvenement{
     }
 
     public void switchToVehicule(ActionEvent event) throws IOException {
-        ArrayList<Perso> liste = new ArrayList<>(PersonnelTV.getItems());
-        ArrayList<Perso> toAdd = new ArrayList<>();
-        for (Perso p : liste) {
-            if (p.getCheckper().isSelected()) {
+        ArrayList<Personnel> liste = new ArrayList<>(PersonnelTV.getItems());
+        ArrayList<Personnel> toAdd = new ArrayList<>();
+        for (Personnel p : liste) {
+            if (p.getCheck().isSelected()) {
                 toAdd.add(p);
             }
         }
@@ -93,13 +94,13 @@ public class ajouterPersonnelEvenement{
     }
 
     public void initData() {
-        nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomper"));
-        prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenomper"));
-        posteColumn.setCellValueFactory(new PropertyValueFactory<>("posteper"));
-        selectColumn.setCellValueFactory(new PropertyValueFactory<>("checkper"));
-        ArrayList<Perso> liste = (ArrayList<Perso>) EvenementServ.ParsePersonnelListe();
-        for (Perso p:liste){
-            p.setCheckper(new CheckBox());
+        nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        posteColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
+        ArrayList<Personnel> liste = InterventionServices._ParsePersonnelListe(evenement.getDateBedutEve());
+        for (Personnel p:liste){
+            p.setCheck(new CheckBox());
         }
         PersonnelTV.getItems().setAll(liste);
     }

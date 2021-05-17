@@ -1,5 +1,6 @@
 package PFA.GestionProjet.GUIs.ajouterProjet;
 
+import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.GestionPersonnel.Services.PersonnelServices;
 import PFA.GestionProjet.Module.Projet;
@@ -24,7 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ajouterPersonnel implements Initializable {
+public class ajouterPersonnel {
     @FXML
     private TableView<Personnel> PersonnelTV;
     
@@ -55,6 +56,7 @@ public class ajouterPersonnel implements Initializable {
         ListeTacheController controller = loader.getController();
         projet.getTaches().clear();
         controller.setProjet(projet);
+        controller.initData();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -75,6 +77,7 @@ public class ajouterPersonnel implements Initializable {
         Parent root = loader.load();
         ajouterOutil controller = loader.getController();
         controller.setProjet(projet);
+        controller.initData();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -83,13 +86,12 @@ public class ajouterPersonnel implements Initializable {
         stage.show();
     }
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData() {
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         posteColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
-        ArrayList<Personnel> liste = (ArrayList<Personnel>) PersonnelServices.ParsePersonnelListe();
+        ArrayList<Personnel> liste =  InterventionServices._ParsePersonnelListe(projet.getDateBedut());
         for (Personnel p : liste)
             p.setCheck(new CheckBox());
         PersonnelTV.getItems().setAll(liste);

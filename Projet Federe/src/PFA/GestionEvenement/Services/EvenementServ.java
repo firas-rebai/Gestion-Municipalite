@@ -3,6 +3,7 @@ package PFA.GestionEvenement.Services;
 import PFA.GestionEvenement.Modules.Evenement;
 import PFA.GestionEvenement.Modules.OutillMater;
 import PFA.GestionEvenement.Modules.Perso;
+import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.MaterielFiras.ModuleMateriel.Outil;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 
@@ -23,7 +24,7 @@ public class EvenementServ {
         String fetchPersonnelEve = "SELECT * from evenement_personnel where idEvenement = ";
         String fetchVehiculeEve = "SELECT * from evenement_vehicule where idEvenement = ";
         String fetchOutilEve = "SELECT * from evenement_outil where idEvenement = ";
-        ArrayList <Perso> listePerso = new ArrayList<>();
+        ArrayList <Personnel> listePerso = new ArrayList<>();
         ArrayList <Vehicule> listeVehicule = new ArrayList<>();
         ArrayList <OutillMater> listeOutilMat = new ArrayList<>();
         String idEvenement;
@@ -44,7 +45,7 @@ public class EvenementServ {
                 listeVehicule.clear();
                 listeOutilMat.clear();
                 while (rsPerso.next()){
-                    listePerso.add(new Perso(rsPerso.getInt("idPersonnel"),rsPerso.getString("nom"),
+                    listePerso.add(new Personnel(rsPerso.getInt("idPersonnel"),rsPerso.getString("nom"),
                             rsPerso.getString("prenom"),rsPerso.getString("poste")));
                 }
                 rsPerso.close();
@@ -155,15 +156,15 @@ public class EvenementServ {
             statement.executeUpdate(query);
 
             for (OutillMater o : i.getOutilsUtilisEve()) {
-                query1 = "insert into EVENEMENT_OUTIL values(" + o.outils.getId() +
+                query1 = "insert into EVENEMENT_OUTIL (IDOUTIL, CONSUMABLE, IDEVENEMENT, QUANTITE, NOM) values(" + o.outils.getId() +
                         "," + o.outils.getConsumable() + ",EVENEMENT_SEQ.currval ,"
                         + o.quantite + ",'" + o.outils.getNom() + "')";
                 statement1.executeUpdate(query1);
             }
-            for (Perso p : i.getEquipeEve()) {
+            for (Personnel p : i.getEquipeEve()) {
                 query2 = "insert into EVENEMENT_PERSONNEL values("
-                        + p.getIdper() + ",EVENEMENT_SEQ.currval,'"
-                        + p.getNomper() + "','" + p.getPrenomper() + "','" + p.getPosteper() + "')";
+                        + p.getId() + ",EVENEMENT_SEQ.currval,'"
+                        + p.getNom() + "','" + p.getPrenom() + "','" + p.getPoste() + "')";
                 statement.executeUpdate(query2);
             }
             for (Vehicule v : i.getVehiculesEve()) {
@@ -231,7 +232,7 @@ public class EvenementServ {
         String fetchPersonnel = "SELECT * from EVENEMENT_PERSONNEL where IDEVENEMENT = ";
         String fetchVehicule = "SELECT * from EVENEMENT_VEHICULE where IDEVENEMENT = ";
         String fetchOutil = "SELECT * from EVENEMENT_OUTIL where IDEVENEMENT = ";
-        ArrayList<Perso> listePersonnel = new ArrayList<>();
+        ArrayList<Personnel> listePersonnel = new ArrayList<>();
         ArrayList<Vehicule> listeVehicule = new ArrayList<>();
         ArrayList<OutillMater> listeOutil = new ArrayList<>();
         String id;
@@ -252,7 +253,7 @@ public class EvenementServ {
                 listeVehicule.clear();
                 listeOutil.clear();
                 while (rsPersonnel.next()) {
-                    listePersonnel.add(new Perso(rsPersonnel.getInt("idPersonnel"), rsPersonnel.getString("nom"), rsPersonnel.getString("prenom"), rsPersonnel.getString("poste")));
+                    listePersonnel.add(new Personnel(rsPersonnel.getInt("idPersonnel"), rsPersonnel.getString("nom"), rsPersonnel.getString("prenom"), rsPersonnel.getString("poste")));
                 }
                 rsPersonnel.close();
                 while (rsVehicule.next()) {

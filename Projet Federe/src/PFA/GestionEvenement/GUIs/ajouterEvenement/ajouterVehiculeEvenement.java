@@ -2,6 +2,7 @@ package PFA.GestionEvenement.GUIs.ajouterEvenement;
 
 import PFA.GestionEvenement.Modules.Evenement;
 import PFA.GestionEvenement.Services.EvenementServ;
+import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
@@ -62,6 +65,8 @@ public class ajouterVehiculeEvenement{
         controller.initData();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
         stage.setScene(scene);
         stage.show();
     }
@@ -89,7 +94,7 @@ public class ajouterVehiculeEvenement{
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         MatriculeColumn.setCellValueFactory(new PropertyValueFactory<>("matricule"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
-        ArrayList<Vehicule> liste = (ArrayList<Vehicule>) EvenementServ.parseVehiculeList();
+        ArrayList<Vehicule> liste = InterventionServices.parseVehiculeList(evenement.getDateBedutEve());
         for (Vehicule v : liste){
             v.setCheck(new CheckBox());
         }

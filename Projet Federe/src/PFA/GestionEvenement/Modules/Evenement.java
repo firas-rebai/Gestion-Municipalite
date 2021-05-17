@@ -1,5 +1,6 @@
 package PFA.GestionEvenement.Modules;
 
+import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,13 +12,13 @@ public class Evenement {
     private LocalDate dateFinEve;
     private String adresseEve;
     private Float BudgetEve;
-    private ArrayList<Perso> equipeEve;
+    private ArrayList<Personnel> equipeEve;
     private ArrayList<Vehicule> vehiculesEve;
     private ArrayList<OutillMater> outilsUtilisEve;
 
     public Evenement(int idEve, String nomEve,
                      LocalDate dateBedutEve, LocalDate dateFinEve, Float BudgetEve,
-                     String adresseEve, ArrayList<Perso> equipeEve,
+                     String adresseEve, ArrayList<Personnel> equipeEve,
                      ArrayList<Vehicule> vehiculesEve, ArrayList<OutillMater> outilsUtilisEve) {
         this.idEve = idEve;
         this.nomEve = nomEve;
@@ -33,7 +34,7 @@ public class Evenement {
     public Evenement(String nomEve,
                      LocalDate dateBedutEve,
                      LocalDate dateFinEve,Float BudgetEve,
-                     String adresseEve, ArrayList<Perso> equipeEve,
+                     String adresseEve, ArrayList<Personnel> equipeEve,
                      ArrayList<Vehicule> vehiculesEve, ArrayList<OutillMater> outilsUtilisEve) {
         this.nomEve = nomEve;
         this.dateBedutEve = dateBedutEve;
@@ -108,11 +109,11 @@ public class Evenement {
         this.adresseEve = adresseEve;
     }
 
-    public ArrayList<Perso> getEquipeEve() {
+    public ArrayList<Personnel> getEquipeEve() {
         return equipeEve;
     }
 
-    public void setEquipeEve(ArrayList<Perso> equipeEve) {
+    public void setEquipeEve(ArrayList<Personnel> equipeEve) {
         this.equipeEve = equipeEve;
     }
 

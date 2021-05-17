@@ -49,12 +49,9 @@ public class ajouterOutilIntervention {
         conumableColumn.setCellValueFactory(new PropertyValueFactory<>("consumable"));
         quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         spinnerColumn.setCellValueFactory(new PropertyValueFactory<>("spinner"));
-        System.out.println(intervention);
-        System.out.println(intervention.getDateBedut());
         ArrayList<Outil> liste = new ArrayList<>(InterventionServices.parseOutilList(intervention.getDateBedut()));
         for (Outil o: liste){
             o.setSpinner(new Spinner<Integer>());
-            System.out.println(o.getQuantite());
             SpinnerValueFactory<Integer> valueFactory = //
                     new SpinnerValueFactory.IntegerSpinnerValueFactory(0, o.getQuantite(), 0);
             o.getSpinner().setValueFactory(valueFactory);

@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ListeTacheController implements Initializable {
+public class ListeTacheController{
     @FXML
     private AnchorPane pane;
     
@@ -61,8 +61,7 @@ public class ListeTacheController implements Initializable {
     @FXML
     private TableColumn<Tache, CheckBox> selectColumn;
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initData() {
         refresh(tacheServices.parsetacheListe());
         
         compteTableView.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
@@ -214,6 +213,7 @@ public class ListeTacheController implements Initializable {
         Parent root = loader.load();
         ajouterPersonnel controller = loader.getController();
         controller.setProjet(projet);
+        controller.initData();
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);

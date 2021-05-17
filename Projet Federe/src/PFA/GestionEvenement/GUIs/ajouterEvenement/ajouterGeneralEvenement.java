@@ -26,7 +26,7 @@ public class ajouterGeneralEvenement implements Initializable {
     private final String numPattern = "[0-9]*";
 
     @FXML
-    TextField nomTextField, budgetTextField, coutTextField, numAdresseTextField, adresseTextField;
+    TextField nomTextField, budgetTextField, numAdresseTextField, adresseTextField;
     @FXML
     DatePicker dateDebutPicker, dateFinPicker;
     @FXML
@@ -37,9 +37,6 @@ public class ajouterGeneralEvenement implements Initializable {
 
     @FXML
     private Label BudgetErrorLabel;
-
-    @FXML
-    private Label CoutErrorLabel;
 
     @FXML
     private Label AdresseErrorLabel;
@@ -89,7 +86,7 @@ public class ajouterGeneralEvenement implements Initializable {
         }
     }
 
-    public void retour(ActionEvent event) throws IOException {
+    public void retour() throws IOException {
         Stage stage = (Stage) retour.getScene().getWindow();
         stage.close();
     }

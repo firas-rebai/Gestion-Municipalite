@@ -3,6 +3,7 @@ package PFA.GestionIntervention.Services;
 import PFA.GestionIntervention.Modules.Intervention;
 import PFA.GestionIntervention.Modules.OutilsUtilise;
 import PFA.GestionIntervention.Modules.PersonnelMin;
+import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.MaterielFiras.ModuleMateriel.Outil;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 
@@ -151,14 +152,12 @@ public class InterventionServices {
         return liste;
     }
     
-    public static List<PersonnelMin> ParsePersonnelListe(LocalDate debut, LocalDate fin) {
-        List<PersonnelMin> liste = new ArrayList<>();
-        String query = "select * from Personnel " +
-                "where IDPERSONNEL NOT IN " +
-                "(select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION IN " +
-                "(select IDINTERVENTION from INTERVENTION " +
-                "where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION))";
-        System.out.println(query);
+    public static ArrayList<PersonnelMin> ParsePersonnelListe(LocalDate debut) {
+        ArrayList<PersonnelMin> liste = new ArrayList<>();
+        String query = "SELECT * from PERSONNEL where IDPERSONNEL not in (" +
+                "select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)" +
+                "union select IDPERSONNEL from PROJET_PERSONNEL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
+                "union select IDPERSONNEL from EVENEMENT_PERSONNEL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -173,38 +172,32 @@ public class InterventionServices {
         return liste;
     }
     
-    public static List<Vehicule> parseVehiculeList(LocalDate debut, LocalDate fin) {
-        List<Vehicule> data = new ArrayList<>();
-        String SQLquery = "select * from VEHICULE " +
-                "where IDVEHICULE NOT IN " +
-                "(select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION IN " +
-                "(select IDINTERVENTION from INTERVENTION " +
-                "where DATEDEBUTINTERVENTION between to_date('" + debut.toString() + "','yyyy-mm-dd') and to_date('" + fin.toString() + "','yyyy-mm-dd')))";
+    public static ArrayList<Personnel> _ParsePersonnelListe(LocalDate debut) {
+        ArrayList<Personnel> liste = new ArrayList<>();
+        String query = "SELECT * from PERSONNEL where IDPERSONNEL not in (" +
+                "select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)" +
+                "union select IDPERSONNEL from PROJET_PERSONNEL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
+                "union select IDPERSONNEL from EVENEMENT_PERSONNEL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
         try {
             Connection connection = getOracleConnection();
-            
             Statement statement = connection.createStatement();
-            
-            ResultSet rs = statement.executeQuery(SQLquery);
-            while (rs.next()) {
-                data.add(new Vehicule(
-                        rs.getInt("idVehicule"),
-                        rs.getInt("matriculeVehicule"),
-                        rs.getString("modelVehicule"),
-                        rs.getString("nomVehicule"),
-                        rs.getDate("dateachat").toLocalDate(),
-                        rs.getFloat("prix")));
+            ResultSet res = statement.executeQuery(query);
+            while (res.next()) {
+                liste.add(new Personnel(res.getInt("idpersonnel"), res.getString("nomPersonnel"), res.getString("prenomPersonnel"), res.getString("postePersonnel")));
             }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return data;
+        return liste;
     }
     
     public static ArrayList<Vehicule> parseVehiculeList(LocalDate debut) {
         ArrayList<Vehicule> data = new ArrayList<>();
-        String SQLquery = "SELECT * from VEHICULE where IDVEHICULE not in (select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('"+debut.toString()+"','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION))";
+        String SQLquery = "SELECT * from VEHICULE where IDVEHICULE not in (" +
+                "select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)" +
+                "union select IDVEHICULE from PROJET_VEHICULE where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
+                "union select IDVEHICULE from EVENEMENT_VEHICULE where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
         try {
             Connection connection = getOracleConnection();
             
@@ -250,27 +243,39 @@ public class InterventionServices {
     public static ArrayList<Outil> parseOutilList(LocalDate debut) {
         ArrayList<Outil> liste = new ArrayList<>();
         String query = "select * from OUTIL";
-        String query2 = "select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in" +
-                "(select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)";
+        String query2 = "select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)";
+                
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
             Statement statement1 = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             int total = 0;
+            int id = 0;
+            String nom;
+            int con;
             while (rs.next()) {
                 total = rs.getInt("quantiteoutil");
-                ResultSet res = statement1.executeQuery(query2);
-                int con = rs.getInt("consumableoutil");
-                while(res.next()){
-                    int i =res.getInt(1);
-                    if (con == 0 && (total - i > 0))
+                id = rs.getInt("idoutil");
+                ResultSet res = statement1.executeQuery("select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION) and IDOUTIL = " + id+ " union all " +
+                        "select QUANTITE from PROJET_OUTIL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN) and IDOUTIL = " + id + " union all " +
+                        "select QUANTITE from EVENEMENT_OUTIL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT) and IDOUTIL = " + id);
+                con = rs.getInt("consumableoutil");
+                nom = rs.getString("nomoutil");
+                System.out.println(nom);
+                System.out.println(con);
+                if(con == 0){
+                    while (res.next()) {
+                        int i = res.getInt(1);
                         total -= i;
+                        System.out.println(total);
+                    }
                 }
                 res.close();
-                liste.add(new Outil(rs.getInt("IDOUTIL"),
+                
+                liste.add(new Outil(id,
                         total,
-                        rs.getString("nomoutil"),
+                        nom,
                         con));
             }
             rs.close();

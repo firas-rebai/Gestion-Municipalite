@@ -12,7 +12,7 @@
       <Button layoutX="482.0" layoutY="181.0" mnemonicParsing="false" onAction="#switchToPersonnel" prefHeight="60.0" prefWidth="220.0" text="Personnels" />
       <Button fx:id="intervention" layoutX="150.0" layoutY="181.0" mnemonicParsing="false" onAction="#switchToIntervention" prefHeight="60.0" prefWidth="220.0" text="Interventions" />
       <Button layoutX="150.0" layoutY="334.0" mnemonicParsing="false" onAction="#switchToDoleance" prefHeight="60.0" prefWidth="220.0" text="Doleances" />
-      <Button layoutX="831.0" layoutY="334.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Taches" />
+      <Button layoutX="831.0" layoutY="334.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" onAction="#switchToOperation" text="Operations Financiers" />
       <Button layoutX="482.0" layoutY="334.0" mnemonicParsing="false" onAction="#switchToEvenement" prefHeight="60.0" prefWidth="220.0" text="Evenement" />
       <Icon fx:id="interventionIcon" content="HELP_OUTLINE" layoutX="195.0" layoutY="199.0" prefHeight="24.0" prefWidth="24.0" />
       <Icon fx:id="doleancesIcon" content="HELP_OUTLINE" layoutX="195.0" layoutY="352.0" prefHeight="24.0" prefWidth="24.0" />

@@ -116,4 +116,16 @@ public class MainController {
         stage.show();
     }
     
+    public void switchToOperation(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionFinances/GUIs/fxml/listeoperation.fxml"));
+        Parent root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
 }
