@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionProjet.GUIs.ListeProjetController">
+<AnchorPane fx:id="pane" stylesheets="@../../../resources/style.css"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PFA.GestionProjet.GUIs.ListeProjetController">
    <children>
       <Button fx:id="ajouterButton" layoutX="1000.0" layoutY="729.0" mnemonicParsing="false" onAction="#ajouterButton" prefHeight="28.0" prefWidth="163.0" text="Ajouter" AnchorPane.rightAnchor="50.0">
          <font>
@@ -43,6 +43,6 @@
       <TextField fx:id="rechercheTextFIeld" layoutX="50.0" layoutY="97.0" prefHeight="27.0" prefWidth="202.0" promptText="Recherche" />
       <Button fx:id="rechercheButton" layoutX="251.0" layoutY="97.0" mnemonicParsing="false" onAction="#recherche" prefHeight="27.0" prefWidth="80.0" text="Recherche" />
       <Button fx:id="refreshButton" layoutX="1061.0" layoutY="97.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="89.0" text="Actualiser" />
-      <Button fx:id="retour" layoutX="50.0" layoutY="42.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Retour" />
+      <Button fx:id="retour" layoutX="50.0" layoutY="42.0" mnemonicParsing="false" prefHeight="27.0" onAction="#retour" prefWidth="71.0" text="Retour" />
    </children>
 </AnchorPane>

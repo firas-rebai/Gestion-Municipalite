@@ -68,9 +68,12 @@ public class login implements Initializable {
     
     @FXML
     ImageView logo;
+    @FXML
+    ImageView login;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logo.setImage(new Image("PFA/resources/logo.png"));
+        login.setImage(new Image("PFA/resources/enter.png"));
     }
 }

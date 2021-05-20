@@ -122,15 +122,8 @@ public class ListeCompteController implements Initializable {
     }
     
     public void retour() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../login_mainMenu/fxml/mainMenu.fxml"));
-        Parent root = loader.load();
-        Stage primaryStage = new Stage();
-        Scene scene = new Scene(root);
-        JMetro jMetro = new JMetro(Style.LIGHT);
-        jMetro.setScene(scene);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        
+        Stage stage = (Stage) refreshButton.getScene().getWindow();
+        stage.close();
     }
     
     public void ajouterButton() throws IOException {

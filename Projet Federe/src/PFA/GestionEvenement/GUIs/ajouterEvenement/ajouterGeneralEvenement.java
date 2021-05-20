@@ -13,6 +13,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
@@ -81,6 +83,8 @@ public class ajouterGeneralEvenement implements Initializable {
             controller.initData();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
+            JMetro jMetro = new JMetro(Style.LIGHT);
+            jMetro.setScene(scene);
             stage.setScene(scene);
             stage.show();
         }

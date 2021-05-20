@@ -1,15 +1,11 @@
 package PFA.GestionEvenement.GUIs.ajouterEvenement;
 
 import PFA.GestionEvenement.Modules.Evenement;
-import PFA.GestionEvenement.Services.EvenementServ;
-import PFA.GestionIntervention.GUIs.ajouterIntervention.ajouterVehiculeIntervention;
-import PFA.GestionIntervention.Modules.PersonnelMin;
 import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.GestionPersonnel.Modules.Personnel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,14 +13,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import PFA.GestionEvenement.Modules.Perso;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class ajouterPersonnelEvenement{
     private Evenement evenement;
@@ -85,7 +78,7 @@ public class ajouterPersonnelEvenement{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterVehiculeEvenement.fxml"));
         Parent root = loader.load();
         ajouterVehiculeEvenement controller = loader.getController();
-        controller.evenement = getEvenement();
+        controller.setEvenement(evenement);
         controller.initData();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

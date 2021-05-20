@@ -113,7 +113,6 @@ public class ModifierEvenementController {
                     dateDebutPicker.getValue(),dateFinPicker.getValue(),
                     Float.parseFloat(budgetTextField.getText()),adresseTextField.getText());
             EvenementServ.Modifier(i);
-            System.out.println("moduf");
 
             Stage stage = (Stage) modifier.getScene().getWindow();
             stage.close();

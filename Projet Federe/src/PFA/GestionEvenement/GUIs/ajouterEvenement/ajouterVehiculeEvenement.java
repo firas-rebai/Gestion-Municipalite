@@ -1,17 +1,14 @@
 package PFA.GestionEvenement.GUIs.ajouterEvenement;
 
 import PFA.GestionEvenement.Modules.Evenement;
-import PFA.GestionEvenement.Services.EvenementServ;
 import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.MaterielFiras.ModuleMateriel.Vehicule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -21,14 +18,12 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class ajouterVehiculeEvenement{
 
 
-    public void retour6(ActionEvent event) throws IOException {
+    public void retour(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterVehiculeEvenement.fxml"));
         Parent root = loader.load();
         ajouterVehiculeEvenement controller = loader.getController();
@@ -46,22 +41,12 @@ public class ajouterVehiculeEvenement{
             if (v.getCheck().isSelected())
                 toAdd.add(v);
         }
-        if (!toAdd.isEmpty()) {
-            evenement.setVehiculesEve(toAdd);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("");
-            alert.setHeaderText(null);
-            alert.setContentText("Aucune Vehicule Selectionee");
-            alert.showAndWait();
-            return;
-        }
-
-
+        evenement.setVehiculesEve(toAdd);
+       
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterOutilEvenement.fxml"));
         Parent root = loader.load();
         ajouterOutilEvenement controller = loader.getController();
-        controller.evenement = evenement;
+        controller.setEvenement(evenement);
         controller.initData();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -70,9 +55,17 @@ public class ajouterVehiculeEvenement{
         stage.setScene(scene);
         stage.show();
     }
-
-
-    public Evenement evenement;
+    
+    
+    public Evenement getEvenement() {
+        return evenement;
+    }
+    
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
+    }
+    
+    private Evenement evenement;
 
     @FXML
     private TableView<Vehicule> listeVehicule;

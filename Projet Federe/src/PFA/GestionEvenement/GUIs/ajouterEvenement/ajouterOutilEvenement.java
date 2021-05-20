@@ -14,7 +14,15 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class ajouterOutilEvenement{
-    public Evenement evenement;
+    public Evenement getEvenement() {
+        return evenement;
+    }
+    
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
+    }
+    
+    private Evenement evenement;
     @FXML
     private TableView<Outil> outilTV;
 
