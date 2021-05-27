@@ -1,28 +1,25 @@
 package PFA.GestionProjet.GUIs.ajouterProjet;
 
-import PFA.GestionEvenement.Modules.OutillMater;
 import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.GestionProjet.Module.Projet;
-import PFA.GestionTache.GUIs.ListeTacheController;
 import PFA.MaterielFiras.ModuleMateriel.Outil;
-import PFA.MaterielFiras.ServiceMateriel.Outils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class ajouterOutil {
     
@@ -94,7 +91,7 @@ public class ajouterOutil {
         conumableColumn.setCellValueFactory(new PropertyValueFactory<>("consumable"));
         quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         spinnerColumn.setCellValueFactory(new PropertyValueFactory<>("spinner"));
-        ArrayList<Outil> liste = (ArrayList<Outil>) InterventionServices.parseOutilList(projet.getDateBedut());
+        ArrayList<Outil> liste = InterventionServices.parseOutilList(projet.getDateBedut());
         for (Outil outil:liste){
             outil.setSpinner(new Spinner<>());
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, outil.getQuantite(), 0);

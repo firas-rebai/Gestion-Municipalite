@@ -3,13 +3,41 @@ package PFA.GestionTache.Module;
 import PFA.GestionPersonnel.Modules.Personnel;
 import javafx.scene.control.CheckBox;
 
+import java.time.LocalDate;
+
 public class Tache {
     private int id;
     private String nom;
     private String description;
     private Personnel personnel;
     private String nomPersonnel = "Non Disponible";
+    private LocalDate date;
     private CheckBox check;
+    
+    public Tache(int id, String nom, String description, Personnel personnel, LocalDate date) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.personnel = personnel;
+        if(!(personnel == null)) nomPersonnel = personnel.getNom();
+        this.date = date;
+    }
+    
+    public Tache(String nom, String description, Personnel personnel, LocalDate date) {
+        this.nom = nom;
+        this.description = description;
+        this.personnel = personnel;
+        if(!(personnel == null)) nomPersonnel = personnel.getNom();
+        this.date = date;
+    }
+    
+    public LocalDate getDate() {
+        return date;
+    }
+    
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
     
     public CheckBox getCheck() {
         return check;
@@ -25,31 +53,6 @@ public class Tache {
     
     public void setNomPersonnel(String nomPersonnel) {
         this.nomPersonnel = nomPersonnel;
-    }
-    
-    public Tache(String nom, String description, Personnel personnel) {
-        this.nom = nom;
-        this.description = description;
-        this.personnel = personnel;
-        if(!(personnel == null)) nomPersonnel = personnel.getNom();
-    }
-    
-    public Tache(int id, String nom, String description, Personnel personnel) {
-        this.id = id;
-        this.nom = nom;
-        this.description = description;
-        this.personnel = personnel;
-        if(!(personnel == null)) nomPersonnel = personnel.getNom();
-    }
-    
-    @Override
-    public String toString() {
-        return "Tache{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                ", personnel=" + personnel +
-                '}';
     }
     
     public int getId() {

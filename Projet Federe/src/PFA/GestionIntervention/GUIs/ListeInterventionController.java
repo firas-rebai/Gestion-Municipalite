@@ -166,4 +166,7 @@ public class ListeInterventionController {
     public void refresh() {
         refreshListe(InterventionServices.parseInterventionListe());
     }
+    
+    public void generate(ActionEvent event) {
+    }
 }

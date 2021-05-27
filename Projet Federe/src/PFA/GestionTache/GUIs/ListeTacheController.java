@@ -24,6 +24,7 @@ import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -61,8 +62,11 @@ public class ListeTacheController{
     @FXML
     private TableColumn<Tache, CheckBox> selectColumn;
     
+    @FXML
+    private TableColumn<Tache , LocalDate> dateColumn;
+    
     public void initData() {
-        refresh(tacheServices.parsetacheListe());
+        refresh(tacheServices.parsetacheListe(projet.getDateBedut(),projet.getDateFin()));
         
         compteTableView.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY) && !compteTableView.getSelectionModel().isEmpty()){
@@ -110,6 +114,7 @@ public class ListeTacheController{
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         nomColumn1.setCellValueFactory(new PropertyValueFactory<>("nomPersonnel"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         for (Tache tache : liste){
             tache.setCheck(new CheckBox());
         }
@@ -127,7 +132,7 @@ public class ListeTacheController{
         jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
-        refresh(tacheServices.parsetacheListe());
+        refresh(tacheServices.parsetacheListe(projet.getDateBedut(),projet.getDateFin()));
     }
     
     public void detailsButton() throws IOException {
@@ -141,7 +146,7 @@ public class ListeTacheController{
         jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
-        refresh(tacheServices.parsetacheListe());
+        refresh(tacheServices.parsetacheListe(projet.getDateBedut(),projet.getDateFin()));
     }
     
     public void modifierButton() throws IOException {
@@ -155,7 +160,7 @@ public class ListeTacheController{
         jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
-        refresh(tacheServices.parsetacheListe());
+        refresh(tacheServices.parsetacheListe(projet.getDateBedut(),projet.getDateFin()));
     }
     
     public void supprimerButton() throws IOException {
@@ -169,7 +174,7 @@ public class ListeTacheController{
         jMetro.setScene(scene);
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
-        refresh(tacheServices.parsetacheListe());
+        refresh(tacheServices.parsetacheListe(projet.getDateBedut(),projet.getDateFin()));
     }
     
     public void recherche() {
@@ -177,7 +182,7 @@ public class ListeTacheController{
     }
     
     public void actualiser() {
-        refresh(tacheServices.parsetacheListe());
+        refresh(tacheServices.parsetacheListe(projet.getDateBedut(),projet.getDateFin()));
     }
     
     public void retour(ActionEvent event) throws IOException {

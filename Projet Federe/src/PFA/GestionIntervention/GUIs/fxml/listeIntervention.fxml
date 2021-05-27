@@ -41,5 +41,6 @@
       <Button fx:id="rechercheButton" layoutX="251.0" layoutY="97.0" mnemonicParsing="false" onAction="#recherche" prefHeight="27.0" prefWidth="71.0" text="Recherche" />
       <Button fx:id="refreshButton" layoutX="1079.0" layoutY="97.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="71.0" text="Actualiser" />
       <Button layoutX="50.0" layoutY="39.0" mnemonicParsing="false" onAction="#retour" prefHeight="27.0" prefWidth="71.0" text="RETOUR" />
+       <Button fx:id="rapportbtn" layoutX="954.0" layoutY="97.0" mnemonicParsing="false" onAction="#generate" prefHeight="27.0" prefWidth="89.0" text="Generer" />
    </children>
 </AnchorPane>

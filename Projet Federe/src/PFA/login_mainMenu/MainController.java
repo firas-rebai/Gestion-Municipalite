@@ -4,6 +4,9 @@ package PFA.login_mainMenu;
 import PFA.GestionIntervention.GUIs.ListeInterventionController;
 import PFA.GestionPersonnel.GUIs.ListePersonnelController;
 import PFA.GestionProjet.GUIs.ListeProjetController;
+import PFA.ModifierInfo.GUIs.ModiController;
+import PFA.ModifierInfo.Module.information;
+import PFA.ModifierInfo.Services.InfoServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,7 +30,6 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     private Stage stage;
     private Scene scene;
-    private Parent root;
     
     
     public void switchToIntervention(ActionEvent event) throws IOException {
@@ -57,7 +60,7 @@ public class MainController implements Initializable {
     }
     
     public void switchToMateriel(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../MaterielFiras/GUIsMateriel/Fxmls/ChoixVehiculeOutils.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -132,7 +135,6 @@ public class MainController implements Initializable {
         jMetro.setScene(scene);
         stage.setScene(scene);
         stage.show();
-        
     }
     
     public void logout(MouseEvent mouseEvent) throws IOException {
@@ -148,10 +150,61 @@ public class MainController implements Initializable {
     
     @FXML
     ImageView logout;
+    @FXML
+    private ImageView logo;
+    @FXML
+    Label adresse;
+    @FXML
+    Label adresseemail;
+    @FXML
+    Label telephone;
+    @FXML
+    Label nom;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
         logout.setImage(new Image("PFA/resources/logout.png"));
+        logo.setImage(new Image("PFA/resources/logo.png"));
+        information info = InfoServices.fetchInfo();
+        adresse.setText(info.getAdresse());
+        adresseemail.setText(info.getEmail());
+        telephone.setText(info.getTelephone());
+        nom.setText(info.getNom());
     }
+    
+    
+    public void refreshInfo(){
+        information info = InfoServices.fetchInfo();
+        adresse.setText(info.getAdresse());
+        adresseemail.setText(info.getEmail());
+        telephone.setText(info.getTelephone());
+        nom.setText(info.getNom());
+    }
+    
+    public void modifierInformation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../ModifierInfo/GUIs/fxml/modifier.fxml"));
+        Parent root = loader.load();
+        ModiController controller = loader.getController();
+        controller.setInfo(new information(adresse.getText(),adresseemail.getText(),telephone.getText(),nom.getText()));
+        controller.init();
+        stage = new Stage();
+        scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.showAndWait();
+        refreshInfo();
+    }
+    
+    public void switchToRapportAct() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../RapportActivite/fxml/rapport.fxml"));
+        Parent root = loader.load();
+        stage = new Stage();
+        scene = new Scene(root);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
 }

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +48,9 @@ public class tacheServices {
         return liste;
     }
     
-    public static ArrayList<Tache> parsetacheListe() {
+    public static ArrayList<Tache> parsetacheListe(LocalDate debut, LocalDate fin) {
         ArrayList<Tache> liste = new ArrayList<>();
-        String query = "select * from tache";
+        String query = "select * from tache where DATETACHE between to_date('"+debut.toString()+"','yyyy-mm-dd') and to_date('"+fin.toString()+"','yyyy-mm-dd')";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -69,7 +70,7 @@ public class tacheServices {
                             , resPersonnel.getDate("datenaissancepersonnel").toLocalDate());
                 }
                 resPersonnel.close();
-                liste.add(new Tache(res.getInt("idtache"), res.getString("nomtache"), res.getString("description"), personnel));
+                liste.add(new Tache(res.getInt("idtache"), res.getString("nomtache"), res.getString("description"), personnel, res.getDate("datetache").toLocalDate()));
             }
             res.close();
         } catch (SQLException throwables) {
@@ -81,9 +82,9 @@ public class tacheServices {
     public static void ajouter(Tache tache) {
         String query;
         if (tache.getPersonnel() == null) {
-            query = "insert into tache (IDTACHE, NOMTACHE, DESCRIPTION) values (tache_seq.nextval,'" + tache.getNom() + "','" + tache.getDescription() + "')";
+            query = "insert into tache (IDTACHE, NOMTACHE, DESCRIPTION, DATETACHE) values (tache_seq.nextval,'" + tache.getNom() + "','" + tache.getDescription() + "',to_date('" + tache.getDate().toString() + "','yyyy-mm-dd'))";
         } else
-            query = "insert into tache (IDTACHE, NOMTACHE, IDPERSONNEL, DESCRIPTION) values (tache_seq.nextval,'" + tache.getNom() + "'," + tache.getPersonnel().getId() + ",'" + tache.getDescription() + "')";
+            query = "insert into tache (IDTACHE, NOMTACHE, IDPERSONNEL, DESCRIPTION, DATETACHE) values (tache_seq.nextval,'" + tache.getNom() + "'," + tache.getPersonnel().getId() + ",'" + tache.getDescription() + "',to_date('" + tache.getDate().toString() + "','yyyy-mm-dd'))";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -107,7 +108,6 @@ public class tacheServices {
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
-            System.out.println(query);
             statement.execute(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -136,7 +136,7 @@ public class tacheServices {
                             , resPersonnel.getDate("datenaissancepersonnel").toLocalDate());
                 }
                 resPersonnel.close();
-                liste.add(new Tache(id, res.getString("nomtache"), res.getString("description"), personnel));
+                liste.add(new Tache(id, res.getString("nomtache"), res.getString("description"), personnel, res.getDate("dateachat").toLocalDate()));
             }
             res.close();
         } catch (SQLException throwables) {

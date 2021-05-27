@@ -106,11 +106,7 @@ public class EvenementServ {
             while (rs.next()) {
                 data.add(new Vehicule(
                         rs.getInt("idVehicule"),
-                        rs.getInt("matriculeVehicule"),
-                        rs.getString("modelVehicule"),
-                        rs.getString("nomVehicule"),
-                        rs.getDate("dateachat").toLocalDate(),
-                        rs.getFloat("prix")));
+                        rs.getInt("matriculeVehicule"), rs.getString("modelVehicule"), rs.getString("nomVehicule"), rs.getDate("dateachat").toLocalDate(), rs.getFloat("prix")));
             }
             rs.close();
         } catch (SQLException e) {
@@ -160,6 +156,9 @@ public class EvenementServ {
                         "," + o.outils.getConsumable() + ",EVENEMENT_SEQ.currval ,"
                         + o.quantite + ",'" + o.outils.getNom() + "')";
                 statement1.executeUpdate(query1);
+                if (o.outils.getConsumable() == 1){
+                    statement1.execute("update outil set QUANTITEOUTIL = QUANTITEOUTIL - " + o.quantite +" where IDOUTIL = " + o.outils.getId());
+                }
             }
             for (Personnel p : i.getEquipeEve()) {
                 query2 = "insert into EVENEMENT_PERSONNEL values("

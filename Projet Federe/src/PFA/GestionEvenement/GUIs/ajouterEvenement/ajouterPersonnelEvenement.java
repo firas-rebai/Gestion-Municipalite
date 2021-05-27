@@ -62,17 +62,7 @@ public class ajouterPersonnelEvenement{
                 toAdd.add(p);
             }
         }
-
-        if (!toAdd.isEmpty()) {
-            evenement.setEquipeEve(toAdd);
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("");
-            alert.setHeaderText(null);
-            alert.setContentText("Aucun personnel selectione");
-            alert.showAndWait();
-            return ;
-        }
+        evenement.setEquipeEve(toAdd);
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterVehiculeEvenement.fxml"));

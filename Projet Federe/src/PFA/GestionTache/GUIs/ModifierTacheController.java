@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class ModifierTacheController {
     
     @FXML
@@ -40,10 +42,15 @@ public class ModifierTacheController {
     @FXML
     private Button ajouter;
     
-    
-    
     @FXML
     private TextArea descriptionTextField;
+    
+    @FXML
+    private DatePicker datepicker;
+    
+    @FXML
+    private Label dateLabel;
+    
     public void initListe(Tache tache){
         id = tache.getId();
         personnel = tache.getPersonnel();
@@ -64,8 +71,12 @@ public class ModifierTacheController {
             remplirLabel.setVisible(true);
             return ;
         }else remplirLabel.setVisible(false);
+        if(datepicker.getValue().isBefore(LocalDate.now())){
+            dateLabel.setVisible(true);
+            return;
+        }else dateLabel.setVisible(false);
         personnel = personnelTV.getSelectionModel().getSelectedItem();
-        tacheServices.Modifier(new Tache(id,nomTextField.getText(),descriptionTextField.getText(),personnel));
+        tacheServices.Modifier(new Tache(id,nomTextField.getText(),descriptionTextField.getText(),personnel,datepicker.getValue()));
         Stage stage = (Stage) ajouter.getScene().getWindow();
         stage.close();
     }

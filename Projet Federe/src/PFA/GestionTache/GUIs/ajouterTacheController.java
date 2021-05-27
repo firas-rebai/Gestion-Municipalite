@@ -1,6 +1,5 @@
 package PFA.GestionTache.GUIs;
 
-import PFA.GestionCompte.Services.compteServices;
 import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.GestionTache.Module.Tache;
 import PFA.GestionTache.Services.tacheServices;
@@ -9,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class ajouterTacheController {
@@ -41,13 +41,24 @@ public class ajouterTacheController {
     
     @FXML
     private TextArea descriptionTextField;
+    
+    @FXML
+    private Label dateLabel;
+    
+    @FXML
+    private DatePicker datepicker;
+    
     public void ajouter() {
-        if (nomTextField.getText().isEmpty()){
+        if (nomTextField.getText().isEmpty()) {
             remplirLabel.setVisible(true);
-            return ;
-        }else remplirLabel.setVisible(false);
+            return;
+        } else remplirLabel.setVisible(false);
         
-        Tache tache = new Tache(nomTextField.getText(),descriptionTextField.getText(),personnelTV.getSelectionModel().getSelectedItem());
+        if (datepicker.getValue().isBefore(LocalDate.now())) {
+            dateLabel.setVisible(true);
+            return;
+        } else dateLabel.setVisible(false);
+        Tache tache = new Tache(nomTextField.getText(), descriptionTextField.getText(), personnelTV.getSelectionModel().getSelectedItem(), datepicker.getValue());
         tacheServices.ajouter(tache);
         Stage stage = (Stage) ajouter.getScene().getWindow();
         stage.close();
@@ -63,10 +74,10 @@ public class ajouterTacheController {
         posteColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
         cinColumn.setCellValueFactory(new PropertyValueFactory<>("CIN"));
         prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-    
+        
         personnelTV.getItems().setAll(tacheServices.ParsePersonnelListe());
-    
-    
+        
+        
         nomTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 String nomPattern = "[a-zA-Z0-9 ._]";

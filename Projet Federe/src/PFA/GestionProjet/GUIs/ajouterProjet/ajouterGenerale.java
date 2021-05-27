@@ -78,7 +78,7 @@ public class ajouterGenerale implements Initializable {
         }
         String budgetPattern = "[0-9]+.[0-9]+";
         String numPattern = "[0-9]+";
-        String nomPattern = "[A-Za-z]{3}[A-Za-z ']*";
+        String nomPattern = "[A-Za-z0-9]{3}[A-Za-z '0-9]*";
         if (valid && Pattern.matches(budgetPattern, coutTextField.getText()) && Pattern.matches(budgetPattern, coutTextField.getText()) && Pattern.matches(numPattern, numAdresseTextField.getText()) && Pattern.matches(nomPattern, adresseTextField.getText()) && Pattern.matches(nomPattern, nomTextField.getText())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../GestionTache/GUIs/fxml/listetache.fxml"));
             Parent root = loader.load();
@@ -91,14 +91,12 @@ public class ajouterGenerale implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-    
-    
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     
-        String nomPattern = "[A-Za-z]{3}[A-Za-z ']*";
+        String nomPattern = "[A-Za-z0-9]{3}[A-Za-z '0-9]*";
         nomTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 NomErrorLabel.setVisible(!Pattern.matches(nomPattern, nomTextField.getText()));
@@ -124,6 +122,5 @@ public class ajouterGenerale implements Initializable {
                 CoutErrorLabel.setVisible(!Pattern.matches(budgetPattern, coutTextField.getText()));
             }
         });
-        
     }
 }

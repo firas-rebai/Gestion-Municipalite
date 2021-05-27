@@ -2,10 +2,6 @@ package PFA.GestionEvenement.GUIs;
 
 import PFA.GestionEvenement.Modules.Evenement;
 import PFA.GestionEvenement.Services.EvenementServ;
-import PFA.GestionIntervention.GUIs.ModifierInterventionController;
-import PFA.GestionIntervention.GUIs.detailsController;
-import PFA.GestionIntervention.GUIs.supprimerInterventionController;
-import PFA.GestionIntervention.Services.InterventionServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +24,8 @@ import jfxtras.styles.jmetro.Style;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.*;
 
 
 public class ListeEvenementController implements Initializable {
@@ -47,6 +45,8 @@ public class ListeEvenementController implements Initializable {
     TextField tfrecherche;
     @FXML
     AnchorPane pane;
+    @FXML
+    Button rapportbtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -57,6 +57,7 @@ public class ListeEvenementController implements Initializable {
                 detailsButton.setDisable(false);
                 modifierButton.setDisable(false);
                 supprimerButton.setDisable(false);
+                rapportbtn.setDisable(false);
             }
         });
         tfrecherche.setOnMouseClicked((MouseEvent event) -> {
@@ -64,6 +65,7 @@ public class ListeEvenementController implements Initializable {
                 detailsButton.setDisable(true);
                 modifierButton.setDisable(true);
                 supprimerButton.setDisable(true);
+                rapportbtn.setDisable(true);
             }
         });
         rechercheButton.setOnMouseClicked((MouseEvent event) -> {
@@ -71,6 +73,7 @@ public class ListeEvenementController implements Initializable {
                 detailsButton.setDisable(true);
                 modifierButton.setDisable(true);
                 supprimerButton.setDisable(true);
+                rapportbtn.setDisable(true);
             }
         });
         pane.setOnMouseClicked((MouseEvent event) -> {
@@ -78,6 +81,7 @@ public class ListeEvenementController implements Initializable {
                 detailsButton.setDisable(true);
                 modifierButton.setDisable(true);
                 supprimerButton.setDisable(true);
+                rapportbtn.setDisable(true);
             }
         });
         refreshButton.setOnMouseClicked((MouseEvent event) -> {
@@ -85,6 +89,7 @@ public class ListeEvenementController implements Initializable {
                 detailsButton.setDisable(true);
                 modifierButton.setDisable(true);
                 supprimerButton.setDisable(true);
+                rapportbtn.setDisable(true);
             }
         });
     }
@@ -165,5 +170,37 @@ public class ListeEvenementController implements Initializable {
     }
     public void recherche3() {
         refreshListe(EvenementServ.Recherche2(tfrecherche.getText()));
+    }
+    
+    public void generate(ActionEvent event) {
+        String fileName = "/devel/examples/test.jasper";
+        String outFileName = "/devel/examples/test.pdf";
+        HashMap hm = new HashMap();
+        try
+        {
+            JasperPrint print = JasperFillManager.fillReport(
+                    fileName,
+                    hm,
+                    new JREmptyDataSource());
+            JRExporter exporter =
+                    new net.sf.jasperreports.engine.export.JRPdfExporter();
+            exporter.setParameter(
+                    JRExporterParameter.OUTPUT_FILE_NAME,
+                    outFileName);
+            exporter.setParameter(
+                    JRExporterParameter.JASPER_PRINT,print);
+            exporter.exportReport();
+            System.out.println("Created file: " + outFileName);
+        }
+        catch (JRException e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 }

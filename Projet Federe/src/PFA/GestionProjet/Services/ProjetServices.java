@@ -28,7 +28,6 @@ public class ProjetServices {
             while (res.next()) {
                 id = res.getInt("idprojet");
                 liste.add(new Projet(id, res.getString("nomprojet"), res.getString("description"), fetchTacheWithID(id), res.getString("adresse"), res.getFloat("cout"), res.getDate("datedebut").toLocalDate(), res.getDate("datefin").toLocalDate(), fetchPersonnelWithID(id), fetchVehiculeWithID(id), fetchOutilWithID(id)));
-                System.out.println(id);
             }
             res.close();
         } catch (SQLException throwables) {
@@ -117,7 +116,7 @@ public class ProjetServices {
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
                 id = res.getInt("idtache");
-                liste.add(new Tache(id, res.getString("nomtache"), res.getString("description"), PersonnelServices.ParsePersonnel(id)));
+                liste.add(new Tache(id, res.getString("nomtache"), res.getString("description"), PersonnelServices.ParsePersonnel(id),res.getDate("datetache").toLocalDate()));
             }
             res.close();
         } catch (SQLException throwables) {
@@ -128,7 +127,7 @@ public class ProjetServices {
     
     public static void ajouter(Projet projet) {
         String query = "insert into PROJET (IDPROJET, NOMPROJET, DESCRIPTION, ADRESSE, DATEDEBUT, DATEFIN,COUT) VALUES (projet_seq.nextval,'" + projet.getNom() + "','" + projet.getDescription() + "','" + projet.getAdresse() + "',to_date('" + projet.getDateBedut().toString() + "','yyyy-mm-dd'),to_date('" + projet.getDateFin().toString() + "','yyyy-mm-dd')," + projet.getCout() + ")";
-        int id = 0;
+        int id;
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -161,11 +160,16 @@ public class ProjetServices {
     
     public static void insertOutil(ArrayList<Outil> outils, int id) {
         String query = "insert into PROJET_OUTIL (IDPROJET, IDOUTIL, QUANTITE) VALUES (" + id + ",";
+        String query2 = "update outil where idoutil = ";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
+            Statement statement1 = connection.createStatement();
             for (Outil v : outils) {
                 statement.execute(query + v.getId() + "," + v.getQuantite() + ")");
+                if (v.getConsumable() == 1){
+                    statement1.execute(query2 + v.getId() + " set quantite = quantite - " + v.getQuantite());
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -22,6 +22,7 @@ public class InterventionServices {
         String query1;
         String query3;
         String query2;
+        String q = "update outil where idoutil = ";
         String query = "insert into INTERVENTION values(INTERVENTION_SEQ.nextval,'" + i.getNom() + "'," + "TO_DATE('" + i.getDateBedut().toString() + "','yyyy-mm-dd')" + "," + "TO_DATE('" + i.getDateFin().toString() + "','yyyy-mm-dd')" + "," + i.getBudget() + ",'" + i.getAdresse() + "')";
         Statement statement;
         Statement statement1;
@@ -34,6 +35,9 @@ public class InterventionServices {
             for (OutilsUtilise o : i.getOutilsUtilises()) {
                 query1 = "insert into INTERVENTION_OUTIL values(" + o.outils.getId() + "," + o.outils.getConsumable() + ",INTERVENTION_SEQ.currval ," + o.quantite + ",'" + o.outils.getNom() + "')";
                 statement1.executeUpdate(query1);
+                if (o.outils.getConsumable() == 1) {
+                    statement1.execute(q + o.outils.getId() + " set quantite = quantite - " + o.quantite);
+                }
             }
             for (PersonnelMin p : i.getEquipe()) {
                 query2 = "insert into INTERVENTION_PERSONNEL values(" + p.getId() + ",INTERVENTION_SEQ.currval,'" + p.getNom() + "','" + p.getPrenom() + "','" + p.getPoste() + "')";
@@ -228,10 +232,7 @@ public class InterventionServices {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                liste.add(new Outil(rs.getInt("idoutil"),
-                        rs.getInt("quantiteoutil"),
-                        rs.getString("nomoutil"),
-                        rs.getInt("consumableoutil")));
+                liste.add(new Outil(rs.getInt("idoutil"), rs.getInt("quantiteoutil"), rs.getString("nomoutil"), rs.getInt("consumableoutil")));
             }
             rs.close();
         } catch (SQLException throwables) {
@@ -243,40 +244,38 @@ public class InterventionServices {
     public static ArrayList<Outil> parseOutilList(LocalDate debut) {
         ArrayList<Outil> liste = new ArrayList<>();
         String query = "select * from OUTIL";
-        String query2 = "select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)";
-                
+        
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
             Statement statement1 = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             int total = 0;
-            int id = 0;
+            int id;
             String nom;
             int con;
             while (rs.next()) {
                 total = rs.getInt("quantiteoutil");
                 id = rs.getInt("idoutil");
-                ResultSet res = statement1.executeQuery("select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION) and IDOUTIL = " + id+ " union all " +
+                ResultSet res = statement1.executeQuery("select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION) and IDOUTIL = " + id + " union all " +
                         "select QUANTITE from PROJET_OUTIL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN) and IDOUTIL = " + id + " union all " +
                         "select QUANTITE from EVENEMENT_OUTIL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT) and IDOUTIL = " + id);
                 con = rs.getInt("consumableoutil");
                 nom = rs.getString("nomoutil");
-                System.out.println(nom);
-                System.out.println(con);
-                if(con == 0){
+                System.out.println("nom :" + nom);
+                System.out.println(con == 1);
+                System.out.println("total " + total);
+                if (con == 0) {
                     while (res.next()) {
                         int i = res.getInt(1);
+                        System.out.println(total + "-" + i);
                         total -= i;
-                        System.out.println(total);
+                        
                     }
                 }
                 res.close();
                 
-                liste.add(new Outil(id,
-                        total,
-                        nom,
-                        con));
+                liste.add(new Outil(id, total, nom, con));
             }
             rs.close();
         } catch (SQLException throwables) {

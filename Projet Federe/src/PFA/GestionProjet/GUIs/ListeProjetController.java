@@ -188,4 +188,6 @@ public class ListeProjetController {
         refreshListe(ProjetServices.parseProjetListe());
     }
     
+    public void generate(ActionEvent event) {
+    }
 }

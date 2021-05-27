@@ -31,9 +31,10 @@
       </Button>
       <TableView fx:id="compteTableView" layoutX="45.0" layoutY="147.0" prefHeight="562.0" prefWidth="1114.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columns>
-          <TableColumn fx:id="nomColumn" prefWidth="239.0" text="Nom de tache" />
-            <TableColumn fx:id="nomColumn1" prefWidth="336.0" text="Nom de personnel" />
-            <TableColumn fx:id="selectColumn" minWidth="0.0" prefWidth="75.0" text="Selectionne" />
+          <TableColumn fx:id="nomColumn" prefWidth="181.0" text="Nom de tache" />
+            <TableColumn fx:id="nomColumn1" prefWidth="230.0" text="Nom de personnel" />
+            <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="156.0" text="Date" />
+            <TableColumn fx:id="selectColumn" minWidth="0.0" prefWidth="82.0" text="Selectionne" />
         </columns>
       </TableView>
       <TextField fx:id="rechercheTextField" layoutX="50.0" layoutY="97.0" prefHeight="27.0" prefWidth="202.0" promptText="Recherche" />

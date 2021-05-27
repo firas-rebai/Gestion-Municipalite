@@ -5,14 +5,11 @@ import PFA.GestionIntervention.Modules.OutilsUtilise;
 import PFA.GestionIntervention.Services.InterventionServices;
 import PFA.MaterielFiras.ModuleMateriel.Outil;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class ajouterOutilIntervention {
     
@@ -51,9 +48,8 @@ public class ajouterOutilIntervention {
         spinnerColumn.setCellValueFactory(new PropertyValueFactory<>("spinner"));
         ArrayList<Outil> liste = new ArrayList<>(InterventionServices.parseOutilList(intervention.getDateBedut()));
         for (Outil o: liste){
-            o.setSpinner(new Spinner<Integer>());
-            SpinnerValueFactory<Integer> valueFactory = //
-                    new SpinnerValueFactory.IntegerSpinnerValueFactory(0, o.getQuantite(), 0);
+            o.setSpinner(new Spinner<>());
+            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, o.getQuantite(), 0);
             o.getSpinner().setValueFactory(valueFactory);
         }
         outilTV.getItems().setAll(liste);
