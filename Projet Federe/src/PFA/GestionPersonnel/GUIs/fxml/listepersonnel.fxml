@@ -41,7 +41,7 @@
          </columnResizePolicy>
       </TableView>
       <TextField fx:id="rechercheTextField" layoutX="50.0" layoutY="97.0" prefHeight="27.0" prefWidth="202.0" promptText="Recherche" />
-      <Button fx:id="rechercheButton" layoutX="251.0" layoutY="97.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" text="Recherche" />
+      <Button fx:id="rechercheButton" layoutX="251.0" layoutY="97.0" mnemonicParsing="false" onAction="#rechercheButton" prefHeight="27.0" prefWidth="71.0" text="Recherche" />
       <Button fx:id="refreshButton" layoutX="1079.0" layoutY="97.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="71.0" text="REFRESH" />
       <Button fx:id="retour" layoutX="50.0" layoutY="36.0" mnemonicParsing="false" onAction="#retour" prefHeight="27.0" prefWidth="71.0" text="RETOUR" />
    </children>

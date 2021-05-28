@@ -138,10 +138,6 @@ public class ModifierDemandeController implements Initializable {
         type.setValue(p.getTypeDem());
         date.setValue(p.getDateDem());
         tel.setText(String.valueOf(p.getNumtel()));
-
-
-
-
     }
 
 }

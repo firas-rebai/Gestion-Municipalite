@@ -21,7 +21,6 @@ public class PersonnelServices {
                 "to_date('%s','yyyy-mm-dd')," +
                 "'%s'," +
                 "%f)",p.getNom(),p.getPrenom(),p.getCIN(),p.getDateNaissance(),p.getPoste(),p.getSalaire());
-        System.out.println(SQLquery);
         Statement statement;
         try {
             Connection connection = getOracleConnection();
@@ -82,8 +81,7 @@ public class PersonnelServices {
         List<Personnel> liste = new ArrayList<>();
         String query = "select * from Personnel" +
                 " WHERE lower(NOMPERSONNEL) LIKE lower('%" + term + "%')" +
-                " OR lower(PRENOMPERSONNEL) LIKE lower('%" + term + "%')" +
-                " OR CINPERSONNEL ="+ "'" + term + "'";
+                " OR lower(PRENOMPERSONNEL) LIKE lower('%" + term + "%')" ;
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -93,9 +91,9 @@ public class PersonnelServices {
                         ,res.getString("nomPersonnel")
                         ,res.getString("prenomPersonnel")
                         ,res.getInt("cinPersonnel")
-                        ,res.getFloat("salairePersonnel")
+                        ,res.getFloat("salaire")
                         ,res.getString("postePersonnel")
-                        ,res.getDate("datenaissance").toLocalDate()));}
+                        ,res.getDate("datenaissancepersonnel").toLocalDate()));}
             res.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

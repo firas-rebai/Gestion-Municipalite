@@ -15,34 +15,7 @@ import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class DemandeServ {
     public static void Ajouter(DemandeModu p) {
-       /*String SQLquery = String.format("insert into dem (nom,prenom,cin,adresse,numtel,id,datedem,typedem,descreption) values( " +
-                        "'%s','%s',%d,'%s',%d,DEM_SEQ.nextval,to_date('%s','dd-mm-yyyy'),'%s','%s')",
-                p.getNom(),p.getPrenom(), p.getCin(),p.getAdresse(),p.getNumtel(),p.getId(),
-                p.getDateDem().toString(),p.getTypeDem(),p.getDescreption());
-
-        */
-
-
-        /*String SQLquery = String.format("insert into dem(cin,id,nom,prenom,adresse,numtel,datedem,typedem,descreption)values( " +
-                "%d,DEM_SEQ.nextval,'%s','%s','%s',%d,to_date('%s','YYYY-MM-DD'),'%s','%s')", p.getCin(),
-                p.getId(), p.getNom(),p.getPrenom(),p.getAdresse(),p.getNumtel(),p.getDateDem().toString(),
-                p.getTypeDem(),p.getDescreption());
-
-         */
-
-       /* String SQLquery = String.format("insert into dem values (" +
-                "'%s'," +
-                "'%s',"
-                + "%d,"
-                + "'%s',"
-                + "%d,"
-                + "DEM_SEQ.nextval,"
-                + "to_date('%s','yyyy-mm-dd'),"
-                + "'%s'," + "'%s'" + ")",p.getNom()
-                ,p.getPrenom(),p.getCin(),p.getAdresse(),
-                p.getNumtel(),p.getId(),p.getDateDem().toString(),p.getTypeDem(),p.getDescreption());
-
-        */
+       
 
         String SQLquery = "insert into DEM values('" + p.getNom() + "','" +
                 p.getPrenom() + "'," + p.getCin() + ",'" +p.getAdresse()

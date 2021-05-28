@@ -29,6 +29,7 @@ public class DetailsPersonnelController {
         salaireD.setText(String.valueOf(p.getSalaire()));
         posteD.setText(p.getPoste());
         CIND.setText(String.valueOf(p.getCIN()));
+        dateD.setText(p.getDateNaissance().toString());
     }
 
 }

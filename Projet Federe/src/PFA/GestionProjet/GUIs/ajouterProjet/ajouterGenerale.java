@@ -96,7 +96,7 @@ public class ajouterGenerale implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     
-        String nomPattern = "[A-Za-z0-9]{3}[A-Za-z '0-9]*";
+        String nomPattern = "[A-Za-z'#]{3}[A-Za-z '0-9]*";
         nomTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 NomErrorLabel.setVisible(!Pattern.matches(nomPattern, nomTextField.getText()));
@@ -109,7 +109,7 @@ public class ajouterGenerale implements Initializable {
             }
         });
         
-        String numPattern = "[0-9]+";
+        String numPattern = "[0-9]{1,5}";
         numAdresseTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 AdresseErrorLabel.setVisible(!Pattern.matches(numPattern, numAdresseTextField.getText()));

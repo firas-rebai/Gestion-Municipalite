@@ -70,7 +70,7 @@ public class compteServices {
     
     public static ArrayList<Compte> recherche(String term) {
         ArrayList<Compte> liste = new ArrayList<>();
-        String query = "select * from compte where lower(NOMUTILISATEUR) like lower('" + term + "')";
+        String query = "select * from compte where lower(NOMUTILISATEUR) like lower('%" + term + "%')";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();

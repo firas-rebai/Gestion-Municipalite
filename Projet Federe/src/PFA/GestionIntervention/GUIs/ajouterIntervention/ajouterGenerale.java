@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 public class ajouterGenerale implements Initializable {
     
     private final String nomPattern = "[A-Za-z0-9]{3}[0-9A-Za-z ]*";
-    private final String budgetPattern = "[0-9]+.[0-9]+";
+    private final String budgetPattern = "[0-9]+.?[0-9]+";
     private final String numPattern = "[0-9]*";
     @FXML
     TextField nomTextField, budgetTextField, coutTextField, numAdresseTextField, adresseTextField;

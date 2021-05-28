@@ -16,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login_mainMenu/fxml/login.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("brabi e5dem the project");
+        primaryStage.setTitle("brabi e5dem");
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(scene);

@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class modifierCompteController {
     
     
-    private final String[] roleListe = { "Adminstrateur", "Agent Financier", "Agent RH" ,""};
+    private final String[] roleListe = { "Adminstrateur", "Agent Financier", "Agent RH" ,"Agent Guichet" , "Project Manager"};
     private final String nomPattern = "[0-9a-zA-Z_.]{5,20}";
     private final String passPattern = "[0-9a-zA-Z_]{5,20}";
     @FXML

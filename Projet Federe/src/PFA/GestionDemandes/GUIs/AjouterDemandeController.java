@@ -1,15 +1,14 @@
 package PFA.GestionDemandes.GUIs;
 
 
-
 import PFA.GestionDemandes.Module.DemandeModu;
+import PFA.GestionDemandes.Service.DemandeServ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import PFA.GestionDemandes.Service.DemandeServ;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -27,15 +26,12 @@ public class AjouterDemandeController implements Initializable {
     Button boutajouter,retour;
     @FXML
     DatePicker date;
-
-    private final String[] Type = {"Voirie", "Degradation", "Construction"};
-    String nompattern = "[a-zA-Z]*";
+    
+    private final String[] Type = {"Voirie", "Degradation", "Construction","Permission"};
+    String nompattern = "[a-zA-Z]+";
     String prenompattern = "[a-zA-Z]*";
     String cinpattern = "[0-9]{8}";
-    String adressepattern = "[a-zA-Z0-9,;. ]*";
-    //  String idpattern = "[0-9]*";
-    String datepattern = "[0-9]{2}/-[0-9]{2}/-[0-9]*";
-    // String descreptionpattern = "";
+    String adressepattern = "[a-zA-Z0-9,;. ]+";
     String telpattern = "[0-9]{8}";
     boolean verif = true;
 
@@ -45,7 +41,7 @@ public class AjouterDemandeController implements Initializable {
 
         nom.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
-                lbnom.setVisible(!Pattern.matches(nompattern, nom.getText())|| nom.getText().isEmpty());
+                lbnom.setVisible(!Pattern.matches(nompattern, nom.getText()));
             }
         });
 
@@ -57,7 +53,7 @@ public class AjouterDemandeController implements Initializable {
 
         prenom.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
-                lbprenom.setVisible(!Pattern.matches(prenompattern, prenom.getText()) || prenom.getText().isEmpty());
+                lbprenom.setVisible(!Pattern.matches(prenompattern, prenom.getText()) );
             }
         });
 
@@ -84,7 +80,7 @@ public class AjouterDemandeController implements Initializable {
     }
 
 
-    public void ajouterDem(ActionEvent event) throws IOException{
+    public void ajouterDem(ActionEvent event){
         if (nom.getText().isEmpty() || prenom.getText().isEmpty() || cin.getText().isEmpty() || adresse.getText().isEmpty() ||
                 type.getSelectionModel().isEmpty() || tel.getText().isEmpty()) {
             remplir.setVisible(true);
@@ -96,20 +92,21 @@ public class AjouterDemandeController implements Initializable {
             verif = false;
         }
 
-        if (verif && Pattern.matches(nompattern, nom.getText())
-                && Pattern.matches(prenompattern, prenom.getText()) &&
+        if (verif && Pattern.matches(nompattern, nom.getText()) &&
+                Pattern.matches(prenompattern, prenom.getText()) &&
                 Pattern.matches(cinpattern, cin.getText()) &&
                 Pattern.matches(adressepattern, adresse.getText()) &&
                 Pattern.matches(telpattern, tel.getText()) &&
                 !type.getSelectionModel().isEmpty() &&
                 !date.getValue().toString().isEmpty() &&
                 event.getSource() == boutajouter) {
-
+            // make a new instance of demande to add
             DemandeModu p = new DemandeModu(nom.getText(),prenom.getText(),Integer.parseInt(cin.getText()),
                     adresse.getText(),Integer.parseInt(tel.getText()),date.getValue(),type.getValue(),
                     descreption.getText());
+            
 
-
+            //call service to add it to the database
             DemandeServ.Ajouter(p);
             Stage stage = (Stage) boutajouter.getScene().getWindow();
             stage.close();
@@ -118,10 +115,6 @@ public class AjouterDemandeController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("l'ajout est fait avec succés");
             alert.show();
-
-
-
-
         }
     }
 

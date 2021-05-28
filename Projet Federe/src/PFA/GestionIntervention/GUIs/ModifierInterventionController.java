@@ -58,8 +58,8 @@ public class ModifierInterventionController {
         nomTextField.setText(selectedItem.getNom());
         adresseTextField.setText(selectedItem.getAdresse());
         budgetTextField.setText(String.valueOf(selectedItem.getBudget()));
-        dateDebutPicker.setAccessibleText(selectedItem.getDateBedut().toString());
-        dateFinPicker.setAccessibleText(selectedItem.getDateFin().toString());
+        dateDebutPicker.setValue(selectedItem.getDateBedut());
+        dateFinPicker.setValue(selectedItem.getDateFin());
     
         nomTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {

@@ -2,21 +2,16 @@ package PFA.GestionPersonnel.GUIs;
 
 import PFA.GestionPersonnel.Modules.Personnel;
 import PFA.GestionPersonnel.Services.PersonnelServices;
-
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-
 
 
 public class ajouterPersonnelController implements Initializable {
@@ -42,7 +37,6 @@ public class ajouterPersonnelController implements Initializable {
         // fill poste picker with their values
         
         PostePicker.getItems().setAll(Poste);
-        
         //Check if every text field is correct when it loses focus
         
         nom.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
@@ -84,12 +78,13 @@ public class ajouterPersonnelController implements Initializable {
     Label cinLabel;
     
     public void AjouterButton() {
-        boolean valid = date.getValue().isBefore(LocalDate.now().minus(18,ChronoUnit.YEARS));
-        dateErrorLabel.setVisible(!valid);
         if (PostePicker.getSelectionModel().isEmpty() || salaire.getText().isEmpty() || CIN.getText().isEmpty() || prenom.getText().isEmpty() || nom.getText().isEmpty() || date.getValue().toString().isEmpty()) {
             Remplir.setVisible(true);
             return ;
         } else Remplir.setVisible(false);
+        boolean valid = date.getValue().isBefore(LocalDate.now().minus(18,ChronoUnit.YEARS));
+        dateErrorLabel.setVisible(!valid);
+        
         boolean cinExist = PersonnelServices.CINexist(Integer.parseInt(CIN.getText()));
         cinLabel.setVisible(cinExist);
         if (valid && !cinExist && Pattern.matches(cinPattern, CIN.getText()) && Pattern.matches(salairePattern, salaire.getText()) && Pattern.matches(namePattern, prenom.getText()) && Pattern.matches(namePattern, nom.getText()) && !PostePicker.getSelectionModel().isEmpty()) {

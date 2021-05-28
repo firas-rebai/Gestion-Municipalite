@@ -22,7 +22,6 @@ public class InterventionServices {
         String query1;
         String query3;
         String query2;
-        String q = "update outil where idoutil = ";
         String query = "insert into INTERVENTION values(INTERVENTION_SEQ.nextval,'" + i.getNom() + "'," + "TO_DATE('" + i.getDateBedut().toString() + "','yyyy-mm-dd')" + "," + "TO_DATE('" + i.getDateFin().toString() + "','yyyy-mm-dd')" + "," + i.getBudget() + ",'" + i.getAdresse() + "')";
         Statement statement;
         Statement statement1;
@@ -36,7 +35,7 @@ public class InterventionServices {
                 query1 = "insert into INTERVENTION_OUTIL values(" + o.outils.getId() + "," + o.outils.getConsumable() + ",INTERVENTION_SEQ.currval ," + o.quantite + ",'" + o.outils.getNom() + "')";
                 statement1.executeUpdate(query1);
                 if (o.outils.getConsumable() == 1) {
-                    statement1.execute(q + o.outils.getId() + " set quantite = quantite - " + o.quantite);
+                    statement1.execute("update outil " + " set QUANTITEOUTIL = QUANTITEOUTIL - " + o.quantite + " where IDOUTIL = " + o.outils.getId());
                 }
             }
             for (PersonnelMin p : i.getEquipe()) {
@@ -160,8 +159,28 @@ public class InterventionServices {
         ArrayList<PersonnelMin> liste = new ArrayList<>();
         String query = "SELECT * from PERSONNEL where IDPERSONNEL not in (" +
                 "select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)" +
-                "union select IDPERSONNEL from PROJET_PERSONNEL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
-                "union select IDPERSONNEL from EVENEMENT_PERSONNEL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
+                "union select IDPERSONNEL from PROJET_PERSONNEL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
+                "union select IDPERSONNEL from EVENEMENT_PERSONNEL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
+        try {
+            Connection connection = getOracleConnection();
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            while (res.next()) {
+                liste.add(new PersonnelMin(res.getInt("idpersonnel"), res.getString("nomPersonnel"), res.getString("prenomPersonnel"), res.getString("postePersonnel")));
+            }
+            res.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return liste;
+    }
+    
+    public static ArrayList<PersonnelMin> ParsePersonnelListe(LocalDate debut, LocalDate fin) {
+        ArrayList<PersonnelMin> liste = new ArrayList<>();
+        String query = "SELECT * from PERSONNEL where IDPERSONNEL not in (" +
+                "select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION or to_date('" + fin.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION or DATEDEBUTINTERVENTION between " + debut + " and " + fin + " or DATEFININTERVENTION between " + debut + " and " + fin + ")" +
+                "union select IDPERSONNEL from PROJET_PERSONNEL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN or to_date('" + fin + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN or DATEDEBUT between " + debut + " and " + fin + " or DATEFIN betwwen " + debut + " and " + fin + " )" +
+                "union select IDPERSONNEL from EVENEMENT_PERSONNEL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -180,8 +199,8 @@ public class InterventionServices {
         ArrayList<Personnel> liste = new ArrayList<>();
         String query = "SELECT * from PERSONNEL where IDPERSONNEL not in (" +
                 "select IDPERSONNEL from INTERVENTION_PERSONNEL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)" +
-                "union select IDPERSONNEL from PROJET_PERSONNEL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
-                "union select IDPERSONNEL from EVENEMENT_PERSONNEL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
+                "union select IDPERSONNEL from PROJET_PERSONNEL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
+                "union select IDPERSONNEL from EVENEMENT_PERSONNEL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
@@ -200,8 +219,8 @@ public class InterventionServices {
         ArrayList<Vehicule> data = new ArrayList<>();
         String SQLquery = "SELECT * from VEHICULE where IDVEHICULE not in (" +
                 "select IDVEHICULE from INTERVENTION_VEHICULE where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION)" +
-                "union select IDVEHICULE from PROJET_VEHICULE where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
-                "union select IDVEHICULE from EVENEMENT_VEHICULE where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
+                "union select IDVEHICULE from PROJET_VEHICULE where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN)" +
+                "union select IDVEHICULE from EVENEMENT_VEHICULE where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT))";
         try {
             Connection connection = getOracleConnection();
             
@@ -250,7 +269,7 @@ public class InterventionServices {
             Statement statement = connection.createStatement();
             Statement statement1 = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
-            int total = 0;
+            int total;
             int id;
             String nom;
             int con;
@@ -258,8 +277,8 @@ public class InterventionServices {
                 total = rs.getInt("quantiteoutil");
                 id = rs.getInt("idoutil");
                 ResultSet res = statement1.executeQuery("select QUANTITE from INTERVENTION_OUTIL where IDINTERVENTION in (select IDINTERVENTION from INTERVENTION where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTINTERVENTION and DATEFININTERVENTION) and IDOUTIL = " + id + " union all " +
-                        "select QUANTITE from PROJET_OUTIL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN) and IDOUTIL = " + id + " union all " +
-                        "select QUANTITE from EVENEMENT_OUTIL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut.toString() + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT) and IDOUTIL = " + id);
+                        "select QUANTITE from PROJET_OUTIL where IDPROJET in (select IDPROJET from PROJET where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUT and DATEFIN) and IDOUTIL = " + id + " union all " +
+                        "select QUANTITE from EVENEMENT_OUTIL where IDEVENEMENT in (select IDEVENEMENT from EVENEMENT where to_date('" + debut + "','yyyy-mm-dd') between DATEDEBUTEVENEMENT and DATEFINEVENEMENT) and IDOUTIL = " + id);
                 con = rs.getInt("consumableoutil");
                 nom = rs.getString("nomoutil");
                 System.out.println("nom :" + nom);
@@ -268,7 +287,7 @@ public class InterventionServices {
                 if (con == 0) {
                     while (res.next()) {
                         int i = res.getInt(1);
-                        System.out.println(total + "-" + i);
+                        System.out.println(total + " - " + i);
                         total -= i;
                         
                     }
@@ -286,7 +305,7 @@ public class InterventionServices {
     
     public static List<Intervention> Recherche(String term) {
         List<Intervention> liste = new ArrayList<>();
-        String query = "SELECT * FROM INTERVENTION WHERE lower(NOMINTERVENTION) like lower('" + term + "')";
+        String query = "SELECT * FROM INTERVENTION WHERE lower(NOMINTERVENTION) like lower('%" + term + "%')";
         String fetchPersonnel = "SELECT * from intervention_personnel where idIntervention = ";
         String fetchVehicule = "SELECT * from intervention_vehicule where idIntervention = ";
         String fetchOutil = "SELECT * from intervention_outil where idIntervention = ";
@@ -297,7 +316,6 @@ public class InterventionServices {
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
-            
             ResultSet res = statement.executeQuery(query);
             while (res.next()) {
                 id = res.getString("idintervention");

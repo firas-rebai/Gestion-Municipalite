@@ -22,10 +22,11 @@ import java.util.ArrayList;
 
 public class ajouterVehiculeIntervention {
     public void retour(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterVehiculeIntervention.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterPersonnelIntervention.fxml"));
         Parent root = loader.load();
-        ajouterVehiculeIntervention controller = loader.getController();
-        controller.intervention = intervention;
+        ajouterPersonnelIntervention controller = loader.getController();
+        intervention.setVehicules(new ArrayList<>());
+        controller.setIntervention(intervention);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         JMetro jMetro = new JMetro(Style.LIGHT);
@@ -42,9 +43,6 @@ public class ajouterVehiculeIntervention {
                 toAdd.add(v);
         }
         intervention.setVehicules(toAdd);
-    
-        System.out.println(toAdd);
-        System.out.println(intervention);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ajouterOutilIntervention.fxml"));
         Parent root = loader.load();
         ajouterOutilIntervention controller = loader.getController();
@@ -92,6 +90,5 @@ public class ajouterVehiculeIntervention {
             v.setCheck(new CheckBox());
         }
         listeVehicule.getItems().setAll(liste);
-        
     }
 }

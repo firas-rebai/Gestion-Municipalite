@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,31 +29,46 @@ import java.util.ResourceBundle;
 import static PFA.dbConnection.dbConnection.getOracleConnection;
 
 public class login implements Initializable {
+    private static String role;
     @FXML
     Button loginButton;
     @FXML
     TextField nomTextField, passwordTextField;
     @FXML
     Label errorLabel;
+    @FXML
+    ImageView logo;
+    @FXML
+    ImageView login;
     
-    public void pressLogin (ActionEvent event) {
+    public static String getRole() {
+        return role;
+    }
+    
+    public void pressLogin(ActionEvent event) {
         String query = "select count(*) from compte where nomutilisateur like '" + nomTextField.getText() + "' and password like '" + passwordTextField.getText() + "'";
         try {
             Connection connection = getOracleConnection();
             Statement statement = connection.createStatement();
+            Statement statement1 = connection.createStatement();
             ResultSet res = statement.executeQuery(query);
+            ResultSet rs = statement1.executeQuery("select role from COMPTE where NOMUTILISATEUR like '" + nomTextField.getText() + "'");
             res.next();
-            if (res.getInt(1) == 0){
+            rs.next();
+            if (res.getInt(1) == 0) {
                 errorLabel.setVisible(true);
-            }else {
+            } else {
+                role = rs.getString(1);
                 switchToMainMenu(event);
             }
+            res.close();
+            rs.close();
         } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
         }
     }
-    
-    public void switchToMainMenu (ActionEvent event) throws IOException {
+
+    public void switchToMainMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxml/mainMenu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -64,12 +77,6 @@ public class login implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-    
-    @FXML
-    ImageView logo;
-    @FXML
-    ImageView login;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {

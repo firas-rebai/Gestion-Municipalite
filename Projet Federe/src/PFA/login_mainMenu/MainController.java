@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +32,64 @@ public class MainController implements Initializable {
     private Stage stage;
     private Scene scene;
     
+    
+    @FXML
+    private Button materiel;
+    
+    @FXML
+    private Button personnel;
+    
+    @FXML
+    private Button intervention;
+    
+    @FXML
+    private Button doleance;
+    
+    @FXML
+    private Button finance;
+    
+    @FXML
+    private Button evenement;
+    
+    @FXML
+    private Button demande;
+    
+    @FXML
+    private Button compte;
+    
+    @FXML
+    private Button projet;
+    
+    @FXML
+    private Button modifier;
+    
+    @FXML
+    private Button rapportact;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        logout.setImage(new Image("PFA/resources/logout.png"));
+        logo.setImage(new Image("PFA/resources/logo.png"));
+        information info = InfoServices.fetchInfo();
+        adresse.setText(info.getAdresse());
+        adresseemail.setText(info.getEmail());
+        telephone.setText(info.getTelephone());
+        nom.setText(info.getNom());
+        if (login.getRole().equals("Agent RH")){
+            rapportact.setDisable(true);
+            modifier.setDisable(true);
+            compte.setDisable(true);
+        }else if (login.getRole().equals("Agent Guichet")){
+            compte.setDisable(true);
+            modifier.setDisable(true);
+            rapportact.setDisable(true);
+            projet.setDisable(true);
+            evenement.setDisable(true);
+            intervention.setDisable(true);
+            personnel.setDisable(true);
+            finance.setDisable(true);
+        }
+    }
     
     public void switchToIntervention(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../GestionIntervention/GUIs/fxml/listeIntervention.fxml"));
@@ -161,16 +220,7 @@ public class MainController implements Initializable {
     @FXML
     Label nom;
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        logout.setImage(new Image("PFA/resources/logout.png"));
-        logo.setImage(new Image("PFA/resources/logo.png"));
-        information info = InfoServices.fetchInfo();
-        adresse.setText(info.getAdresse());
-        adresseemail.setText(info.getEmail());
-        telephone.setText(info.getTelephone());
-        nom.setText(info.getNom());
-    }
+
     
     
     public void refreshInfo(){
